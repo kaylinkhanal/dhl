@@ -1,0 +1,123 @@
+*{margin: 0; padding: 0; box-sizing: border-box;}
+
+.main-registration{
+   /* max-height: 100vh; */
+   /* min-height: auto; */
+   background: linear-gradient(to right, blue, red);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.registration-card{
+   width: 550px;
+   background: rgba(221, 221, 221, 0.5);
+   border-radius: 36px;
+   margin: 8px 0px;    
+}
+
+.registration-card-image{
+   margin-bottom: 12px;
+}
+
+.registration-card-image img{
+   width: 76px;
+   transition: all .5s ease-in-out;
+}
+
+.registration-card-image img:hover{
+   transform: scale(1.2);
+}
+
+.registration-card-header, .registration-card-image{
+   text-align: center;
+   margin-top: 12px;
+}
+
+.registration-header h2{
+   text-align: center;
+   font-size: 36px;
+}
+
+.registration-header h5{
+   text-align: center;
+   font-size: 22px;
+   font-weight: 400;
+}
+
+.registration-header{
+   margin-bottom: 12px;
+}
+
+/* Registration Card Form */
+.registration-card-form{
+   display: flex;
+   flex-direction: column;
+   /* gap: 12px; */
+}
+
+.registration-card-form .form-item{
+   font-size: 22px;
+}
+
+.form-item{
+   margin: 10px 20px;
+}
+
+/* Login Card Form Elements */
+.registration-card input[type="text"],
+.registration-card input[type="password"],
+.registration-card input[type="email"],
+.registration-card input[type="number"] {
+   border: none;
+   cursor: pointer;
+   outline: none;
+   background: rgba(221, 221, 221, 0.5);
+   padding: 14px 18px;
+   border-radius: 36px;
+   width: 100%;
+   transition: background .5s;
+}
+
+.registration-card input:focus {
+   background: rgb(236, 236, 236);
+}
+
+.registration-card button {
+   background: black;
+   color: white;
+   padding: 12px 32px;
+   outline: none;
+   border-radius: 32px;
+   text-align: center;
+   text-transform: uppercase;
+   letter-spacing: 2px;
+   transition: background .5s;
+}
+
+.registration-card button:hover {
+   background-color: rgba(192, 190, 190, 0.85);
+   cursor: pointer;
+   color: black;
+   font-size: 16px;
+}
+
+.submit-btn{
+   text-align: center;
+   margin: 12px 0px;
+}
+
+@media (max-width: 768px) {
+
+   body {
+       padding: 16px 0;
+   }
+
+   .registration-card {
+       width: 280px;
+       padding: 22px;
+   }
+   .registration-card-form .form-item{
+   font-size: 14px;
+   }
+}
