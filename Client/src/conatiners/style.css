@@ -1,0 +1,29 @@
+.register {
+    
+}
+.register form{
+    width:500px;
+    height: 100%;
+    margin: 0 auto;
+    background-color: aliceblue;
+    padding: 40px 0;
+}
+.register form input, select{
+    width: 308px;
+    height: 35px;
+    border: 2px solid green;
+    border-radius: 8px;
+    padding-left: 10px;
+    display: block;
+    margin: 0 auto 9px auto;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
