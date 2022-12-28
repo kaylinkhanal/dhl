@@ -10,6 +10,7 @@ connect()
 const user = require('./routes/userRouter');
 app.use(user)
 
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })

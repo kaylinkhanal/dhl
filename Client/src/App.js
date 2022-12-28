@@ -1,11 +1,19 @@
 import React from "react";
 import './App.css';
-
-function App() {
+import { useEffect,useState } from "react";
+import Register from './containers/admin/register'
+import { BrowserRouter as Router,Route,Routes,Link} from "react-router-dom";
+const App =()=> {
   return (
-    <div className="App">
-      hi
-    </div>
+    <>
+    <Router>
+      <Routes>
+      <Route exact path="/register" element={<Register/>} />
+      </Routes>
+    </Router>
+    
+    </>
+   
   );
 }
 
