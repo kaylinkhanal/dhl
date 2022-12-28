@@ -4,6 +4,7 @@ const app = Router();
 
 app.post('/register', async(req, res) => {
     try{
+        console.log(req.body)
         const data = await Users.create(req.body)
         if(data){
             res.json({
