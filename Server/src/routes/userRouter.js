@@ -19,5 +19,24 @@ app.post('/register', async(req, res) => {
     }
 })
 
+app.get('/register', async(req, res) => {
+    try{
+        const email = await Users.findOne(req.body.email)
+        const password = await Users.findOne(req.body.password)
+        debugger;
+        if(email === req.body.email && password === req.body.password){
+            res.json({
+                msg: 'login success'
+            })
+        }else{
+            res.json({
+                msg: 'something went wrong'
+            })
+        }
+    }catch(err){
+        console.log(err)
+    }
+})
+
 
 module.exports = app;
