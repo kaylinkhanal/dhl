@@ -6,6 +6,7 @@ const usersSchema = new Schema({
     email: {type:String, required: true},
     phoneNumber: {type:Number, required: true},
     password:  {type:String, required: true},
+    confirmPassword:  {type:String, required: true},
     userRole:  {type:String, required: true},
     permanentAddress:  {type:String, required: true},
     temporaryAddress: {type:String, required: true},

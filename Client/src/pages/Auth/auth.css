@@ -1,0 +1,57 @@
+.main-div{
+    background-image: url("../../images/dhlimage.jpg") ;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+h1{
+    color: white;
+    /* padding-top: 100px; */
+}
+
+/* .forms{
+    display: flex;
+    flex-direction: column;
+    width: 330px;
+    height: 550px;
+    margin-top: 120px;
+    margin-left: 840px;
+    align-items: center;
+} */
+
+input, select{
+    display: flex;
+    height: 35px;
+    width: 300px;
+    background: #f0f0f0;
+    margin-bottom: 10px;
+    margin-left: 102px;
+    opacity: 90%;
+    text-align: center;
+    box-shadow: 1px 2px 5px lightgrey;
+    border: none;
+}
+
+button{
+    height: 40px;
+    width: 152px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background-color: #FFEA00; 
+    border: none;
+    margin-right: 755px;
+    box-shadow: 1px 2px 5px lightgrey;  
+    margin-top: 20px; 
+}
+
+button:hover {
+    background-color: #FDDA0D;
+}
+
+.error{
+    color: red;
+    margin-right: 775px;
+}
+
+
