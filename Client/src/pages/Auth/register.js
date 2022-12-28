@@ -7,9 +7,6 @@ import { Link } from 'react-router-dom'
 import { Country } from '../../countryJson/country';
 
 const Register = () =>{
-    
-  
-    
 
     return(
         <div>
@@ -152,9 +149,10 @@ const Register = () =>{
                         onChange={handleChange}
                         onBlur={handleBlur}
                       >
+                        <option value="" disabled="disabled" label="Select a country name" />
                         {Country.map((item, id)=>{
                           return( <>
-                          <option item={item.name} label="Select Country" />
+                          <option item={item.name} label={item.name} value={item.name} />
                           </>)
                         })}
                         
