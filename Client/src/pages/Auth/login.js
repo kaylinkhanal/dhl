@@ -7,23 +7,21 @@ import ShowhidePassword from "../../component/showhidePassword";
 
 const Login = ()=>{
     const navigate = useNavigate()
-    const loginUser = async(values)=>{
+    const loginUser = async(values, resetForm)=>{
         const requestOptions = {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                email: values.email,
-				password: values.password
-			})
+            body: JSON.stringify(values)
         };
 
         const response = await fetch('http://localhost:5000/login', requestOptions);
         const data = await response.json()
 
-        if(data){
-            console.log(data)
-            message.success("User has been registered")
+        if(data.userdata){
+            message.success(data.msg)
             navigate('/home')
+        }else{
+            message.error('Invalid email or password')
         }
     }
     const SignupSchema = Yup.object().shape({
@@ -42,22 +40,23 @@ const Login = ()=>{
                             password: ''
                         }}
                         validationSchema={SignupSchema}
-                        onSubmit={values=>{
+                        onSubmit={(values, { resetForm })=>{
                             loginUser(values)
+                            resetForm()
                         }}
                     >
 
-                            {({ errors, touched, values, handleChange, handleBlur, handleSubmit }) => (
-								<Form onSubmit={handleSubmit}>
-									<Field name="email" placeholder="Enter Email" value={values.email} onChange={handleChange} onBlur={handleBlur} />
-									{errors.email && touched.email ? (<div className="error">{errors.email}</div>) : null}
+                        {({ errors, touched, values, handleChange, handleBlur, handleSubmit }) => (
+                            <Form onSubmit={handleSubmit}>
+                                <Field name="email" placeholder="Enter Email" value={values.email} onChange={handleChange} onBlur={handleBlur} />
+                                {errors.email && touched.email ? (<div className="error">{errors.email}</div>) : null}
 
-									<Field name="password" placeholder="Enter Password" value={values.password} component={ShowhidePassword} onChange={handleChange} onBlur={handleBlur} />
-									{errors.password && touched.password ? <div className="error">{errors.password}</div> : null}
+                                <Field name="password" placeholder="Enter Password" value={values.password} component={ShowhidePassword} onChange={handleChange} onBlur={handleBlur} />
+                                {errors.password && touched.password ? <div className="error">{errors.password}</div> : null}
 
-									<button type="submit">Login</button>
-								</Form>
-							)}
+                                <button type="submit">Login</button>
+                            </Form>
+                        )}
                     </Formik>
                     <p style={{ marginTop: '10px' }}>Dont have an account? <Link to="/register">Signup</Link> here</p>
                 </div>

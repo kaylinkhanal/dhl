@@ -7,23 +7,13 @@ import ShowhidePassword from '../../component/showhidePassword';
 import { useNavigate, Link } from 'react-router-dom';
 
 const Register = ()=>{
-
     const navigate = useNavigate()
+
     const registerUser = async(values)=>{
         const requestOptions = {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-				name: values.name,
-                email: values.email,
-				phoneNumber: values.phoneNumber,
-				permanentAddress: values.permanentAddress,
-				temporaryAddress: values.temporaryAddress,
-				userRole: values.userRole,
-				password: values.password,
-				country: values.country,
-                zipCode: values.zipCode
-			})
+            body: JSON.stringify(values)
         };
 
         const response = await fetch('http://localhost:5000/register', requestOptions);
@@ -34,6 +24,7 @@ const Register = ()=>{
             message.success(data.msg)
             navigate('/login')
         }
+        resetForm()
     }
 
     const passwordRule = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/
