@@ -1,10 +1,12 @@
 import React from "react";
 import './App.css';
+// import '../src/containers/userRegister'
 
 function App() {
   return (
     <div className="App">
-      hi
+      hi 
+      {/* <userRegister/> */}
     </div>
   );
 }
