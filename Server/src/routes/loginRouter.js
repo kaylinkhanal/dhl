@@ -4,7 +4,7 @@ const app = Router();
 
 app.post('/login', async(req, res) => {
     try{
-        // res.send(req.body)
+        // console.log(req.body)
         const registeredUser = await Users.findOne({email: req.body.email})
 
         if(registeredUser){
@@ -13,16 +13,15 @@ app.post('/login', async(req, res) => {
                 msg: `you're logged in`
             })
         }else{
-            res.json(
-                {
-                    msg: "Invalid username or password"
-                }
-            )
+            res.json({
+                errmsg: 'invalid '
+            })
         }
         
     }catch(err){
         console.log(err)
     }
+
 })
 
 

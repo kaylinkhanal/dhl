@@ -22,9 +22,8 @@ const Register = ()=>{
         if(data){
             console.log(data)
             message.success(data.msg)
-            navigate('/login')
+            navigate('/')
         }
-        resetForm()
     }
 
     const passwordRule = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/

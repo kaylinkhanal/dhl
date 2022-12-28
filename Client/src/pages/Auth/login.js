@@ -7,7 +7,7 @@ import ShowhidePassword from "../../component/showhidePassword";
 
 const Login = ()=>{
     const navigate = useNavigate()
-    const loginUser = async(values, resetForm)=>{
+    const loginUser = async(values  )=>{
         const requestOptions = {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
@@ -16,12 +16,14 @@ const Login = ()=>{
 
         const response = await fetch('http://localhost:5000/login', requestOptions);
         const data = await response.json()
+        console.log(data)
 
-        if(data.userdata){
+        if(data){
+            console.log(data)
             message.success(data.msg)
             navigate('/home')
         }else{
-            message.error('Invalid email or password')
+            message.error(data.errmsg)
         }
     }
     const SignupSchema = Yup.object().shape({
@@ -40,9 +42,8 @@ const Login = ()=>{
                             password: ''
                         }}
                         validationSchema={SignupSchema}
-                        onSubmit={(values, { resetForm })=>{
+                        onSubmit={values=>{
                             loginUser(values)
-                            resetForm()
                         }}
                     >
 
