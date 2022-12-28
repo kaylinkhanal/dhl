@@ -1,10 +1,10 @@
 import React from "react";
-import './App.css';
+import Register from "./containers/registration/register";
 
 function App() {
   return (
     <div className="App">
-      hi
+     <Register/>
     </div>
   );
 }
