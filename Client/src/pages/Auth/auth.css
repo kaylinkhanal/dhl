@@ -26,10 +26,9 @@ input, select{
     background: #f0f0f0;
     margin-bottom: 10px;
     margin-left: 102px;
-    opacity: 90%;
     text-align: center;
     box-shadow: 1px 2px 5px lightgrey;
-    border: none;
+    border: 1px solid lightgrey;
 }
 
 button{

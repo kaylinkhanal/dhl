@@ -8,7 +8,7 @@ import { Country } from '../../countryJson/country';
 
 const Register = () =>{
     
-  const registerUsers = async(values)=>{
+  
     
 
     return(
@@ -32,7 +32,7 @@ const Register = () =>{
                 validationSchema={RegisterSchema}
                 onSubmit={values => {
                     // same shape as initial values
-                    registerUsers(values);
+                    console.log(values);
                 }}
                 >
                 {({ errors, touched, values, handleChange, handleBlur, handleSubmit }) => (
