@@ -49,7 +49,7 @@ function Login() {
                             {errors.password && touched.password ? (
                                 <div>{errors.password}</div>
                             ) : null}
-                            <button className='btn btn-success' type="submit">Register</button>
+                            <button className='btn btn-success' type="submit">Login</button>
                             <h6> {message} </h6>
                         </Form>
                     </div>

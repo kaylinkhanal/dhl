@@ -3,6 +3,8 @@ import { Formik, Form, Field } from 'formik';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as Yup from 'yup';
 import '../style.css'
+const countryData = require('./country-list')
+const countries = countryData.countries
 
 const registerSchema = Yup.object().shape({
     name: Yup.string()
@@ -10,17 +12,28 @@ const registerSchema = Yup.object().shape({
         .max(50, 'Too Long!')
         .required('Required'),
     email: Yup.string()
+        .email('Invalid email')
         .min(10, 'Too Short!')
         .max(50, 'Too Long!')
         .required('Required'),
-    phoneNumber: Yup.number()
-        // .min(10, 'Too Short!')
-        // .max(15, 'Too Long!')
+    phoneNumber: Yup.string()
+        .min(10, 'Too Short!')
+        .max(15, 'Too Long!')
         .required('Required'),
     password: Yup.string()
         .min(8, 'Too Short!')
         .max(16, 'Too Long!')
         .required('Required'),
+    cPassword: Yup.string()
+        .min(8, 'Too Short!')
+        .max(16, 'Too Long!')
+        .when("password", {
+            is: val => (val && val.length > 0 ? true : false),
+            then: Yup.string().oneOf(
+                [Yup.ref("password")],
+                "password didn't match")
+            })
+        .required('Required'),    
     userRole: Yup.string()
         .min(4, 'Too Short!')
         .max(20, 'Too Long!')
@@ -41,21 +54,25 @@ const registerSchema = Yup.object().shape({
         // .min(4, 'Too Short!')
         // .max(50, 'Too Long!')
         .required('Required'),
-
 });
 
-function Register() {
+const Auth = () => {
     const [message, setMessage] = useState('')
+    // console.log(countries[0].name)
+
+    const countryList = countries.map((item) => {
+        return item.name
+    })
 
     return (
         <div className='App'>
-            <h1>Register</h1>
             <Formik
                 initialValues={{
                     name: '',
                     email: '',
                     phoneNumber: '',
                     password: '',
+                    cPassword: '',
                     userRole: '',
                     permanentAddress: '',
                     temporaryAddress: '',
@@ -83,6 +100,7 @@ function Register() {
                 {({ errors, touched }) => (
                     <div className='register'>
                         <Form>
+                            <h1>Register</h1>
                             <Field name="name" type="name" placeholder="Enter your name" />
                             {errors.name && touched.name ? (
                                 <div>{errors.name}</div>
@@ -99,15 +117,19 @@ function Register() {
                             {errors.password && touched.password ? (
                                 <div>{errors.password}</div>
                             ) : null}
+                            <Field name="cPassword" type="password" placeholder="Re-type your password" />
+                            {errors.cPassword && touched.cPassword ? (
+                                <div>{errors.cPassword}</div>
+                            ) : null}
                             <Field as="select" name="userRole">
-                                <option value="">select </option>
+                                <option value="">select user type </option>
                                 <option value="User">User</option>
                                 <option value="Rider">Rider</option>
                                 <option value="Admin">Admin</option>
                             </Field>
-                            {/* {errors.userRole && touched.userRole ? (
+                            {errors.userRole && touched.userRole ? (
                                 <div>{errors.userRole}</div>
-                            ) : null} <br /> */}
+                            ) : null}
                             <Field name="permanentAddress" placeholder="Enter your permanentAddress" />
                             {errors.permanentAddress && touched.permanentAddress ? (
                                 <div>{errors.permanentAddress}</div>
@@ -116,7 +138,15 @@ function Register() {
                             {errors.temporaryAddress && touched.temporaryAddress ? (
                                 <div>{errors.temporaryAddress}</div>
                             ) : null}
-                            <Field name="country" placeholder="Enter your country" />
+
+                            <Field name="country" as="select">
+                                <option value="">select country</option>
+                                {countryList.map((item, id) => {
+                                    return (
+                                        <option value={item}>{item}</option>
+                                    )
+                                })}
+                            </Field>
                             {errors.country && touched.country ? (
                                 <div>{errors.country}</div>
                             ) : null}
@@ -128,11 +158,10 @@ function Register() {
                             <h6> {message} </h6>
                         </Form>
                     </div>
-
                 )}
             </Formik>
         </div>
     );
 }
 
-export default Register;
+export default Auth;

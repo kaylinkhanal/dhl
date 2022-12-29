@@ -1,5 +1,11 @@
-.register {
-    
+.register{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('.././media/dhl.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
 }
 .register form{
     width:500px;
@@ -8,6 +14,10 @@
     background-color: aliceblue;
     padding: 40px 0;
 }
+.register form h1{
+  padding: 12px 0 36px 0;
+  font-weight: bolder;
+}
 .register form input, select{
     width: 308px;
     height: 35px;
@@ -15,8 +25,12 @@
     border-radius: 8px;
     padding-left: 10px;
     display: block;
-    margin: 0 auto 9px auto;
+    margin: 0 auto 11px auto;
 }
+.register form button{
+  margin-top: 25px;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
