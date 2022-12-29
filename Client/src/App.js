@@ -1,7 +1,8 @@
 import React from "react";
 import { Route, Link, Routes } from "react-router-dom";
 import "./App.css";
-import RegistrationForm from "./containers/registrationForm";
+import Register from "./containers/register";
+import Login from "./containers/login";
 import NavBar from "./components/navBar";
 
 const App = () => {
@@ -11,7 +12,8 @@ const App = () => {
         <NavBar />
       </>
       <Routes>
-        <Route exact path="/registrationform" element={<RegistrationForm />} />
+        <Route exact path="/register" element={<Register />} />
+        <Route exact path="/login" element={<Login />} />
       </Routes>
     </>
   );

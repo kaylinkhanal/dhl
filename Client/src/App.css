@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  width: 800px;
+  height: 100%;
+  margin: auto;
 }
 
 .App-logo {
@@ -37,6 +40,19 @@
   }
 }
 
-.navbar-custom {
-  background-color: #674ead;
+.register form {
+  width: 800px;
+  height: 100%;
+  margin: auto;
+  background-color: ghostwhite;
+  padding: 40px 0;
+}
+
+.login {
+  display: flex;
+  width: 500px;
+  height: 100%;
+  margin: auto;
+  background-color: ghostwhite;
+  padding: 40px 0;
 }
