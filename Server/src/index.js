@@ -9,6 +9,10 @@ const connect = require('./db/connect')
 connect()
 const user = require('./routes/userRouter');
 app.use(user)
+const login = require('./routes/loginRouter');
+app.use(login)
+
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

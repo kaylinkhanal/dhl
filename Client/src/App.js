@@ -1,11 +1,21 @@
 import React from "react";
 import './App.css';
-import {BrowserRouter,Routes,Router}
 
-function App() {
+const App =()=> {
   return (
-    <h1>chnages</h1>
-    
+    <>
+    <Routes>
+      <Route exact path="/" 
+      element={<TicketWinner/>} />
+      
+      <Route exact path="/registeruser" 
+      element={<RegisterUser/>} />
+      
+      <Route exact path="/assignwinner" 
+      element={<AssignWinner/>} />
+   
+    </Routes>
+    </>
   );
 }
 
