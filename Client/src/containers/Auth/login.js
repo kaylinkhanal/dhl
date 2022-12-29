@@ -3,7 +3,7 @@ import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import { message } from 'antd';
 import { useNavigate, Link } from 'react-router-dom';
-import ShowhidePassword from "../../component/showhidePassword";
+import ShowhidePassword from "../../components/showhidePassword";
 
 const Login = ()=>{
     const navigate = useNavigate()
@@ -17,11 +17,8 @@ const Login = ()=>{
         const response = await fetch('http://localhost:5000/login', requestOptions);
         const data = await response.json()
 
-        if(data.userdata){
-            message.success(data.msg)
-            navigate('/home')
-        }else{
-            message.error('Invalid email or password')
+        if(data.msg === 'login success'){
+          alert('login success')
         }
     }
     const SignupSchema = Yup.object().shape({

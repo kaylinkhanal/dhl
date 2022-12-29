@@ -3,7 +3,7 @@ import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import CountryData from '../../countries.json';
 import { message } from 'antd';
-import ShowhidePassword from '../../component/showhidePassword';
+import ShowhidePassword from '../../components/showhidePassword';
 import { useNavigate, Link } from 'react-router-dom';
 
 const Register = ()=>{
@@ -20,11 +20,9 @@ const Register = ()=>{
         const data = await response.json()
 
         if(data){
-            console.log(data)
-            message.success(data.msg)
-            navigate('/login')
+            alert(data.msg)
+            navigate('/')
         }
-        resetForm()
     }
 
     const passwordRule = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/
