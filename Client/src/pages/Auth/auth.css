@@ -1,7 +1,20 @@
+.main{
+    background-color: #000;
+    align-items: center;
+}
+
+.login-div{
+    display: flex;
+    flex-direction: row;
+    margin-top: 162px;
+    height: 500px;
+}
+
 .main-div{
-    background-image: url("../../images/dhlimage.jpg") ;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
+    margin-top: 50px;
+    height: 860px;
+    display: flex;
+    flex-direction: row;
 }
 
 h1{
@@ -9,26 +22,31 @@ h1{
     /* padding-top: 100px; */
 }
 
-/* .forms{
-    display: flex;
-    flex-direction: column;
-    width: 330px;
-    height: 550px;
-    margin-top: 120px;
-    margin-left: 840px;
-    align-items: center;
-} */
+.imageUpload{
+    background-image: url(../../images/plane.png);
+    background-repeat: no-repeat;
+    height: 365px;
+    width: 100%;
+    float: left;
+    color: white;
+}
 
-input, select{
+.forms{
+    width: 50%;
+    float: right;
+    /* border: 1px solid white; */
+}
+
+input, select, textarea{
     display: flex;
     height: 35px;
-    width: 300px;
-    background: #f0f0f0;
-    margin-bottom: 10px;
-    margin-left: 102px;
-    text-align: center;
-    box-shadow: 1px 2px 5px lightgrey;
-    border: 1px solid lightgrey;
+    width: 465px;
+    margin-bottom: 15px;
+    /* margin-left: 102px;  */
+    /* background: transparent; */
+    background-color: #343434;
+    border: 1px solid white;
+    color: white;
 }
 
 button{
@@ -37,20 +55,19 @@ button{
     font-size: 20px;
     font-weight: bold;
     color: white;
-    background-color: #FFEA00; 
-    border: none;
-    margin-right: 755px;
-    box-shadow: 1px 2px 5px lightgrey;  
+    background-color: #343434; 
+    border: 1px solid #fff;
+    margin-right: 755px;  
     margin-top: 20px; 
 }
 
 button:hover {
-    background-color: #FDDA0D;
+    background-color: #000;
 }
 
 .error{
     color: red;
-    margin-right: 775px;
+    /* margin-right: 775px; */
 }
 
 

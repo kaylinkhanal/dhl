@@ -3,15 +3,42 @@ import { Formik, Form } from 'formik';
 import { RegisterSchema } from '../../schema/schema';
 import classNames from "classnames";
 import './auth.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Country } from '../../countryJson/country';
 
+
 const Register = () =>{
+  const navigate = useNavigate()
+  const registerParticipants = async(values)=>{
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: values.name,
+          email: values.email,
+          phoneNumber: values.phoneNumber,
+          password: values.password,
+          confirmPassword: values.confirmPassword,
+          userRole: values.userRole,
+          permanentAddress: values.permanentAddress,
+          temporaryAddress: values.temporaryAddress,
+          country: values.country,
+          zipCode: values.zipCode,
+          
+        })
+      };
+      const response = await fetch('http://localhost:5000/register/', requestOptions);
+      const data = await response.json();
+      if(data){
+        navigate('/')
+    } 
+      }
 
     return(
-        <div>
+        <div className='main'>
+          <h1>Register Page</h1>
           <div className='main-div'>
-            <h1>Register Page</h1>            
+            <div className='imageUpload'></div>           
             <Formik
                 className='forms'
                 initialValues={{
@@ -29,11 +56,13 @@ const Register = () =>{
                 validationSchema={RegisterSchema}
                 onSubmit={values => {
                     // same shape as initial values
-                    console.log(values);
+                    registerParticipants(values)
                 }}
                 >
                 {({ errors, touched, values, handleChange, handleBlur, handleSubmit }) => (
-                    <Form>
+
+
+                    <Form className="forms">
                     <input name="name" 
                     type="name"
                     placeholder="Enter your name"
@@ -177,7 +206,7 @@ const Register = () =>{
                       </div>
                       
                     <button type="submit">Submit</button>
-                    <p style={{ color: '#fff', marginTop: '10px' }}>Already have an account? <Link to="/login" style={{ color: 'yellow'}}>SignIn</Link> here</p>
+                    <p style={{ color: '#fff', marginTop: '10px' }}>Already have an account? <Link to="/" style={{ color: 'yellow'}}>SignIn</Link> here</p>
                     </Form>
                 )}
                 </Formik>

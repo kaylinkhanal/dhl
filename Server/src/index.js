@@ -8,7 +8,10 @@ app.use(cors())
 const connect = require('./db/connect')
 connect()
 const user = require('./routes/userRouter');
+const login = require('./routes/loginRouter');
+
 app.use(user)
+app.use(login)
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
