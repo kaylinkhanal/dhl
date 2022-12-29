@@ -1,21 +1,26 @@
+
 .register {
-    
-}
+   /* background-color:burlywood; */
+   
+  }
+
 .register form{
-    width:500px;
-    height: 100%;
+    width:400px;
+    height: 80%;
     margin: 0 auto;
     background-color: aliceblue;
     padding: 40px 0;
+    
 }
 .register form input, select{
     width: 308px;
     height: 35px;
     border: 2px solid green;
-    border-radius: 8px;
-    padding-left: 10px;
+    border-radius: 3px;
+    padding-left: 8px;
     display: block;
-    margin: 0 auto 9px auto;
+    margin: 0 auto 7px auto;
+    
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -26,4 +31,24 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
+}
+.App{
+  background-image:url('./images/dhl.jpg');
+}
+
+.login form{
+  width:500px;
+  height: 100%;
+  margin: 0 auto;
+  background-color: aliceblue;
+  padding: 40px 0;
+}
+.login form input, select{
+  width: 308px;
+  height: 35px;
+  border: 2px solid green;
+  border-radius: 8px;
+  padding-left: 10px;
+  display: block;
+  margin: 0 auto 9px auto;
 }

@@ -18,6 +18,28 @@ app.post('/register', async(req, res) => {
         console.log(err)
     }
 })
+app.get('/login', async(req,res)=>{
+    try{
+        const data = await Users.findOne(req.body)
+        if (data){
+            res.json({
+                msg: 'you are successfully login'
+            })
+           
+        }else{
+            if(!data){
+                res.json({
+                    msg: 'Something went wrong'
+                })
+            }
+           
 
+        }
+
+    }catch(err){
+        console.log(err)
+
+    }
+})
 
 module.exports = app;

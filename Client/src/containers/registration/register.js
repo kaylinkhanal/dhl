@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import * as Yup from 'yup';
 import '../style.css'
 
+
 const registerSchema = Yup.object().shape({
     name: Yup.string()
         .min(5, 'Too Short!')
