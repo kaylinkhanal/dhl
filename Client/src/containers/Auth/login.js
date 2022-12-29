@@ -14,7 +14,7 @@ const Login = ()=>{
             body: JSON.stringify(values)
         };
 
-        const response = await fetch('http://localhost:5000/login', requestOptions);
+        const response = await fetch('http://localhost:6000/login', requestOptions);
         const data = await response.json()
 
         if(data.msg === 'login success'){

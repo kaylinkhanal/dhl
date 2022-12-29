@@ -2,10 +2,20 @@ const { Router } = require('express');
 const Users = require('../models/users')
 const app = Router();
 const bcrypt = require('bcrypt');
+const { findOne } = require('../models/users');
 const saltRounds = 10;
 
 app.post('/register', async(req, res) => {
+
     try{
+      // const registeredData=await Users.findOne({email:req.body.email})
+      // if(registeredData){
+      //   res.json({
+      //     msg:"username is already taken"
+      //   })
+      // }
+      // else{
+
         const salt = bcrypt.genSaltSync(saltRounds);
         const hash = bcrypt.hashSync(req.body.password, salt);
         if(hash){
@@ -17,7 +27,10 @@ app.post('/register', async(req, res) => {
              res.json({msg: 'sth went wrong'})
            }
         }
-    }catch(err){
+
+      }
+
+    catch(err){
         console.log(err)
     }
 })

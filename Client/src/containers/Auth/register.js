@@ -1,4 +1,4 @@
-import React from 'react'
+import {React,useState} from 'react'
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import CountryData from '../../countries.json';
@@ -8,6 +8,7 @@ import { useNavigate, Link } from 'react-router-dom';
 
 const Register = ()=>{
     const navigate = useNavigate()
+    const [message, setMessage] = useState('');
 
     const registerUser = async(values)=>{
         const requestOptions = {
@@ -16,8 +17,14 @@ const Register = ()=>{
             body: JSON.stringify(values)
         };
 
-        const response = await fetch('http://localhost:5000/register', requestOptions);
+        const response= await fetch('http://localhost:6000/register', requestOptions);
         const data = await response.json()
+        // .then(res => res.json())
+        // .then(data => setMessage(data.msg))
+
+//     fetch('http://localhost:6000/register' , requestOptions)
+//    .then((res)=>res.json())
+//    .then((data)=>alert(data.msg))
 
         if(data){
             alert(data.msg)
@@ -105,6 +112,7 @@ const Register = ()=>{
                                 {errors.zipCode && touched.zipCode ? (<div className="error">{errors.zipCode}</div>) : null}
 
                                 <button type="submit">Signup</button>
+                                <h1>{message}</h1>
                             </Form>
                         )} 
                     </Formik>
