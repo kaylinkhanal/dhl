@@ -1,38 +1,97 @@
-.App {
+body{
+  font-size: 14px;
+  line-height: 25px;
+}
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box
+}
+
+ul{
+  padding-left: 0
+}
+
+li{
+  list-style: none;
+}
+
+h1,h2,h3,h4,h5,h6{
+  font-weight: 700;
+}
+
+h1{
+  font-size: 30px;
+  line-height: 34px;
+}
+
+.container{
+  max-width: 80%;
+  width: 100%;
+  margin: 0 auto
+}
+
+input,select{
+  height: 40px;
+    padding: 10px;
+    border: 1px solid #e3e3e3;
+    width: 100%;
+    background: #f1f1f1;
+    margin-bottom: 10px;
+    border-radius: 0;
+}
+input:focus,select:focus{
+  outline: 0;
+}
+
+::placeholder{
+  font-style: italic;
+}
+
+.form {
+  max-width: 400px;
+  margin: 0 auto;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+section {
+  padding: 50px 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+form {
+  margin-top: 32px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.error {
+  color: red;
+  text-align: left;
+  font-size: 12px;
 }
 
-.App-link {
-  color: #61dafb;
+button {
+  padding: 10px 20px;
+  background: red;
+  color: #fff;
+  font-size: 14px;
+  border: 0;
+  text-transform: uppercase;
+  cursor: pointer;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+select option:disabled {
+  background-color: #ccc;
+  font-size: 16px
 }
+
+.input_wrap {
+  position: relative;
+}
+
+.input_wrap i {
+  position: absolute;
+  right: 10px;
+  line-height: 40px;
+  font-size: 12px;
+}
+

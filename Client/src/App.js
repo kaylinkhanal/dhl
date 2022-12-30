@@ -1,18 +1,22 @@
 import React from "react";
 import './App.css';
-import Register from "./containers/registration/register";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./containers/registration/login";
+import Register from "./containers/Auth/register";
+import Login from "./containers/Auth/login";
+import {
+	BrowserRouter as Router,
+	Routes,
+	Route,
+ } from "react-router-dom";
 
-function App() {
+const App = ()=> {
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
-        <Route path="/register" element={<Register/>}/>
-        <Route path="/login" element={<Login/>}/>
+        <Route exact path='/' element={<Login/>}/>
+        <Route exact path='/register' element={<Register/>}/>
       </Routes>
-    </BrowserRouter>
-  );
+    </Router>
+  )
 }
 
 export default App;
