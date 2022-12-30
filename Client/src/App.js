@@ -4,15 +4,16 @@ import Register from "./containers/registration/register";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./containers/registration/login";
 
-function App() {
+
+const App = ()=> {
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
         <Route path="/register" element={<Register/>}/>
         <Route path="/login" element={<Login/>}/>
       </Routes>
-    </BrowserRouter>
-  );
+    </Router>
+  )
 }
 
 export default App;
