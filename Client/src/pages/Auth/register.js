@@ -3,7 +3,7 @@ import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import CountryData from '../../countries.json';
 import { message } from 'antd';
-import ShowhidePassword from '../../component/showhidePassword';
+import ShowhidePassword from '../../components/showhidePassword';
 import { useNavigate, Link } from 'react-router-dom';
 
 const Register = ()=>{
@@ -33,6 +33,8 @@ const Register = ()=>{
 		phoneNumber: Yup.string().required('Required'),
         permanentAddress: Yup.string().required('Required'),
 		email: Yup.string().email('Invalid email').required('Required'),
+        confirmPassword: Yup.string()
+			.oneOf([Yup.ref('password'), null], 'Passwords doesnt match'),
 		password: Yup.string()
 			.required('Required')
 			.min(6)
@@ -54,6 +56,7 @@ const Register = ()=>{
                             temporaryAddress: '',
                             userRole: '',
                             password: '',
+                            confirmPassword: '',
                             country: '',
                             zipCode: ''
                         }}
@@ -89,6 +92,9 @@ const Register = ()=>{
 
                                 <Field name="password" placeholder="Your password" value={values.password} onChange={handleChange} onBlur={handleBlur} component={ShowhidePassword}/>
                                 {errors.password && touched.password ? (<div className="error">{errors.password}</div>) : null}
+
+                                <Field name="confirmPassword" placeholder="confirm password" value={values.confirmPassword} onChange={handleChange} onBlur={handleBlur} component={ShowhidePassword}/>
+                                {errors.confirmPassword && touched.confirmPassword ? (<div className="error">{errors.confirmPassword}</div>) : null}
 
                                 <select name="country" value={values.country} onChange={handleChange} onBlur={handleBlur}>
                                     <option value="" disabled="disabled" label="Select a Country"></option>

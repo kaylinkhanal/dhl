@@ -3,7 +3,7 @@ import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import { message } from 'antd';
 import { useNavigate, Link } from 'react-router-dom';
-import ShowhidePassword from "../../component/showhidePassword";
+import ShowhidePassword from "../../components/showhidePassword";
 
 const Login = ()=>{
     const navigate = useNavigate()
@@ -18,7 +18,7 @@ const Login = ()=>{
         const data = await response.json()
         console.log(data)
 
-        if(data){
+        if(data.msg){
             console.log(data)
             message.success(data.msg)
             navigate('/home')
