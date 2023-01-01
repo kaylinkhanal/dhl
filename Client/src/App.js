@@ -1,7 +1,7 @@
 import React from "react";
 import './App.css';
-import Register from "./pages/Auth/register";
-import Login from "./pages/Auth/login";
+import Register from "./containers/Auth/register";
+import Login from "./containers/Auth/login";
 import {
 	BrowserRouter as Router,
 	Routes,

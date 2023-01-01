@@ -6,23 +6,16 @@ const saltRounds = 10;
 
 app.post('/register', async(req, res) => {
     try{
-        // console.log(req.body)
         const salt = bcrypt.genSaltSync(saltRounds);
-        const hash = bcrypt.hashSync(req.body.password, salt)
-        
+        const hash = bcrypt.hashSync(req.body.password, salt);
         if(hash){
             req.body.password = hash
-            const data = await Users.create(req.body)
-
-            if(data){
-                req.json({
-                    msg: 'user registered'
-                })
-            }else{
-                req.json({
-                    errmsg: 'somthing went wrong'
-                })
-            }
+           const data = await Users.create(req.body)
+           if(data){
+             res.json({msg: 'users registered'})
+           }else{
+             res.json({msg: 'sth went wrong'})
+           }
         }
     }catch(err){
         console.log(err)

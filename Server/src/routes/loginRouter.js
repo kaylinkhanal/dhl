@@ -2,30 +2,29 @@ const { Router } = require('express');
 const Users = require('../models/users')
 const app = Router();
 const bcrypt = require('bcrypt');
-const saltRounds = 10;
 
 app.post('/login', async(req, res) => {
     try{
-        const data = await Users.findOne({email: req.body.email})
-        
-        if(data){
-            const {password} = data
-            const isValidPassword = bcrypt.compareSync(req.body.password, password)
-            if(isValidPassword){
-                req.json({
-                    msd: 'login success'
-                })
-            }else{
-                res.json({
-                    errmsg: 'password did not match'
-                })
-            }
+    const data = await Users.findOne({email: req.body.email})
+    if(data){
+        const {password} = data
+        const isValidPassword = bcrypt.compareSync(req.body.password, password)
+        if(isValidPassword){
+            res.json({
+                msg: 'login success'
+            })
         }else{
             res.json({
-                errmsg: 'invalid credentials'
+                msg: 'password did not match'
             })
         }
-        // console.log(req.body) 
+    }else{
+        res.json({
+            msg: 'invalid credentials'
+        })
+    }
+ 
+
     }catch(err){
         console.log(err)
     }
