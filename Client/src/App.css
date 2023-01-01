@@ -17,6 +17,11 @@ li{
   list-style: none;
 }
 
+a{
+  text-decoration: none;
+  color: #000;
+}
+
 h1,h2,h3,h4,h5,h6{
   font-weight: 700;
 }
@@ -93,5 +98,64 @@ select option:disabled {
   right: 10px;
   line-height: 40px;
   font-size: 12px;
+}
+
+.card_block{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-size: cover;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.bg-image {
+  background-image: url(./images/courier.jpg);
+  filter: blur(8px);
+  -webkit-filter: blur(10px);
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.card {
+  height: 150px;
+  width: 150px;
+  background: #fc0;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  margin: 10px;
+  transition: all .3s ease;
+}
+
+.card:hover{
+  transform: translateY(-15px);
+}
+
+.card i {
+  height: 50px;
+  width: 50px;
+  background: rgb(239 3 3 / 20%);
+  border-radius: 50%;
+  line-height: 50px;
+  text-align: center;
+  color: red;
+  margin: 0 auto;
+  display: inline-block;
+  margin-bottom: 10px;
+  font-size: 18px;
 }
 

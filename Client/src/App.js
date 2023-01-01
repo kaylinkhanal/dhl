@@ -5,8 +5,9 @@ import Login from "./containers/Auth/login";
 import UserDashboard from "./containers/User/dashboard"
 import AdminDashboard from "./containers/Admin/dashboard"
 import RiderDashboard from "./containers/Rider/dashboard"
+import UserOrder from "./containers/User/userOrder";
 
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 
 import {
 	BrowserRouter as Router,
@@ -57,6 +58,7 @@ const UserScreen=()=>{
   return(
     <Routes>
   <Route exact path='/' element={<UserDashboard/>}/>
+  <Route exact path='/user-order' element={<UserOrder/>}/>
     </Routes>
   )
 }
