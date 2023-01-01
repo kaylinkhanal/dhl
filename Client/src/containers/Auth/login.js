@@ -4,9 +4,12 @@ import * as Yup from 'yup';
 import { message } from 'antd';
 import { useNavigate, Link } from 'react-router-dom';
 import ShowhidePassword from "../../components/showhidePassword";
-
+import { useDispatch, useSelector } from "react-redux"
+import {setUserDetails}  from "../../reducers/userSlice"
 const Login = ()=>{
-    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const {name, userRole} = useSelector(state=>state.user)
+  
     const loginUser = async(values, resetForm)=>{
         const requestOptions = {
             method: "POST",
@@ -16,9 +19,9 @@ const Login = ()=>{
 
         const response = await fetch('http://localhost:5000/login', requestOptions);
         const data = await response.json()
-
+        console.log(data)
         if(data.msg === 'login success'){
-          alert('login success')
+            dispatch(setUserDetails(data.userDetails))
         }
     }
     const SignupSchema = Yup.object().shape({
@@ -30,7 +33,7 @@ const Login = ()=>{
             <div className='container'>
                 <div className='form'>
                     <h1>Login</h1>
-
+                        {'you are:' +name + "and your role is"+ userRole}
                     <Formik
                         initialValues={{
                             email: '',
@@ -39,7 +42,7 @@ const Login = ()=>{
                         validationSchema={SignupSchema}
                         onSubmit={(values, { resetForm })=>{
                             loginUser(values)
-                            resetForm()
+                            // resetForm()
                         }}
                     >
 
