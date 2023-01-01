@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux"
 import {setUserDetails}  from "../../reducers/userSlice"
 const Login = ()=>{
     const dispatch = useDispatch()
-    const {name, userRole} = useSelector(state=>state.user)
+ 
   
     const loginUser = async(values, resetForm)=>{
         const requestOptions = {
@@ -33,7 +33,7 @@ const Login = ()=>{
             <div className='container'>
                 <div className='form'>
                     <h1>Login</h1>
-                        {'you are:' +name + "and your role is"+ userRole}
+                     
                     <Formik
                         initialValues={{
                             email: '',
