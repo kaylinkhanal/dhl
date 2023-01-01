@@ -28,17 +28,12 @@ const Register = () => {
     }
   };
 
-  const passwordRule = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
-
   const SignupSchema = Yup.object().shape({
     name: Yup.string().required("Required*"),
     phoneNumber: Yup.string().required("Required*"),
     permanentAddress: Yup.string().required("Required*"),
     email: Yup.string().email("Invalid email").required("Required*"),
-    password: Yup.string()
-      .required("Required*")
-      .min(6)
-      .matches(passwordRule, { message: "Please create a stronger password" }),
+    password: Yup.string().required("Required*").min(6),
   });
 
   return (
