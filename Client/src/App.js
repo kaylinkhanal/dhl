@@ -5,6 +5,7 @@ import Login from "./containers/Auth/login";
 import UserDashboard from "./containers/User/dashboard"
 import AdminDashboard from "./containers/Admin/dashboard"
 import RiderDashboard from "./containers/Rider/dashboard"
+import OrderCard from "./components/order/orderCard"
 
 import { useDispatch, useSelector } from "react-redux"
 
@@ -48,7 +49,7 @@ const AuthScreens=()=>{
 const RiderScreen=()=>{
   return(
     <Routes>
-  <Route exact path='/' element={<RiderDashboard/>}/>
+      <Route exact path='/' element={<RiderDashboard/>}/>
     </Routes>
   )
 }
@@ -56,14 +57,15 @@ const RiderScreen=()=>{
 const UserScreen=()=>{
   return(
     <Routes>
-  <Route exact path='/' element={<UserDashboard/>}/>
+      <Route exact path='/' element={<UserDashboard/>}/>
+      <Route exact path='/order' element={<OrderCard/>}/>
     </Routes>
   )
 }
 const AdminScreen=()=>{
   return(
     <Routes>
-  <Route exact path='/' element={<AdminDashboard/>}/>
+      <Route exact path='/' element={<AdminDashboard/>}/>
     </Routes>
   )
 }
