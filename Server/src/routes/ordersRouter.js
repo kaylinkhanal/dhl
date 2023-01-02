@@ -20,4 +20,18 @@ app.post('/orders', async(req, res)=>{
     }
 })
 
+app.get('/orders', async(req, res)=>{
+    try{
+        const orderData = await Orders.find()
+        if(orderData){
+            res.json({
+                ordersList: orderData
+            })
+        }
+        
+    }catch(err){
+        console.log(err)
+    }
+})
+
 module.exports = app;

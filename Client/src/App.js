@@ -6,6 +6,7 @@ import UserDashboard from "./containers/User/dashboard"
 import AdminDashboard from "./containers/Admin/dashboard"
 import RiderDashboard from "./containers/Rider/dashboard"
 import Orders from "./containers/User/orders";
+import OrdersList from "./containers/User/ordersList";
 
 import { useSelector } from "react-redux"
 
@@ -59,6 +60,7 @@ const UserScreen=()=>{
     <Routes>
   <Route exact path='/' element={<UserDashboard/>}/>
   <Route exact path='/orders' element={<Orders/>}/>
+  <Route exact path='/ordersList' element={<OrdersList/>}/>
     </Routes>
   )
 }
