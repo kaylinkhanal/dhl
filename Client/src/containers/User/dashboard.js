@@ -3,7 +3,9 @@ import '../style.css'
 import { GrLogout } from 'react-icons/gr';
 import { FaUserCircle } from 'react-icons/fa';
 import { Link } from "react-router-dom";
-import OrderCard from "../../components/order/orderCard";
+import Orders from "./orders";
+import OrdersList from "./ordersList";
+
 
 
 const Dashboard = ()=>{
@@ -15,12 +17,15 @@ const Dashboard = ()=>{
             </div>
             <div className="cards">
                 <div className="send-items">
-                    <Link to="/order" element={<OrderCard/>} style={{textDecoration:"none", color:"white"}}>
+                    <Link to="/orders" element={<Orders/>} style={{textDecoration:"none", color:"white"}}>
                         <label>Sent items</label>
                     </Link>
                 </div>
                 <div className="my-orders">
-                    <label>My orders</label>
+                    <Link to="/ordersList" element={<OrdersList/>} style={{textDecoration:"none", color:"white"}}>
+                        <label>My orders</label>
+                    </Link>
+                   
                 </div>
             </div>
             <div className="instruction-div">

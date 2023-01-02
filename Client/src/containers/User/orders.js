@@ -2,18 +2,21 @@ import React from 'react'
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate, Link } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux"
 
-const OrderCard = ()=>{
+const Orders = ()=>{
     const navigate = useNavigate()
+    const {name} = useSelector(state=> state.user)
 
     const orderItem = async(values)=>{
+        values.senderName = name
         const requestOptions = {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(values)
         };
 
-        const response = await fetch('http://localhost:5000/order', requestOptions);
+        const response = await fetch('http://localhost:5000/orders', requestOptions);
         const data = await response.json()
 
         if(data){
@@ -116,4 +119,4 @@ const OrderCard = ()=>{
         </section>
     )
 }
-export default OrderCard
+export default Orders

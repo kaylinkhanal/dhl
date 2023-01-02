@@ -5,7 +5,8 @@ import Login from "./containers/Auth/login";
 import UserDashboard from "./containers/User/dashboard"
 import AdminDashboard from "./containers/Admin/dashboard"
 import RiderDashboard from "./containers/Rider/dashboard"
-import OrderCard from "./components/order/orderCard"
+import Orders from "./containers/User/orders"
+import OrdersList from "./containers/User/ordersList"
 
 import { useDispatch, useSelector } from "react-redux"
 
@@ -58,7 +59,8 @@ const UserScreen=()=>{
   return(
     <Routes>
       <Route exact path='/' element={<UserDashboard/>}/>
-      <Route exact path='/order' element={<OrderCard/>}/>
+      <Route exact path='/orders' element={<Orders/>}/>
+      <Route exact path='/orderslist' element={<OrdersList/>}/>
     </Routes>
   )
 }
