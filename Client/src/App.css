@@ -24,6 +24,7 @@ h1,h2,h3,h4,h5,h6{
 h1{
   font-size: 30px;
   line-height: 34px;
+  color: #E4D00A;
 }
 
 .container{
@@ -33,9 +34,9 @@ h1{
 }
 
 input,select{
-  height: 40px;
+    height: 40px;
     padding: 10px;
-    border: 1px solid #e3e3e3;
+    border: 1px solid #E4D00A;
     width: 100%;
     background: #f1f1f1;
     margin-bottom: 10px;
@@ -71,7 +72,7 @@ form {
 
 button {
   padding: 10px 20px;
-  background: red;
+  background: #E4D00A;
   color: #fff;
   font-size: 14px;
   border: 0;
