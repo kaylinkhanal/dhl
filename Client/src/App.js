@@ -6,6 +6,7 @@ import UserDashboard from "./containers/User/dashboard"
 import AdminDashboard from "./containers/Admin/dashboard"
 import RiderDashboard from "./containers/Rider/dashboard"
 
+
 import { useDispatch, useSelector } from "react-redux"
 
 import {
@@ -49,6 +50,7 @@ const RiderScreen=()=>{
   return(
     <Routes>
   <Route exact path='/' element={<RiderDashboard/>}/>
+
     </Routes>
   )
 }
@@ -57,6 +59,8 @@ const UserScreen=()=>{
   return(
     <Routes>
   <Route exact path='/' element={<UserDashboard/>}/>
+  <Route exact path='/orders' element={<UserDashboard/>}/>
+  
     </Routes>
   )
 }
