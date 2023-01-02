@@ -5,7 +5,7 @@ import Login from "./containers/Auth/login";
 import UserDashboard from "./containers/User/dashboard"
 import AdminDashboard from "./containers/Admin/dashboard"
 import RiderDashboard from "./containers/Rider/dashboard"
-import UserOrder from "./containers/User/userOrder";
+import Orders from "./containers/User/orders";
 
 import { useSelector } from "react-redux"
 
@@ -58,7 +58,7 @@ const UserScreen=()=>{
   return(
     <Routes>
   <Route exact path='/' element={<UserDashboard/>}/>
-  <Route exact path='/user-order' element={<UserOrder/>}/>
+  <Route exact path='/orders' element={<Orders/>}/>
     </Routes>
   )
 }

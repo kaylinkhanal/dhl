@@ -1,27 +1,20 @@
-import { faCartShopping, faFileExport } from "@fortawesome/free-solid-svg-icons";
+import { faCartShopping, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { Link } from "react-router-dom";
+import Card from "../../components/card";
+import { useSelector } from 'react-redux';
 
 const Dashboard = ()=>{
+    const {name} = useSelector(state=> state.user)
     return(
         <>
-        <div className="bg-image"></div>
-        <div className="card_block">
-            <div className="card">
-                <Link to="/user-order">
-                    <i><FontAwesomeIcon icon={faFileExport}/></i>
-                    <p>Send item</p>
-                </Link>
-            </div>
+            <h5>Welcome, {name}</h5>
 
-            <div className="card">
-                <Link to="/user-order">
-                    <i><FontAwesomeIcon icon={faCartShopping}/></i>
-                    <p>My Orders</p>
-                </Link>
+            <div className="bg-image"></div>
+            <div className="card_block">
+                <Card title='Send Item' icon='faPaperPlane'/>
+                <Card title='My Orders' icon='faCartShopping'/>
             </div>
-        </div>
         </>
     )
 }

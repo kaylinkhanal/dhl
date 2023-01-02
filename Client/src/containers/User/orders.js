@@ -1,22 +1,28 @@
 import React from 'react'
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
+import { message } from 'antd';
+import { useSelector } from 'react-redux';
 
-const UserOrder = ()=>{
+
+const Orders = ()=>{
     const timeslot = ['12am - 3am', '3am - 6am', '6am - 9am', '9am - 11am', '11am - 2pm', '2pm - 5pm','5pm - 8pm', '8pm - 11pm',]
     
-    const registerUser = async(values)=>{
+    const {name} = useSelector(state=> state.user)
+    const orderItem = async(values)=>{
+        values.senderName = name;
         const requestOptions = {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(values)
         };
 
-        const response = await fetch('http://localhost:5000/register', requestOptions);
+        const response = await fetch('http://localhost:5000/orders', requestOptions);
         const data = await response.json()
-
+        console.log(data)
         if(data){
-            alert(data.msg)
+            // alert(data.msg)
+            message.success(data.msg)
         }
     }
 
@@ -25,7 +31,7 @@ const UserOrder = ()=>{
 		productWeight: Yup.string().required('Required'),
         maxSize: Yup.string().required('Required'),
 		senderLocation: Yup.string().required('Required'),
-		receipantLocation: Yup.string().required('Required'),
+		receipentLocation: Yup.string().required('Required'),
 	});
 
     return(
@@ -41,14 +47,14 @@ const UserOrder = ()=>{
                             maxSize: '',
                             senderLocation: '',
                             receipentLocation: '',
-                            receipantName: '',
-                            PhoneNumber: '',
-                            delivertDate: '',
-                            delivertTime:''
+                            receipentName: '',
+                            receipentNumber: '',
+                            expectedDeliveryDate: '',
+                            expectedDeliveryTime:''
                         }}
                         validationSchema={SignupSchema}
                         onSubmit={values=>{
-                            registerUser(values)
+                            orderItem(values)
                         }}
                     >
 
@@ -76,27 +82,26 @@ const UserOrder = ()=>{
                                 <Field name="receipentLocation" placeholder="Receipent Location" value={values.receipentLocation} onChange={handleChange} onBlur={handleBlur} />
                                 {errors.receipentLocation && touched.receipentLocation ? (<div className="error">{errors.receipentLocation}</div>) : null}
 
-                                <Field name="receipantName" placeholder="Receipent Name" value={values.receipantName} onChange={handleChange} onBlur={handleBlur} />
-                                {errors.receipantName && touched.receipantName ? (<div className="error">{errors.receipantName}</div>) : null}
+                                <Field name="receipentName" placeholder="Receipent Name" value={values.receipentName} onChange={handleChange} onBlur={handleBlur} />
+                                {errors.receipentName && touched.receipentName ? (<div className="error">{errors.receipentName}</div>) : null}
 
-                                <Field name="PhoneNumber" placeholder="Receipent Phone Number" value={values.PhoneNumber} onChange={handleChange} onBlur={handleBlur} />
-                                {errors.PhoneNumber && touched.PhoneNumber ? (<div className="error">{errors.PhoneNumber}</div>) : null}
+                                <Field name="receipentNumber" placeholder="Receipent Phone Number" value={values.receipentNumber} onChange={handleChange} onBlur={handleBlur} />
+                                {errors.receipentNumber && touched.receipentNumber ? (<div className="error">{errors.receipentNumber}</div>) : null}
 
-                                <Field name="delivertDate" placeholder="Pick Delivery Date" value={values.delivertDate} onChange={handleChange} onBlur={handleBlur} />
-                                {errors.delivertDate && touched.delivertDate ? (<div className="error">{errors.delivertDate}</div>) : null}
+                                <Field name="expectedDeliveryDate" placeholder="Pick Delivery Date" value={values.expectedDeliveryDate} onChange={handleChange} onBlur={handleBlur} />
+                                {errors.expectedDeliveryDate && touched.expectedDeliveryDate ? (<div className="error">{errors.expectedDeliveryDate}</div>) : null}
 
-                                <select name="exportTime" value={values.exportTime} onChange={handleChange} onBlur={handleBlur}>
+                                <select name="expectedDeliveryTime" value={values.expectedDeliveryTime} onChange={handleChange} onBlur={handleBlur}>
                                     <option value="" disabled="disabled" label="Select Delivery Time"></option>
                                     {timeslot.map(time => {
-                                        console.log(time)
                                         return(
                                             <option value={time} label={time} key={time}>{time}</option>
                                         )
                                     })}
                                 </select>
-                                {errors.exportTime && touched.exportTime ? (<div className="error">{errors.exportTime}</div>) : null}
+                                {errors.expectedDeliveryTime && touched.expectedDeliveryTime ? (<div className="error">{errors.expectedDeliveryTime}</div>) : null}
 
-                                <button type="submit">Signup</button>
+                                <button type="submit">Make Order</button>
                             </Form>
                         )} 
                     </Formik>
@@ -105,4 +110,4 @@ const UserOrder = ()=>{
         </section>
     )
 }
-export default UserOrder
+export default Orders
