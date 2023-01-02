@@ -7,8 +7,8 @@ const Card = (props)=>{
     return(
         <>
             <div className="card">
-                <Link to="/orders">
-                    <i><FontAwesomeIcon icon={props.icon}/></i>
+                <Link to={props.link}>
+                    <i><FontAwesomeIcon icon=""/></i>
                     <p>{props.title}</p>
                 </Link>
             </div>

@@ -12,8 +12,8 @@ const Dashboard = ()=>{
 
             <div className="bg-image"></div>
             <div className="card_block">
-                <Card title='Send Item' icon='faPaperPlane'/>
-                <Card title='My Orders' icon='faCartShopping'/>
+                <Card title='Send Item' link="/orders"/>
+                <Card title='My Orders' link="/ordersList"/>
             </div>
         </>
     )
