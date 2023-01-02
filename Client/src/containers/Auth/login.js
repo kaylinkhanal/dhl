@@ -8,8 +8,6 @@ import { useDispatch, useSelector } from "react-redux"
 import {setUserDetails}  from "../../reducers/userSlice"
 const Login = ()=>{
     const dispatch = useDispatch()
- 
-  
     const loginUser = async(values, resetForm)=>{
         const requestOptions = {
             method: "POST",
