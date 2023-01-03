@@ -50,7 +50,7 @@ const AuthScreens=()=>{
 const RiderScreen=()=>{
   return(
     <Routes>
-  <Route exact path='/' element={<RiderDashboard/>}/>
+      <Route exact path='/' element={<RiderDashboard/>}/>
     </Routes>
   )
 }
@@ -58,16 +58,16 @@ const RiderScreen=()=>{
 const UserScreen=()=>{
   return(
     <Routes>
-  <Route exact path='/' element={<UserDashboard/>}/>
-  <Route exact path='/orders' element={<Orders/>}/>
-  <Route exact path='/ordersList' element={<OrdersList/>}/>
+      <Route exact path='/' element={<UserDashboard/>}/>
+      <Route exact path='/orders' element={<Orders/>}/>
+      <Route exact path='/orderslist' element={<OrdersList/>}/>
     </Routes>
   )
 }
 const AdminScreen=()=>{
   return(
     <Routes>
-  <Route exact path='/' element={<AdminDashboard/>}/>
+      <Route exact path='/' element={<AdminDashboard/>}/>
     </Routes>
   )
 }
