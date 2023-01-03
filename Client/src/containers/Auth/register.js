@@ -36,6 +36,7 @@ const Register = ()=>{
 			.required('Required')
 			.min(6)
 			.matches(passwordRule, { message: 'Please create a stronger password' }),
+            country:Yup.string().required('Required'),
 	});
 
     return(
