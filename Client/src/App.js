@@ -5,10 +5,10 @@ import Login from "./containers/Auth/login";
 import UserDashboard from "./containers/User/dashboard"
 import AdminDashboard from "./containers/Admin/dashboard"
 import RiderDashboard from "./containers/Rider/dashboard"
-import Orders from "./containers/User/orders"
-import OrdersList from "./containers/User/ordersList"
+import Orders from "./containers/User/orders";
+import OrdersList from "./containers/User/ordersList";
 
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 
 import {
 	BrowserRouter as Router,
