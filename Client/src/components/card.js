@@ -8,14 +8,13 @@ library.add(
     faPaperPlane
 );
 
-const Card = (props)=>{
-    console.log(props.icon)
+const Card = ({icon, title, link})=>{
     return(
         <>
             <div className="card">
-                <Link to={props.link}>
-                    <i><FontAwesomeIcon icon={props.icon[`prefix`, `iconName`]} /></i>
-                    <p>{props.title}</p>
+                <Link to={link}>
+                    <i><FontAwesomeIcon icon={icon[`prefix`, `iconName`]} /></i>
+                    <p>{title}</p>
                 </Link>
             </div>
         </>
