@@ -9,6 +9,7 @@ app.post('/login', async(req, res) => {
     
     if(data){
         const dbPassword = data.password
+        console.log(data.password)
         const isValidPassword = bcrypt.compareSync(req.body.password, dbPassword)
         const {password, _id, __v, ...refactoredData} = data.toObject()
         if(isValidPassword){

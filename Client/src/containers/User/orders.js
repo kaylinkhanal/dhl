@@ -1,8 +1,9 @@
 import React from 'react'
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
-import { useNavigate, Link } from 'react-router-dom';
-import { useDispatch, useSelector } from "react-redux"
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from "react-redux"
+import { message } from 'antd'
 
 const Orders = ()=>{
     const navigate = useNavigate()
@@ -20,7 +21,7 @@ const Orders = ()=>{
         const data = await response.json()
 
         if(data){
-            alert(data.msg)
+            message.success(data.msg)
             navigate('/')
         }
     }

@@ -13,7 +13,7 @@ const Card = ({icon, title, link})=>{
         <>
             <div className="card">
                 <Link to={link}>
-                    <i><FontAwesomeIcon icon={icon[`prefix`, `iconName`]} /></i>
+                    <i><FontAwesomeIcon icon={icon['prefix', 'iconName']} /></i>
                     <p>{title}</p>
                 </Link>
             </div>

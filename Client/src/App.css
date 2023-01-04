@@ -100,6 +100,46 @@ select option:disabled {
   font-size: 12px;
 }
 
+/*header*/
+.header {
+  background: #ffcc00;
+}
+
+.header_content {
+  display: flex;
+  flex-direction: row;
+}
+
+.logo,.logo img {
+  max-width: 100px;
+}
+
+.navbar {
+  flex: 1;
+  display: flex;
+  align-items: center;
+    padding-left: 100px;
+}
+
+.navbar_left {
+  flex-grow: 1;
+}
+
+ul.nav_list li {
+  display: inline-block;
+}
+
+li.user_profile {
+  height: 30px;
+    width: 30px;
+    background: #fca401;
+    border-radius: 50%;
+    line-height: 30px;
+    text-align: center;
+    color: red;
+
+}
+
 .card_block{
   display: flex;
   flex-flow: row wrap;
