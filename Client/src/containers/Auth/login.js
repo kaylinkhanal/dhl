@@ -16,13 +16,17 @@ const Login = ()=>{
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(values)
         };
-
-        const response = await fetch('http://localhost:5000/login', requestOptions);
-        const data = await response.json()
-        console.log(data)
-        if(data.msg === 'login success'){
-            dispatch(setUserDetails(data.userDetails))
+        try{
+            const response = await fetch('http://localhost:5000/login', requestOptions);
+            const data = await response.json()
+            console.log(data)
+            if(data.msg === 'login success'){
+                dispatch(setUserDetails(data.userDetails))
+            }
+        }catch(err){
+            console.error(JSON.stringify(err))
         }
+      
     }
     const SignupSchema = Yup.object().shape({
 		password: Yup.string().required('Required'),

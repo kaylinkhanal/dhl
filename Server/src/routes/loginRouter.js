@@ -6,10 +6,8 @@ const bcrypt = require('bcrypt');
 app.post('/login', async(req, res) => {
     try{
     const data = await Users.findOne({email: req.body.email})
-    
     if(data){
-        const dbPassword = data.password
-        const isValidPassword = bcrypt.compareSync(req.body.password, dbPassword)
+        const isValidPassword =  bcrypt.compareSync(req.body.password,  data.password)
         const {password, _id, __v, ...refactoredData} = data.toObject()
         if(isValidPassword){
             res.json({
