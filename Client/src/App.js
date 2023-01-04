@@ -7,14 +7,9 @@ import AdminDashboard from "./containers/Admin/dashboard"
 import RiderDashboard from "./containers/Rider/dashboard"
 import Orders from "./containers/User/orders";
 import OrdersList from "./containers/User/ordersList";
-
 import { useSelector } from "react-redux"
-
-import {
-	BrowserRouter as Router,
-	Routes,
-	Route,
- } from "react-router-dom";
+import {BrowserRouter as Router, Routes,Route,} from "react-router-dom";
+import PendingOrder from "./containers/Admin/pendingOrder";
 
 const App = ()=> {
   return (
@@ -68,6 +63,8 @@ const AdminScreen=()=>{
   return(
     <Routes>
       <Route exact path='/' element={<AdminDashboard/>}/>
+      <Route exact path='/pendingorder' element={<PendingOrder/>}/>
+
     </Routes>
   )
 }
