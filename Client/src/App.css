@@ -29,7 +29,6 @@ h1,h2,h3,h4,h5,h6{
 h1{
   font-size: 30px;
   line-height: 34px;
-  color: #E4D00A;
 }
 
 .container{
@@ -41,7 +40,7 @@ h1{
 input,select{
     height: 40px;
     padding: 10px;
-    border: 1px solid #E4D00A;
+    border: 1px solid #ccc;
     width: 100%;
     background: #f1f1f1;
     margin-bottom: 10px;
@@ -77,7 +76,7 @@ form {
 
 button {
   padding: 10px 20px;
-  background: #E4D00A;
+  background: red;
   color: #fff;
   font-size: 14px;
   border: 0;
@@ -100,6 +99,71 @@ select option:disabled {
   line-height: 40px;
   font-size: 12px;
 }
+
+/*header*/
+.header {
+  background: #ffcc00;
+}
+
+.header_content {
+  display: flex;
+  flex-direction: row;
+}
+
+.logo,.logo img {
+  max-width: 100px;
+}
+
+.navbar {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding-left: 100px;
+}
+
+.navbar_left {
+  flex-grow: 1;
+}
+
+ul.nav_list li {
+  display: inline-block;
+  margin-left: 10px;
+  position: relative;
+}
+
+.user_profile i{
+  height: 25px;
+  width: 25px;
+  line-height: 25px;
+  display: inline-block;
+  background: #fca401;
+  text-align: center;
+  border-radius: 50%;
+  color: red;
+
+}
+
+ul.menu-dropdown {
+  background: red;
+  position: absolute;
+  right: 0;
+  width: 152px;
+  opacity: 0;
+}
+
+li.active .menu-dropdown {
+  opacity: 1;
+}
+
+.menu-icon {
+  background-color: transparent;
+  border: 0;
+  font-size: 18px;
+  padding: 0;
+  line-height: 6px;
+}
+
+/* card */
 
 .card_block{
   display: flex;
@@ -160,7 +224,7 @@ select option:disabled {
   font-size: 18px;
 }
 
-h5{
+h4{
   display: flex;
     align-items: center;
     position: absolute;
@@ -168,6 +232,7 @@ h5{
     left: 50%;
     z-index: 1;
     transform: translate(-50%, -50%);
+    color: #fff;
 }
 
 .order_item{
@@ -187,6 +252,14 @@ p.badge {
 
 span.pending {
   color: #d19100;
+}
+
+span.success {
+  color: green;
+}
+
+span.cancel {
+  color: red;
 }
 
 .bottom ul {
