@@ -93,7 +93,9 @@ const Orders = ()=>{
                                 <Field name="receipentNumber" placeholder="Receipent Number" value={values.receipentNumber} onChange={handleChange} onBlur={handleBlur}/>
                                 {errors.receipentNumber && touched.receipentNumber ? (<div className="error">{errors.receipentNumber}</div>) : null}
 
-                                <Field name="expectedDeliveryDate" placeholder="Expected Delivery Date" value={values.expectedDeliveryDate} onChange={handleChange} onBlur={handleBlur} />
+                                <Field name="expectedDeliveryDate"
+                                type="date"
+                                placeholder="Expected Delivery Date" value={values.expectedDeliveryDate} onChange={handleChange} onBlur={handleBlur} />
                                 {errors.expectedDeliveryDate && touched.expectedDeliveryDate ? (<div className="error">{errors.expectedDeliveryDate}</div>) : null}
 
                                 <select name="expectedDeliveryTime" value={values.expectedDeliveryTime} onChange={handleChange} onBlur={handleBlur}>

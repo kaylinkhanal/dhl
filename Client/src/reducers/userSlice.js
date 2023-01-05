@@ -15,10 +15,15 @@ const userSlice = createSlice({
         state.name =name
         state.userRole =userRole
     },
+    resetDetails:  (state, actions) => {
+         state.name =''
+         state.userRole =''
+         state.token=''
+     },
   }
 });
 
-export const { setUserDetails } = userSlice.actions;
+export const { setUserDetails,resetDetails } = userSlice.actions;
 export default userSlice.reducer;
 
 

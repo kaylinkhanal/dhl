@@ -8,6 +8,8 @@ import RiderDashboard from "./containers/Rider/dashboard"
 import Orders from "./containers/User/orders";
 import OrdersList from "./containers/User/ordersList";
 
+
+
 import { useSelector } from "react-redux"
 
 import {
@@ -15,7 +17,8 @@ import {
 	Routes,
 	Route,
  } from "react-router-dom";
-
+//what is diff between localstorage 
+// and sessionstorage?
 const App = ()=> {
   return (
     <Router>
@@ -27,7 +30,7 @@ const App = ()=> {
 const ConditionalRouting = ()=>{
   const {userRole} = useSelector(state=>state.user)
   if(userRole==='user'){
-    return <UserScreen/>
+    return (<UserScreen/>)
   }else if(userRole === 'rider'){
     return <RiderScreen/>
   }else if(userRole === 'admin'){
