@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 import { faUser, faMap, faPhone, faCalendarAlt, faClock, faDolly } from '@fortawesome/free-solid-svg-icons'
 
 const Box = ({item})=>{
-
-    return(
+   return(
         <>
             <div className='order_item'>
                                 <div className='top'>
