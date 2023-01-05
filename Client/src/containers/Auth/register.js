@@ -6,10 +6,10 @@ import { message } from 'antd';
 import ShowhidePassword from '../../components/showhidePassword';
 import { useNavigate, Link } from 'react-router-dom';
 
-const Register = ()=>{
+const Register = () => {
     const navigate = useNavigate()
 
-    const registerUser = async(values)=>{
+    const registerUser = async (values) => {
         const requestOptions = {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
@@ -19,7 +19,7 @@ const Register = ()=>{
         const response = await fetch('http://localhost:5000/register', requestOptions);
         const data = await response.json()
 
-        if(data){
+        if (data) {
             alert(data.msg)
             navigate('/')
         }
@@ -27,18 +27,27 @@ const Register = ()=>{
 
     const passwordRule = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/
 
-	const SignupSchema = Yup.object().shape({
-		name: Yup.string().required('Required'),
-		phoneNumber: Yup.string().required('Required'),
+    const SignupSchema = Yup.object().shape({
+        name: Yup.string().required('Required'),
+        phoneNumber: Yup.string().required('Required'),
         permanentAddress: Yup.string().required('Required'),
-		email: Yup.string().email('Invalid email').required('Required'),
-		password: Yup.string()
-			.required('Required')
-			.min(6)
-			.matches(passwordRule, { message: 'Please create a stronger password' }),
-	});
+        email: Yup.string().email('Invalid email').required('Required'),
+        password: Yup.string()
+            .required('Required')
+            .min(6)
+            .matches(passwordRule, { message: 'Please create a stronger password' }),
+        confirmPassword: Yup.string()
+            .min(8, 'Too Short!')
+            .max(16, 'Too Long!')
+            .when("password", {
+                is: val => (val && val.length > 0 ? true : false),
+                then: Yup.string().oneOf(
+                    [Yup.ref("password")],
+                    "password didn't match")
+            })
+    });
 
-    return(
+    return (
         <section className='form_section'>
             <div className='container'>
                 <div className='form'>
@@ -53,19 +62,20 @@ const Register = ()=>{
                             temporaryAddress: '',
                             userRole: '',
                             password: '',
+                            confirmPassword: '',
                             country: '',
                             zipCode: ''
                         }}
                         validationSchema={SignupSchema}
-                        onSubmit={values=>{
+                        onSubmit={values => {
                             registerUser(values)
                         }}
                     >
 
                         {({ errors, touched, values, handleChange, handleBlur, handleSubmit }) => (
-                            <Form  onSubmit={handleSubmit}>
+                            <Form onSubmit={handleSubmit}>
                                 <Field name="name" placeholder="Your Name" value={values.name} onChange={handleChange} onBlur={handleBlur} />
-								{errors.name && touched.name ? (<div className="error">{errors.name}</div>) : null}
+                                {errors.name && touched.name ? (<div className="error">{errors.name}</div>) : null}
 
                                 <Field name="email" placeholder="Your Email" value={values.email} onChange={handleChange} onBlur={handleBlur} />
                                 {errors.email && touched.email ? (<div className="error">{errors.email}</div>) : null}
@@ -86,19 +96,22 @@ const Register = ()=>{
                                 </select>
                                 {errors.userRole && touched.userRole ? (<div className="error">{errors.userRole}</div>) : null}
 
-                                <Field name="password" placeholder="Your password" value={values.password} onChange={handleChange} onBlur={handleBlur} component={ShowhidePassword}/>
+                                <Field name="password" placeholder="Your password" value={values.password} onChange={handleChange} onBlur={handleBlur} component={ShowhidePassword} />
                                 {errors.password && touched.password ? (<div className="error">{errors.password}</div>) : null}
+
+                                <Field name="confirmPassword" type="password" placeholder="Re-type Your Password" value={values.confirmPassword} onChange={handleChange} onBlur={handleBlur} />
+                                {errors.confirmPassword && touched.confirmPassword ? (<div className="error">{errors.confirmPassword}</div>) : null}
 
                                 <select name="country" value={values.country} onChange={handleChange} onBlur={handleBlur}>
                                     <option value="" disabled="disabled" label="Select a Country"></option>
                                     {CountryData.map(country => {
-                                        const {name} = country
-                                        return(
+                                        const { name } = country
+                                        return (
                                             <option value={name} label={name} key={name}>{name}</option>
                                         )
                                     })}
                                 </select>
-                                
+
                                 {errors.country && touched.country ? (<div className="error">{errors.country}</div>) : null}
 
                                 <Field name="zipCode" placeholder="Your zipCode" value={values.zipCode} onChange={handleChange} onBlur={handleBlur} />
@@ -106,7 +119,7 @@ const Register = ()=>{
 
                                 <button type="submit">Signup</button>
                             </Form>
-                        )} 
+                        )}
                     </Formik>
                     <p style={{ marginTop: '10px' }}>Already have an account? Please <Link to="/">Login</Link> to continue</p>
                 </div>
