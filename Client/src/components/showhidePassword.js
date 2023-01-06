@@ -16,7 +16,7 @@ const ShowhidePassword = (props) => {
 
       <input
         type={showPassword ? "text" : "password"}
-        placeholder="Password"
+        placeholder={props.placeholder}
         {...props.field}
       ></input>
     </div>

@@ -6,6 +6,7 @@ import { useNavigate, Link } from "react-router-dom";
 import ShowhidePassword from "../../components/showhidePassword";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserDetails } from "../../reducers/userSlice";
+
 const Login = () => {
   const dispatch = useDispatch();
   const { name, userRole } = useSelector((state) => state.user);
@@ -19,8 +20,10 @@ const Login = () => {
 
     const response = await fetch("http://localhost:5000/login", requestOptions);
     const data = await response.json();
-    console.log(data);
-    if (data.msg === "login success") {
+    // console.log(data);
+    if (data.msg !== "login success") {
+      alert(data.msg);
+    } else {
       dispatch(setUserDetails(data.userDetails));
     }
   };
@@ -33,7 +36,6 @@ const Login = () => {
       <div className="container">
         <div className="form">
           <h1>Login</h1>
-          {`Hi ${name} and your role is ${userRole}`}
           <Formik
             initialValues={{
               email: "",
@@ -56,7 +58,7 @@ const Login = () => {
               <Form onSubmit={handleSubmit}>
                 <Field
                   name="email"
-                  placeholder="Email"
+                  placeholder="Enter Email"
                   value={values.email}
                   onChange={handleChange}
                   onBlur={handleBlur}
