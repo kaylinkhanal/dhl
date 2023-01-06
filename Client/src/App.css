@@ -118,7 +118,7 @@ select option:disabled {
   flex: 1;
   display: flex;
   align-items: center;
-    padding-left: 100px;
+  padding-left: 100px;
 }
 
 .navbar_left {
@@ -127,18 +127,43 @@ select option:disabled {
 
 ul.nav_list li {
   display: inline-block;
+  margin-left: 10px;
+  position: relative;
 }
 
-li.user_profile {
-  height: 30px;
-    width: 30px;
-    background: #fca401;
-    border-radius: 50%;
-    line-height: 30px;
-    text-align: center;
-    color: red;
+.user_profile i{
+  height: 25px;
+  width: 25px;
+  line-height: 25px;
+  display: inline-block;
+  background: #fca401;
+  text-align: center;
+  border-radius: 50%;
+  color: red;
 
 }
+
+ul.menu-dropdown {
+  background: red;
+  position: absolute;
+  right: 0;
+  width: 152px;
+  opacity: 0;
+}
+
+li.active .menu-dropdown {
+  opacity: 1;
+}
+
+.menu-icon {
+  background-color: transparent;
+  border: 0;
+  font-size: 18px;
+  padding: 0;
+  line-height: 6px;
+}
+
+/* card */
 
 .card_block{
   display: flex;
