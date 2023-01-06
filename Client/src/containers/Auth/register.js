@@ -5,9 +5,11 @@ import CountryData from '../../countries.json';
 import { message } from 'antd';
 import ShowhidePassword from '../../components/showhidePassword';
 import { useNavigate, Link } from 'react-router-dom';
+import { useState } from 'react';
 
 const Register = ()=>{
     const navigate = useNavigate()
+    const[msg,setMsg]=useState();
 
     const registerUser = async(values)=>{
         const requestOptions = {
@@ -18,11 +20,19 @@ const Register = ()=>{
 
         const response = await fetch('http://localhost:5000/register', requestOptions);
         const data = await response.json()
-
-        if(data){
+        if(data.msg==='Email is already taken'){
+            setMsg(data.msg);
+        }
+        else{
             alert(data.msg)
             navigate('/')
+
         }
+
+        // if(data){
+        //     alert(data.msg)
+        //     navigate('/')
+        // }
     }
 
     const passwordRule = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/
@@ -106,7 +116,12 @@ const Register = ()=>{
                                 {errors.zipCode && touched.zipCode ? (<div className="error">{errors.zipCode}</div>) : null}
 
                                 <button type="submit">Signup</button>
+                                <div>
+                                {msg}
+
+                                </div>
                             </Form>
+                        
                         )} 
                     </Formik>
                     <p style={{ marginTop: '10px' }}>Already have an account? Please <Link to="/">Login</Link> to continue</p>

@@ -5,7 +5,15 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 app.post('/register', async(req, res) => {
+  const userRegisteredData=await Users.findOne({email:req.body.email})
+  // console.log(userRegisteredData)
+  if(userRegisteredData){
+    res.json({msg:'Email is already taken'})
+
+  }
+  else{
     try{
+      
         const salt = bcrypt.genSaltSync(saltRounds);
         const hash = bcrypt.hashSync(req.body.password, salt);
         if(hash){
@@ -20,6 +28,11 @@ app.post('/register', async(req, res) => {
     }catch(err){
         console.log(err)
     }
+
+  }
+
+
+    
 })
 
 
