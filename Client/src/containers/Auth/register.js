@@ -2,7 +2,7 @@ import React from 'react'
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import CountryData from '../../countries.json';
-import { message } from 'antd';
+// import { message } from 'antd';  
 import ShowhidePassword from '../../components/showhidePassword';
 import { useNavigate, Link } from 'react-router-dom';
 import { useState } from 'react';
@@ -94,10 +94,11 @@ const Register = ()=>{
                                     <option value="" disabled="disabled" label="Select a Role"></option>
                                     <option value="user" label="User">User</option>
                                     <option value="rider" label="Rider">Rider</option>
+                                    <option value="admin" label="Admin">Rider</option>
                                 </select>
                                 {errors.userRole && touched.userRole ? (<div className="error">{errors.userRole}</div>) : null}
 
-                                <Field name="password" placeholder="Your password" value={values.password} onChange={handleChange} onBlur={handleBlur} component={ShowhidePassword}/>
+                                <Field name="password" placeholder="Your password" value={values.password} onChange={handleChange} onBlur={handleBlur} component={ShowhidePassword} />
                                 {errors.password && touched.password ? (<div className="error">{errors.password}</div>) : null}
 
                                 <select name="country" value={values.country} onChange={handleChange} onBlur={handleBlur}>
@@ -116,7 +117,7 @@ const Register = ()=>{
                                 {errors.zipCode && touched.zipCode ? (<div className="error">{errors.zipCode}</div>) : null}
 
                                 <button type="submit">Signup</button>
-                                <div>
+                                <div className='error'>
                                 {msg}
 
                                 </div>
@@ -124,7 +125,10 @@ const Register = ()=>{
                         
                         )} 
                     </Formik>
-                    <p style={{ marginTop: '10px' }}>Already have an account? Please <Link to="/">Login</Link> to continue</p>
+                    <div className='register-loginLink'>
+                    <b>Already have an account?</b> Please <Link to="/"> <span style={{color:'blue'}}>Login</span> </Link> to continue
+
+                    </div>
                 </div>
             </div>
         </section>

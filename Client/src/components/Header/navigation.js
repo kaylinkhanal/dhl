@@ -64,7 +64,7 @@ const Navigation = () => {
                                     <Button onClick={showDrawer} className="menu-icon"><FontAwesomeIcon icon={faBars} /></Button>
                                     <Drawer placement="right" onClose={onClose} open={open}>
                                         <ul>
-                                            <li><Link to="/">Dashboard</Link></li>
+                                               <li><Link to="/">Dashboard</Link></li>
                                         </ul>
                                     </Drawer>
                                 </li>

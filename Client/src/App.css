@@ -70,7 +70,7 @@ form {
 
 .error {
   color: red;
-  text-align: left;
+  text-align: center;
   font-size: 12px;
 }
 
@@ -297,4 +297,14 @@ span.cancel {
 }
 
 
+.errMsg{
+  color: red;
+  
+}
+.loginCss{
+  color: blue;
+}
+.register-loginLink{
+  margin-top: 10px;
+}
 

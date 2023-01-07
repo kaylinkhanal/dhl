@@ -3,7 +3,11 @@ import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux"
-import { message } from 'antd'
+import { message} from 'antd'
+// import ChooseDate from '../../components/datePicker';
+import { DatePicker } from 'antd';
+// import ChooseDate from '../../components/datePicker';
+
 
 const Orders = ()=>{
     const navigate = useNavigate()
@@ -91,10 +95,12 @@ const Orders = ()=>{
                                 <Field name="receipentName" placeholder="Receipent Name" value={values.receipentName} onChange={handleChange} onBlur={handleBlur} />
                                 {errors.receipentName && touched.receipentName ? (<div className="error">{errors.receipentName}</div>) : null}
 
-                                <Field name="receipentNumber" placeholder="Receipent Number" value={values.receipentNumber} onChange={handleChange} onBlur={handleBlur}/>
+                                <Field name="receipentNumber" placeholder="Receipent Number" value={values.receipentNumber} onChange={handleChange} onBlur={handleBlur}  />
                                 {errors.receipentNumber && touched.receipentNumber ? (<div className="error">{errors.receipentNumber}</div>) : null}
 
-                                <Field name="expectedDeliveryDate" placeholder="Expected Delivery Date" value={values.expectedDeliveryDate} onChange={handleChange} onBlur={handleBlur} />
+                                {/* <ChooseDate name="expectedDeliveryDate"/> */}
+                                
+                                <Field name="expectedDeliveryDate"  value={values.expectedDeliveryDate} onChange={handleChange} onBlur={handleBlur} /*component={ChooseDate} */ />
                                 {errors.expectedDeliveryDate && touched.expectedDeliveryDate ? (<div className="error">{errors.expectedDeliveryDate}</div>) : null}
 
                                 <select name="expectedDeliveryTime" value={values.expectedDeliveryTime} onChange={handleChange} onBlur={handleBlur}>

@@ -61,7 +61,7 @@ const Login = ()=>{
                             </Form>
                         )}
                     </Formik>
-                    <p style={{ marginTop: '10px' }}>Dont have an account? <Link to="/register">Signup</Link> here</p>
+                    <p style={{ marginTop: '10px' }}> <b>Dont have an account?</b>  <Link to="/register"> <span style={{color:'blue'}}>Signup</span> </Link> here</p>
                 </div>
             </div>
         </section>
