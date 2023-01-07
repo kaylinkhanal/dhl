@@ -1,0 +1,17 @@
+.main-container{
+    text-align: center;
+    height: 100vh;
+    /* background: linear-gradient(45deg, red, blue); */
+    background: #fff;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container Link[type="text"]{
+    color: white;
+    text-decoration: none;
+    font-size: 36px;
+}

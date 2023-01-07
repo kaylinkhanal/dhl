@@ -1,0 +1,76 @@
+.register form{
+    width:500px;
+    height: 100%;
+    margin: 0 auto;
+    background-color: aliceblue;
+    padding: 40px 0;
+}
+.register form input{
+    width: 308px;
+    height: 35px;
+    border: 2px solid green;
+    border-radius: 8px;
+    padding-left: 10px;
+    display: block;
+    margin: 0 auto 9px auto;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* .main-nav{
+  height: 50px;
+  border: 1px solid grey;
+} */
+
+.main-div{
+  display: flex;
+  flex-direction: column;
+}
+
+.main-nav{
+  margin-top: 20px;
+}
+
+label{
+  color: white;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 35px;
+}
+
+.icon{
+  font-size: 30px;
+  float: right;
+  margin-right: 50px;
+  color: grey;
+}
+
+.cards{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.send-items, .my-orders{
+  border: 3px solid #DFFF00;
+  background-color: #E4D00A;
+  color: white;
+  height: 50px;
+  width: 500px;
+  text-align: center;
+  margin-top: 100px;
+}
+
+.click-option{
+  text-align: center;
+  margin-top: 20px;
+  color: #8B8000;
+}

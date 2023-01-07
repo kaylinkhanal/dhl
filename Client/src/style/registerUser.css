@@ -79,6 +79,18 @@
    transition: background .5s;
 }
 
+.registration-card Field[type="text"]
+ {
+   border: none;
+   cursor: pointer;
+   outline: none;
+   background: rgba(221, 221, 221, 0.5);
+   padding: 14px 18px;
+   border-radius: 36px;
+   width: 100%;
+   transition: background .5s;
+}
+
 .registration-card input:focus {
    background: rgb(236, 236, 236);
 }
