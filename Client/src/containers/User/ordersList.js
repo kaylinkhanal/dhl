@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import OrderCard from "../../components/orderCard";
-import setOrderrDetails from "../../reducers/orderSlice"
+// import {  Link } from "react-router-dom";
+// import { useDispatch, useSelector } from "react-redux";
+// import OrderCard from "../../components/orderCard";
+// import setOrderrDetails from "../../reducers/orderSlice"
 import "../style.css"
 
 const OrdersList = () => {

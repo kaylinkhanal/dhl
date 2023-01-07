@@ -8,7 +8,7 @@ import RiderDashboard from "./containers/Rider/dashboard";
 import Orders from "./containers/User/orders";
 import OrdersList from "./containers/User/ordersList";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import OrderCard from "./components/orderCard";
@@ -17,7 +17,7 @@ const App = () => {
   return (
     <Router>
       <ConditionalRouting/>
-      {/* <OrderCard /> */}
+      
     </Router>
   );
 };
