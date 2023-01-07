@@ -6,10 +6,8 @@ import { useNavigate, Link } from "react-router-dom";
 import ShowhidePassword from "../../components/showhidePassword";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserDetails } from "../../reducers/userSlice";
-
 const Login = () => {
   const dispatch = useDispatch();
-  const { name, userRole } = useSelector((state) => state.user);
 
   const loginUser = async (values, resetForm) => {
     const requestOptions = {
@@ -20,13 +18,15 @@ const Login = () => {
 
     const response = await fetch("http://localhost:5000/login", requestOptions);
     const data = await response.json();
-    // console.log(data);
-    if (data.msg !== "login success") {
-      alert(data.msg);
-    } else {
+    console.log(data);
+    if (data.msg === "login success") {
       dispatch(setUserDetails(data.userDetails));
+      message.success(data.msg);
+    } else {
+      message.error(data.msg);
     }
   };
+
   const SignupSchema = Yup.object().shape({
     password: Yup.string().required("Required"),
     email: Yup.string().email("Invalid email").required("Required"),

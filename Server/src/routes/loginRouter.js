@@ -11,7 +11,7 @@ app.post("/login", async (req, res) => {
 
     if (data) {
       const dbPassword = data.password;
-      // console.log(data.password)
+      // console.log(data.password);
       const isValidPassword = bcrypt.compareSync(req.body.password, dbPassword);
       const { password, _id, __v, ...refactoredData } = data.toObject();
       if (isValidPassword) {
@@ -50,7 +50,7 @@ app.put("/changepassword", async (req, res, next) => {
         data.password = hash;
         const response = await Users.findByIdAndUpdate(data._id, data);
         if (response) {
-          res.json({ msg: "Password Changed" });
+          res.json({ msg: "Password Updated" });
         } else {
           res.json({ msg: "something went wrong" });
         }
