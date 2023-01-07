@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 import CountryData from "../../countries.json";
@@ -7,6 +7,7 @@ import ShowhidePassword from "../../components/showhidePassword";
 import { useNavigate, Link } from "react-router-dom";
 
 const Register = () => {
+  const [errorMsg, setErrorMsg] = useState('')
   const navigate = useNavigate();
 
   const registerUser = async (values) => {
@@ -22,9 +23,11 @@ const Register = () => {
     );
     const data = await response.json();
 
-    if (data) {
+    if(data.msg) {
       alert(data.msg);
       navigate("/");
+    } else {
+      setErrorMsg(data.errMsg)
     }
   };
 
@@ -39,6 +42,16 @@ const Register = () => {
       .required("Required")
       .min(6)
       .matches(passwordRule, { message: "Please create a stronger password" }),
+    confirmPassword: Yup.string()
+      .min(6)
+      .when("password", {
+        is: val => (val && val.length > 0 ? true : false),
+        then: Yup.string().oneOf(
+          [Yup.ref("password")],
+          "password didn't match")
+      })
+      .required('Required'),
+
   });
 
   return (
@@ -56,6 +69,7 @@ const Register = () => {
               temporaryAddress: "",
               userRole: "",
               password: "",
+              confirmPassword: "",
               country: "",
               zipCode: "",
             }}
@@ -162,6 +176,18 @@ const Register = () => {
                   <div className="error">{errors.password}</div>
                 ) : null}
 
+                <Field
+                  name="confirmPassword"
+                  placeholder="Re-type password"
+                  value={values.confirmPassword}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  component={ShowhidePassword}
+                />
+                {errors.confirmPassword && touched.confirmPassword ? (
+                  <div className="error">{errors.confirmPassword}</div>
+                ) : null}
+
                 <select
                   name="country"
                   value={values.country}
@@ -198,7 +224,9 @@ const Register = () => {
                   <div className="error">{errors.zipCode}</div>
                 ) : null}
 
-                <button type="submit">Signup</button>
+                <button type="submit">Signup</button> <br />
+                <p style={{color:"red", fontSize:"14px"}}>{errorMsg}</p>
+
               </Form>
             )}
           </Formik>

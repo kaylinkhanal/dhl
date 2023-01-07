@@ -6,22 +6,23 @@ const saltRounds = 10;
 
 app.post("/register", async (req, res, next) => {
   try {
-    const salt = bcrypt.genSaltSync(saltRounds);
-    const hash = bcrypt.hashSync(req.body.password, salt);
-    const email = await Users.findOne({ email: req.body.email }).exec();
-    if (hash) {
-      req.body.password = hash;
-      if (email == null) {
+    const email = await Users.findOne({ email: req.body.email });
+    if (!email) {
+      const salt = bcrypt.genSaltSync(saltRounds);
+      const hash = bcrypt.hashSync(req.body.password, salt);
+      if (hash) {
+        req.body.password = hash;
         const data = await Users.create(req.body);
         if (data) {
           res.json({ msg: "users registered" });
         } else {
-          res.json({ msg: "something went wrong" });
+          res.json({ errMsg: "something went wrong" });
         }
-      } else {
-        res.json({ msg: "email already exist please enter another email" });
       }
+    } else {
+      res.json({ errMsg: "email already exist please enter another email" });
     }
+
   } catch (err) {
     console.log(err);
   }
