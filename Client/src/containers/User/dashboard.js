@@ -3,7 +3,6 @@ import React from "react";
 import Card from "../../components/card";
 import { useSelector } from 'react-redux';
 
-import Order from "../../components/orders"
 const Dashboard = ()=>{
     const {name} = useSelector(state=> state.user)
     return(
