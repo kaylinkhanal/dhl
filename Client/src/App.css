@@ -37,7 +37,7 @@ h1{
   margin: 0 auto
 }
 
-input,select{
+input,select, .ant-picker{
     height: 40px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -52,6 +52,10 @@ input:focus,select:focus{
 
 ::placeholder{
   font-style: italic;
+}
+
+.ant-picker input{
+  margin-bottom: 0;
 }
 
 .form {
