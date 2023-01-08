@@ -50,11 +50,11 @@ const Navigation = () => {
                                 <li><Link to="/">Dashboard</Link></li>
                             </ul>
                         ) : userRole === 'rider' ?
-                            (
-                                <ul>
-                                    <li><Link to="/">Dashboard</Link></li>
-                                </ul>
-                            ) : null}
+                        (
+                            <ul>
+                                <li><Link to="/">Dashboard</Link></li>
+                            </ul>
+                        ) : null}
                     </div>
                     <div className="navbar_right">
 
@@ -65,6 +65,7 @@ const Navigation = () => {
                                     <Drawer placement="right" onClose={onClose} open={open}>
                                         <ul>
                                             <li><Link to="/">Dashboard</Link></li>
+                                            <li><Link to="/unitprice">Unit Price</Link></li>
                                         </ul>
                                     </Drawer>
                                 </li>

@@ -12,9 +12,13 @@ app.use(cors())
 const registerRouter = require('./routes/registerRouter');
 const loginRouter = require('./routes/loginRouter');
 const ordersRouter = require('./routes/ordersRouter');
+const sizeRouter = require('./routes/sizeRouter');
+const weightRouter = require('./routes/weightRouter')
 app.use(registerRouter)
 app.use(loginRouter)
 app.use(ordersRouter)
+app.use(sizeRouter)
+app.use(weightRouter)
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

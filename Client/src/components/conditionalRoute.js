@@ -6,6 +6,7 @@ import AdminDashboard from "../containers/Admin/dashboard"
 import RiderDashboard from "../containers/Rider/dashboard"
 import Orders from "../containers/User/orders";
 import OrdersList from "../containers/User/ordersList";
+import UnitPriceMapping from "../containers/Admin/unitPriceMapping";
 import {useSelector} from 'react-redux';
 import { Routes, Route} from "react-router-dom";
 
@@ -52,6 +53,7 @@ const AuthScreens=()=>{
     return(
       <Routes>
         <Route exact path='/' element={<AdminDashboard/>}/>
+        <Route exact path='/unitprice' element={<UnitPriceMapping/>}/>
       </Routes>
     )
   }
