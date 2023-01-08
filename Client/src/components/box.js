@@ -1,16 +1,27 @@
 import React from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faMap, faPhone, faCalendarAlt, faClock } from '@fortawesome/free-solid-svg-icons'
-
-const Box = ({ item }) => {
-
+import axios from  'axios'
+const Box = ({ item, fetchData }) => {
+    const triggerDelete=  () => {
+         axios.delete('http://localhost:5000/orders', { data: { id: item._id } })
+        .then(response => response ? fetchData(): null)
+        .catch(error => {
+            console.error('There was an error!', error);
+        });
+        
+    }
     return (
         <>
             <div className='order_item'>
                 <div className='top'>
-                    <p className='badge'>Status: <span className='pending'>Pending</span></p>
+                    <p className='badge'>Status: <span className='pending'>{item.orderStatus}</span></p>
                     <span>#{item._id}</span> <span><strong>{item.productType}</strong></span>
                 </div>
+
+                    <button onClick={()=> triggerDelete()}>
+                        Delete
+                    </button>
 
                 <div className='bottom'>
                     <ul>
