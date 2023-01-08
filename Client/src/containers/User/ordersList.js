@@ -13,6 +13,7 @@ const OrdersList = ()=>{
             setOrderList(data.ordersList)
         }
     }
+  
 
     useEffect(()=>{
         fetchData()
@@ -25,7 +26,7 @@ const OrdersList = ()=>{
                     <h1 className='title'><i><FontAwesomeIcon icon={faDolly}/></i> My Orders</h1>
                     {orderList.length > 0 ? orderList.map((item)=>{
                         return(
-                            <Box item={item}/>
+                            <Box item={item} fetchData={fetchData}/>
                             )
                     }): 'list not found'}
                 </div>

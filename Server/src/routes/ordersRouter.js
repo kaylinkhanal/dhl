@@ -34,4 +34,39 @@ app.get('/orders', async(req, res)=>{
     }
 })
 
+app.put('/orders', async(req, res)=>{
+    try{
+    const data = await Orders.findByIdAndUpdate(req.body._id, req.body)
+    if(data){
+        res.json({
+            msg: "updated successfully"
+        })
+    }else{
+        res.json({
+            msg: "something went wrong"
+        })
+    }
+    }catch(err){
+        console.log(err)
+    }
+})
+
+app.delete('/orders', async(req, res)=>{
+    try{
+    const data = await Orders.findByIdAndRemove(req.body.id)
+    if(data){
+        res.json({
+            msg: "deleted successfully"
+        })
+    }else{
+        res.json({
+            msg: "something went wrong"
+        })
+    }
+    }catch(err){
+        console.log(err)
+    }
+})
+
+
 module.exports = app;

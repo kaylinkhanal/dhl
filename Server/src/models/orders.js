@@ -13,6 +13,7 @@ const ordersSchema = new Schema({
     receipentNumber: { type: Number, required: true },
     expectedDeliveryDate: { type: String, required: true },
     expectedDeliveryTime: { type: String, required: true },
+    orderStatus: { type: String, default: 'pending' },
   },
   { collection: 'Orders' });
 
