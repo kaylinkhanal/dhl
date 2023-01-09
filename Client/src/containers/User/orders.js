@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux"
 import { message, DatePicker} from 'antd'
 
-const Orders = ()=>{
+const Orders = (props)=>{
     const navigate = useNavigate()
     const {name} = useSelector(state=> state.user)
 
@@ -42,12 +42,12 @@ const Orders = ()=>{
         <section className='form_section'>
             <div className='container'>
                 <div className='form'>
-                    <h1>Make your order</h1>
+                    <h1>{props.isEdit ? 'Edit order' : 'Make your order'}</h1>
 
                     <Formik
                         initialValues={{
-                            productType: '',
-                            productWeight: '',
+                            productType: props.item.productType,
+                            productWeight: props.item.productWeight,
                             maxSize: '',
                             senderLocation: '',
                             receipentLocation: '',
@@ -111,7 +111,7 @@ const Orders = ()=>{
                                 
                                 {errors.expectedDeliveryTime && touched.expectedDeliveryTime ? (<div className="error">{errors.expectedDeliveryTime}</div>) : null}
 
-                                <button type="submit">Send order</button>
+                                <button type="submit">{props.isEdit ? 'Save' : 'Send'} order</button>
                             </Form>
                         )} 
                     </Formik>

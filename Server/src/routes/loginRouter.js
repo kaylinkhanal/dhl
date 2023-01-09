@@ -2,6 +2,7 @@ const { Router } = require('express');
 const Users = require('../models/users')
 const app = Router();
 const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 app.post('/login', async(req, res) => {
     try{
