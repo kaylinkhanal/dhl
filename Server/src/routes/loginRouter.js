@@ -34,5 +34,34 @@ app.post('/login', async(req, res) => {
     }
 })
 
+app.put("/changepassword", async (req, res, next) => {
+    try {
+      const data = await Users.findOne({ email: req.body.email });
+      const dbPassword = data.password;
+      const isValidPassword = bcrypt.compareSync(
+        req.body.currentPassword,
+        dbPassword
+      );
+  
+      if (req.body.newPassword === req.body.confirmPassword && isValidPassword) {
+        const salt = bcrypt.genSaltSync(saltRounds);
+        const hash = bcrypt.hashSync(req.body.newPassword, salt);
+        if (hash) {
+          data.password = hash;
+          const response = await Users.findByIdAndUpdate(data._id, data);
+          if (response) {
+            res.json({ msg: "Password Updated" });
+          } else {
+            res.json({ msg: "something went wrong" });
+          }
+        }
+      } else {
+        res.json({ msg: "Old Password doesn't matched" });
+      }
+      next();
+    } catch (error) {
+      console.error(error);
+    }
+  });
 
 module.exports = app;
