@@ -35,7 +35,8 @@ const OrdersList = () => {
               return <Box item={item} fetchData={fetchData} />;
             })
           ) : (
-            <Skeleton />
+            <Skeleton active avatar paragraph={{ rows: 3 }} />
+            // <Skeleton />
           )}
         </div>
       </div>
