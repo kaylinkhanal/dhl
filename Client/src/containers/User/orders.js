@@ -3,7 +3,7 @@ import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux"
-import { message } from 'antd'
+import { message, DatePicker} from 'antd'
 
 const Orders = ()=>{
     const navigate = useNavigate()
@@ -62,7 +62,7 @@ const Orders = ()=>{
                         }}
                     >
 
-                        {({ errors, touched, values, handleChange, handleBlur, handleSubmit }) => (
+                        {({ errors, touched, values, setFieldValue, handleChange, handleBlur, handleSubmit }) => (
                             <Form  onSubmit={handleSubmit}>
                                 <select name="productType" value={values.productType} onChange={handleChange} onBlur={handleBlur}>
                                     <option value="" disabled="disabled" label="Product Type"></option>
@@ -94,7 +94,7 @@ const Orders = ()=>{
                                 <Field name="receipentNumber" placeholder="Receipent Number" value={values.receipentNumber} onChange={handleChange} onBlur={handleBlur}/>
                                 {errors.receipentNumber && touched.receipentNumber ? (<div className="error">{errors.receipentNumber}</div>) : null}
 
-                                <Field name="expectedDeliveryDate" placeholder="Expected Delivery Date" value={values.expectedDeliveryDate} onChange={handleChange} onBlur={handleBlur} />
+                                <DatePicker onChange={(date)=> setFieldValue('expectedDeliveryDate', date)}  name="expectedDeliveryDate" placeholder="Expected Delivery Date" value={values.expectedDeliveryDate} />
                                 {errors.expectedDeliveryDate && touched.expectedDeliveryDate ? (<div className="error">{errors.expectedDeliveryDate}</div>) : null}
 
                                 <select name="expectedDeliveryTime" value={values.expectedDeliveryTime} onChange={handleChange} onBlur={handleBlur}>

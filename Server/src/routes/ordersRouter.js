@@ -1,10 +1,12 @@
 const { Router } = require('express');
 const Orders = require('../models/orders')
 const app = Router();
+const moment = require('moment')
 
 app.post('/orders', async(req, res)=>{
     try{
-        // res.send(req.body)
+        const formattedDate = moment(req.body.expectedDeliveryDate).format('YYYY-MM-DD')
+        req.body.expectedDeliveryDate = formattedDate
         const data = await Orders.create(req.body)
         if(data){
             res.json({

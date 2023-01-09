@@ -19,9 +19,12 @@ const Register = ()=>{
         const response = await fetch('http://localhost:5000/register', requestOptions);
         const data = await response.json()
 
-        if(data){
-            alert(data.msg)
+        
+        if(data.msg === "users registered"){
+            message.success(data.msg)
             navigate('/')
+        }else{
+            message.error(data.errmsg)
         }
     }
 
