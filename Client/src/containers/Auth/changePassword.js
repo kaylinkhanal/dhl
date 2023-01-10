@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import ShowhidePassword from "../../components/showhidePassword";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
+import {responseHandler} from "../../utils/responseHandler"
 const ChangePassword = () => {
   const [isPasswordMatched, setIsPasswordMatched] = useState("");
   const email = useSelector((state) => state.user.email);
@@ -23,19 +23,23 @@ const ChangePassword = () => {
 
 
   const changingPassword = async (values) => {
-    const requestOptions = {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(values),
-    };
+    try{
+      const requestOptions = {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      };
+  
+      const response = await fetch(
+        "http://localhost:5000/changepassword",
+        requestOptions
+      );
+      const statusMessage = responseHandler(response)
+      alert(JSON.stringify(statusMessage))
 
-    const response = await fetch(
-      "http://localhost:5000/changepassword",
-      requestOptions
-    );
-    const data = await response.json();
-    alert(data.msg);
-    navigate("/")
+    }catch(err){
+      console.log(err)
+    }
   };
 
   return (
@@ -53,7 +57,7 @@ const ChangePassword = () => {
               values.email = email;
               if (values.newPassword === values.confirmPassword) {
                 changingPassword(values);
-                resetForm();
+                // resetForm();
               } else {
                 setIsPasswordMatched("Password doesn't match");
               }
