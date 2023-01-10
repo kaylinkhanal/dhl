@@ -18,6 +18,12 @@ const Navigation = () => {
                 <li>Profile</li>
             ),
         },
+
+        {
+            key: "2",
+            label: <li onClick={() => changePassword()}>Change Password</li>,
+          },
+
         {
             key: '2',
             label: (
@@ -34,6 +40,10 @@ const Navigation = () => {
     const onClose = () => {
         setOpen(false);
     };
+
+    const changePassword = () => {
+        navigate("/changepassword");
+      };
 
     const logout = () => {
         dispatch(resetDetails())

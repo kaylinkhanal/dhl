@@ -10,22 +10,27 @@ const Register = ()=>{
     const navigate = useNavigate()
 
     const registerUser = async(values)=>{
-        const requestOptions = {
-            method: "POST",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(values)
-        };
-
-        const response = await fetch('http://localhost:5000/register', requestOptions);
-        const data = await response.json()
-
-        
-        if(data.msg === "users registered"){
-            message.success(data.msg)
-            navigate('/')
-        }else{
-            message.error(data.errmsg)
+        try{
+            const requestOptions = {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(values)
+            };
+    
+            const response = await fetch('http://localhost:5000/register', requestOptions);
+            const data = await response.json()
+    
+            
+            if(data.msg === "users registered"){
+                message.success(data.msg)
+                navigate('/')
+            }else{
+                message.error(data.errmsg)
+            }
+        }catch(err){
+            console.log(err)
         }
+ 
     }
 
     const passwordRule = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/
