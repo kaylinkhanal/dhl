@@ -1,13 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux"
 import { message, DatePicker} from 'antd'
 
-const Orders = ()=>{
+const Orders = (props)=>{
     const navigate = useNavigate()
     const {name} = useSelector(state=> state.user)
+
+    const [initialValues, setInitialValues] = useState({
+        productType: '',
+        productWeight: '',
+        maxSize: '',
+        senderLocation: '',
+        receipentLocation: '',
+        receipentName: '',
+        receipentNumber: '',
+        expectedDeliveryDate: '',
+        expectedDeliveryTime: ''
+    })
+
+    useEffect(()=>{
+        if(props.selectedItem){
+            setInitialValues(props.selectedItem)
+        }
+    }, [props.selectedItem])
 
     const orderItem = async(values)=>{
         values.senderName = name
@@ -42,20 +60,11 @@ const Orders = ()=>{
         <section className='form_section'>
             <div className='container'>
                 <div className='form'>
-                    <h1>Make your order</h1>
+                    <h1>{!props.isEdit ? 'Make your' : 'Edit'} Order</h1>
 
                     <Formik
-                        initialValues={{
-                            productType: '',
-                            productWeight: '',
-                            maxSize: '',
-                            senderLocation: '',
-                            receipentLocation: '',
-                            receipentName: '',
-                            receipentNumber: '',
-                            expectedDeliveryDate: '',
-                            expectedDeliveryTime: ''
-                        }}
+                        initialValues={initialValues}
+                        enableReinitialize={true}
                         validationSchema={OrderSchema}
                         onSubmit={values=>{
                             orderItem(values)
@@ -111,7 +120,7 @@ const Orders = ()=>{
                                 
                                 {errors.expectedDeliveryTime && touched.expectedDeliveryTime ? (<div className="error">{errors.expectedDeliveryTime}</div>) : null}
 
-                                <button type="submit">Send order</button>
+                                <button type="submit">{!props.isEdit ? 'Send' : 'Edit'} order</button>
                             </Form>
                         )} 
                     </Formik>

@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Box from '../../components/box'
 import { faDolly } from '@fortawesome/free-solid-svg-icons'
+import { Skeleton } from 'antd';
+
 const OrdersList = ()=>{
     const [orderList, setOrderList] = useState([])
 
@@ -14,7 +16,6 @@ const OrdersList = ()=>{
         }
     }
   
-
     useEffect(()=>{
         fetchData()
     },[])
@@ -28,9 +29,10 @@ const OrdersList = ()=>{
                         return(
                             <Box item={item} fetchData={fetchData}/>
                             )
-                    }): 'list not found'}
+                    }): <Skeleton />}
                 </div>
             </div>
+            
         </section>
     )
 }

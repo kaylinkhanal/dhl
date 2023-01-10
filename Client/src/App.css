@@ -241,8 +241,6 @@ h4{
 
 .order_item{
   background: #e9e9e9;
-  padding: 10px;
-  margin-bottom: 10px;
 }
 
 p.badge {
@@ -254,16 +252,20 @@ p.badge {
   font-weight: 700;
 }
 
-span.pending {
+.pending {
   color: #d19100;
 }
 
-span.success {
+.success {
   color: green;
 }
 
-span.cancel {
+.cancel {
   color: red;
+}
+
+.edit{
+  color: #333;
 }
 
 .bottom ul {
@@ -279,9 +281,13 @@ span.cancel {
 
 .top {
   border-bottom: 1px solid #ccc;
-  padding-bottom: 10px;
-  margin-bottom: 10px;
-  font-size: 16px
+  padding: 10px;
+  font-size: 16px;
+  background: #ffcc00;
+}
+
+.bottom{
+  padding: 10px
 }
 
 .title{
@@ -300,5 +306,13 @@ span.cancel {
     line-height: 40px;
 }
 
+.btns{
+  text-align: right;
+}
+
+.btns button{
+  background: none;
+  padding: 10px;
+}
 
 
