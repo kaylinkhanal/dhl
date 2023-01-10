@@ -2,6 +2,7 @@ const { Router } = require('express');
 const Users = require('../models/users')
 const app = Router();
 const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 app.post('/login', async(req, res) => {
     try{
@@ -50,13 +51,13 @@ app.put("/changepassword", async (req, res, next) => {
           data.password = hash;
           const response = await Users.findByIdAndUpdate(data._id, data);
           if (response) {
-            res.json({ msg: "Password Updated" });
+            res.status(200).json({ msg: "Password Updated" });
           } else {
-            res.json({ msg: "something went wrong" });
+            res.status(500).json({ msg: "something went wrong" });
           }
         }
       } else {
-        res.json({ msg: "Old Password doesn't matched" });
+        res.status(401).json({ msg: "Old Password doesn't matched" });
       }
       next();
     } catch (error) {
