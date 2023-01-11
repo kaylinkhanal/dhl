@@ -35,8 +35,14 @@ const OrdersList = () => {
               return <Box item={item} fetchData={fetchData} />;
             })
           ) : (
-            <Skeleton active paragraph={{ rows: 3 }} />
-            // <Skeleton />
+            <div>
+              <Skeleton active paragraph={{ rows: 3 }} />
+             <br />
+             <Skeleton active paragraph={{ rows: 3 }} />
+             <br />
+              <Skeleton active paragraph={{ rows: 3 }} />
+            </div>
+            
           )}
         </div>
       </div>
