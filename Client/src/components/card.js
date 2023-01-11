@@ -1,7 +1,5 @@
 import React from 'react'
-import { FaDolly, FaTelegramPlane } from "react-icons/fa";
 import { Link } from "react-router-dom";
-// import { library } from '@fortawesome/fontawesome-svg-core';
 // library.add(
 //     FaDolly,
 //     FaTelegramPlane
@@ -12,10 +10,8 @@ const Card = ({icon, title, link})=>{
         <>
             <div className="card">
                 <Link to={link}>
-                    <i>
-                        {/* <FontAwesomeIcon icon={icon['prefix', 'iconName']} /> */}
-                    </i>
-
+                    <i> {icon}</i>
+                    {/* <FontAwesomeIcon icon={icon['prefix', 'iconName']} /> */}
                     <p>{title}</p>
                 </Link>
             </div>

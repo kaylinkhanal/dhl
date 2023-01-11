@@ -5,14 +5,14 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux"
 import { message, DatePicker} from 'antd'
 
-const Orders = ()=>{
+const Orders = (props)=>{
     const navigate = useNavigate()
     const {name} = useSelector(state=> state.user)
 
     const orderItem = async(values)=>{
         values.senderName = name
         const requestOptions = {
-            method: "POST",
+            method: !props.isEdit ? "POST" : "PUT",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(values)
         };
@@ -34,7 +34,7 @@ const Orders = ()=>{
 		receipentLocation: Yup.string().required('Required'),
         receipentName: Yup.string().required('Required'),
         receipentNumber: Yup.number().required('Required'),
-		expectedDeliveryDate: Yup.date().required('Required'),
+		// expectedDeliveryDate: Yup.date().required('Required'),
         expectedDeliveryTime: Yup.string().required('Required'),
 	});
 
@@ -42,10 +42,10 @@ const Orders = ()=>{
         <section className='form_section'>
             <div className='container'>
                 <div className='form'>
-                    <h1>Make your order</h1>
+                    <h1>{!props.isEdit ? 'Make your' : 'Edit'} order</h1>
 
                     <Formik
-                        initialValues={{
+                        initialValues={props.item || {
                             productType: '',
                             productWeight: '',
                             maxSize: '',
@@ -94,8 +94,8 @@ const Orders = ()=>{
                                 <Field name="receipentNumber" placeholder="Receipent Number" value={values.receipentNumber} onChange={handleChange} onBlur={handleBlur}/>
                                 {errors.receipentNumber && touched.receipentNumber ? (<div className="error">{errors.receipentNumber}</div>) : null}
 
-                                <DatePicker onChange={(date)=> setFieldValue('expectedDeliveryDate', date)}  name="expectedDeliveryDate" placeholder="Expected Delivery Date" value={values.expectedDeliveryDate} />
-                                {errors.expectedDeliveryDate && touched.expectedDeliveryDate ? (<div className="error">{errors.expectedDeliveryDate}</div>) : null}
+                                {/* <DatePicker onChange={(date)=> setFieldValue('expectedDeliveryDate', date)}  name="expectedDeliveryDate" placeholder="Expected Delivery Date" value={values.expectedDeliveryDate} />
+                                {errors.expectedDeliveryDate && touched.expectedDeliveryDate ? (<div className="error">{errors.expectedDeliveryDate}</div>) : null} */}
 
                                 <select name="expectedDeliveryTime" value={values.expectedDeliveryTime} onChange={handleChange} onBlur={handleBlur}>
                                     <option value="" disabled="disabled" label="Expected Delivery Time"></option>
@@ -111,7 +111,7 @@ const Orders = ()=>{
                                 
                                 {errors.expectedDeliveryTime && touched.expectedDeliveryTime ? (<div className="error">{errors.expectedDeliveryTime}</div>) : null}
 
-                                <button type="submit">Send order</button>
+                                <button type="submit">{!props.isEdit ? 'Send' : 'Edit'} order</button>
                             </Form>
                         )} 
                     </Formik>

@@ -307,9 +307,10 @@ span.cancel {
     margin-right: 10px;
 }
 
-.orderId{
-  font-size: 14px;
+.top span {
+  font-size: 13px;
   margin-right: 15px;
+  font-weight: 500;
 }
 
 .bottom ul {
