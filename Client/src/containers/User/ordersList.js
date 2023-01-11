@@ -1,38 +1,47 @@
 import React, { useEffect, useState } from "react";
-// import {  Link } from "react-router-dom";
-// import { useDispatch, useSelector } from "react-redux";
-// import OrderCard from "../../components/orderCard";
-// import setOrderrDetails from "../../reducers/orderSlice"
-import "../style.css"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Box from "../../components/box";
+import { faDolly } from "@fortawesome/free-solid-svg-icons";
+import { Skeleton } from "antd";
 
 const OrdersList = () => {
-  const [ordersList, setOrdersList] = useState([]);
-  
-  const fetchOrder = async () => {
-    const res = await fetch("http://localhost:5000/orders");
-    const data = await res.json();
-    setOrdersList(data.ordersList);
+  const [orderList, setOrderList] = useState([]);
+
+  const fetchData = async () => {
+    const response = await fetch("http://localhost:5000/orders");
+    const data = await response.json();
+
+    if (data) {
+      setOrderList(data.ordersList);
+    }
   };
+
   useEffect(() => {
-    fetchOrder();
+    fetchData();
   }, []);
+
   return (
-    <>
-      <h1>This are your Order list:</h1>
-      {ordersList.length > 0
-        ? ordersList.map((item) => (
-            <div className="orderCard">
-              <p>Product Type : {item.productType}</p>
-              <p>Sender name : {item.senderName}</p>
-              <p>Reciver name : {item.receipentName}</p>
-              <p>
-                from :{item.senderLocation} to: {item.receipentLocation}
-              </p>
-              <hr />
-            </div>
-          ))
-        : null}
-    </>
+    <section>
+      <div className="container">
+        <div className="orderList">
+          <h1 className="title">
+            <i>
+              <FontAwesomeIcon icon={faDolly} />
+            </i>{" "}
+            My Orders
+          </h1>
+          {orderList.length > 0 ? (
+            orderList.map((item) => {
+              return <Box item={item} fetchData={fetchData} />;
+            })
+          ) : (
+            <Skeleton active paragraph={{ rows: 3 }} />
+            // <Skeleton />
+          )}
+        </div>
+      </div>
+    </section>
   );
 };
+
 export default OrdersList;
