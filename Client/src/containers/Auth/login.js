@@ -20,6 +20,9 @@ const Login = ()=>{
         console.log(data)
         if(data.msg === 'login success'){
             dispatch(setUserDetails(data.userDetails))
+            message.success(data.msg)
+        }else{
+            message.error(data.msg)
         }
     }
     const SignupSchema = Yup.object().shape({
