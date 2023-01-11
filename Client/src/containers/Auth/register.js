@@ -1,13 +1,14 @@
 import React from 'react'
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
-import CountryData from '../../countries.json';
 import { message } from 'antd';
 import ShowhidePassword from '../../components/showhidePassword';
 import { useNavigate, Link } from 'react-router-dom';
+import {countries} from 'country-data-list';
 
 const Register = ()=>{
     const navigate = useNavigate()
+    const countryName = countries.all
 
     const registerUser = async(values)=>{
         try{
@@ -20,7 +21,6 @@ const Register = ()=>{
             const response = await fetch('http://localhost:5000/register', requestOptions);
             const data = await response.json()
     
-            
             if(data.msg === "users registered"){
                 message.success(data.msg)
                 navigate('/')
@@ -30,7 +30,6 @@ const Register = ()=>{
         }catch(err){
             console.log(err)
         }
- 
     }
 
     const passwordRule = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/
@@ -44,6 +43,8 @@ const Register = ()=>{
 			.required('Required')
 			.min(6)
 			.matches(passwordRule, { message: 'Please create a stronger password' }),
+            confirmPassword: Yup.string()
+			.oneOf([Yup.ref('password'), null], 'Passwords doesnt match'),
 	});
 
     return(
@@ -61,6 +62,7 @@ const Register = ()=>{
                             temporaryAddress: '',
                             userRole: '',
                             password: '',
+                            confirmPassword: '',
                             country: '',
                             zipCode: ''
                         }}
@@ -97,9 +99,12 @@ const Register = ()=>{
                                 <Field name="password" placeholder="Your password" value={values.password} onChange={handleChange} onBlur={handleBlur} component={ShowhidePassword}/>
                                 {errors.password && touched.password ? (<div className="error">{errors.password}</div>) : null}
 
+                                <Field name="confirmPassword" type="password" placeholder="Confirm Password" value={values.confirmPassword} onChange={handleChange} onBlur={handleBlur}  component={ShowhidePassword} />
+								{errors.confirmPassword && touched.confirmPassword ? <div className="error">{errors.confirmPassword}</div> : null}
+
                                 <select name="country" value={values.country} onChange={handleChange} onBlur={handleBlur}>
                                     <option value="" disabled="disabled" label="Select a Country"></option>
-                                    {CountryData.map(country => {
+                                    {countryName.map(country => {
                                         const {name} = country
                                         return(
                                             <option value={name} label={name} key={name}>{name}</option>

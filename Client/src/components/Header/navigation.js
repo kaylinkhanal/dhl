@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { faUser, faChevronDown, faBars } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FaUserAlt, FaChevronDown, FaBars } from "react-icons/fa";
 import { useSelector, useDispatch } from 'react-redux';
 import { resetDetails } from "../../reducers/userSlice";
 import { Button, Drawer, Dropdown, Space } from 'antd';
@@ -71,7 +70,7 @@ const Navigation = () => {
                         <ul className="nav_list">
                             {userRole === 'admin' ? (
                                 <li>
-                                    <Button onClick={showDrawer} className="menu-icon"><FontAwesomeIcon icon={faBars} /></Button>
+                                    <Button onClick={showDrawer} className="menu-icon"><FaBars/></Button>
                                     <Drawer placement="right" onClose={onClose} open={open}>
                                         <ul>
                                             <li><Link to="/">Dashboard</Link></li>
@@ -84,8 +83,8 @@ const Navigation = () => {
                                 <Dropdown menu={{ items, }}>
                                     <a onClick={(e) => e.preventDefault()}>
                                         <Space>
-                                            <i><FontAwesomeIcon icon={faUser} /></i>
-                                            <span>{name} <FontAwesomeIcon icon={faChevronDown} /></span>
+                                            <i><FaUserAlt /></i>
+                                            <span>{name} <FaChevronDown /></span>
                                         </Space>
                                     </a>
                                 </Dropdown>
