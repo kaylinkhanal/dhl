@@ -30,6 +30,7 @@ const OrdersList = () => {
             </i>{" "}
             My Orders
           </h1>
+          {console.log(orderList.length)}
           {orderList.length > 0 ? (
             orderList.map((item) => {
               return <Box item={item} fetchData={fetchData} />;
