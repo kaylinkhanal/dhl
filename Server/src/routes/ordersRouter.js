@@ -24,7 +24,7 @@ app.post('/orders', async(req, res)=>{
 
 app.get('/orders', async(req, res)=>{
     try{
-        const orderData = await Orders.find()
+        const orderData = await Orders.find().sort({expectedDeliveryDate: -1})
         if(orderData){
             res.json({
                 ordersList: orderData

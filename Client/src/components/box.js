@@ -1,8 +1,20 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faMap, faPhone, faCalendarAlt, faClock } from '@fortawesome/free-solid-svg-icons'
 import axios from  'axios'
+import { Button, Modal } from 'antd';
+import Orders from '../containers/User/orders'
 const Box = ({ item, fetchData }) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+      const showModal = () => {
+        setIsModalOpen(true);
+    };
+    const handleOk = () => {
+        setIsModalOpen(false);
+    };
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
     const triggerDelete=  () => {
          axios.delete('http://localhost:5000/orders', { data: { id: item._id } })
         .then(response => response ? fetchData(): null)
@@ -22,6 +34,13 @@ const Box = ({ item, fetchData }) => {
                     <button onClick={()=> triggerDelete()}>
                         Delete
                     </button>
+
+                    <Button onClick={()=>showModal()}>
+                        Edit
+                    </Button>
+                    <Modal  open={isModalOpen} footer={null} onCancel={handleCancel}>
+                        <Orders isEdit={true} item={item}/>
+                    </Modal>
 
                 <div className='bottom'>
                     <ul>

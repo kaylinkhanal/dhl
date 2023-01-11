@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Box from "../../components/box";
 import { faDolly } from "@fortawesome/free-solid-svg-icons";
+// import {useSelector} from "react-redux"
 import { Skeleton } from "antd";
 
 const OrdersList = () => {
   const [orderList, setOrderList] = useState([]);
-
+  // const {_id} = useSelector(state=> state.user)
   const fetchData = async () => {
-    const response = await fetch("http://localhost:5000/orders");
+    debugger;
+    const response = await fetch("http://localhost:5000/orders/");
     const data = await response.json();
 
     if (data) {
@@ -35,8 +37,16 @@ const OrdersList = () => {
               return <Box item={item} fetchData={fetchData} />;
             })
           ) : (
-            <Skeleton active paragraph={{ rows: 3 }} />
-            // <Skeleton />
+            <div>
+              <Skeleton active paragraph={{ rows: 3 }} />
+              <br />
+              <Skeleton active paragraph={{ rows: 3 }} />
+              <br />
+              <Skeleton active paragraph={{ rows: 3 }} />
+              <br />
+              <Skeleton active paragraph={{ rows: 3 }} />
+              <br />
+            </div>
           )}
         </div>
       </div>
