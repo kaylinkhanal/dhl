@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Box from "../../components/box";
 import { faDolly } from "@fortawesome/free-solid-svg-icons";
-// import { Skeleton } from "antd";
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
+import { Pagination } from 'antd';
 
 // import { Pagination } from 'antd';
 
@@ -42,11 +42,13 @@ const OrdersList = () => {
             
           })
           }
+          <Pagination defaultCurrent={6} total={orderList.length*10} /> {/**Pagination added form antdesign **/}
 
           </>
             
           ) : (
-            <Stack spacing={2}>
+          <Stack spacing={2}>   {/*Skeleton added  from mui*/}
+
   
             <Skeleton variant="rectangular" width={500} height={150} />
             <Skeleton variant="rectangular" width={500} height={150} />
@@ -55,7 +57,7 @@ const OrdersList = () => {
             
             
             </Stack>
-            // <Skeleton block="true" />
+           
             
           )
           
