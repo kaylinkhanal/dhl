@@ -10,7 +10,7 @@ const OrdersList = () => {
 
   
   const fetchData = async (page, size) => {
-    const response = await fetch(`http://localhost:5000/orders?page=${page || 1}&size=${size || 5}`);
+    const response = await fetch(`${process.env.REACT_APP_BASE_URL}/orders?page=${page || 1}&size=${size || 5}`);
     const data = await response.json();
     if (data) {
       setOrderList(data.ordersList);

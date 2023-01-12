@@ -17,7 +17,7 @@ const Login = ()=>{
             body: JSON.stringify(values)
         };
 
-        const response = await fetch('http://localhost:5000/login', requestOptions);
+        const response = await fetch(`${process.env.REACT_APP_BASE_URL}/login`, requestOptions);
         const data = await response.json()
         console.log(data)
         if(data.msg === 'login success'){

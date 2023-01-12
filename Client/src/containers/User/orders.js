@@ -17,7 +17,7 @@ const Orders = ()=>{
             body: JSON.stringify(values)
         };
 
-        const response = await fetch('http://localhost:5000/orders', requestOptions);
+        const response = await fetch(`${process.env.REACT_APP_BASE_URL}/orders`, requestOptions);
         const data = await response.json()
 
         if(data){

@@ -8,7 +8,7 @@ const OrdersList = () => {
   const [orderList, setOrderList] = useState([]);
 
   const fetchData = async () => {
-    const response = await fetch("http://localhost:5000/orders");
+    const response = await fetch(`${process.env.REACT_APP_BASE_URL}/orders`);
     const data = await response.json();
 
     if (data) {
