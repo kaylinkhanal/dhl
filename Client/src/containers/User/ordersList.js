@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Box from "../../components/box";
 import { faDolly } from "@fortawesome/free-solid-svg-icons";
-import { Skeleton } from "antd";
+// import { Skeleton } from "antd";
+import Skeleton from '@mui/material/Skeleton';
+import Stack from '@mui/material/Stack';
+
+// import { Pagination } from 'antd';
 
 const OrdersList = () => {
   const [orderList, setOrderList] = useState([]);
@@ -31,14 +35,35 @@ const OrdersList = () => {
             My Orders
           </h1>
           {orderList.length > 0 ? (
-            orderList.map((item) => {
-              return <Box item={item} fetchData={fetchData} />;
-            })
+            <>
+            
+          {orderList.map((item) => {
+            return <Box item={item} fetchData={fetchData} />;
+            
+          })
+          }
+
+          </>
+            
           ) : (
-            <Skeleton active paragraph={{ rows: 3 }} />
-            // <Skeleton />
-          )}
+            <Stack spacing={2}>
+  
+            <Skeleton variant="rectangular" width={500} height={150} />
+            <Skeleton variant="rectangular" width={500} height={150} />
+            <Skeleton variant="rectangular" width={500} height={150} />
+            <Skeleton variant="rectangular" width={500} height={150} />
+            
+            
+            </Stack>
+            // <Skeleton block="true" />
+            
+          )
+          
+          }
+
+          
         </div>
+
       </div>
     </section>
   );
