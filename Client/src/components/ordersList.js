@@ -6,13 +6,15 @@ import { Skeleton } from "antd";
 import { Pagination } from 'antd';
 const OrdersList = () => {
   const [orderList, setOrderList] = useState([]);
+  const [totalOrderCount, setTotalOrderCount] = useState(0);
 
-  const fetchData = async () => {
-    const response = await fetch("http://localhost:5000/orders");
+  
+  const fetchData = async (page, size) => {
+    const response = await fetch(`http://localhost:5000/orders?page=${page || 1}&size=${size || 5}`);
     const data = await response.json();
-
     if (data) {
       setOrderList(data.ordersList);
+      setTotalOrderCount(data.totalOrderCount)
     }
   };
 
@@ -37,7 +39,9 @@ const OrdersList = () => {
               return <Box item={item} fetchData={fetchData} />;
             })
             }
-            <Pagination defaultCurrent={6} total={500} />
+            <Pagination
+            defaultPageSize={5}
+            onChange={(page,size)=>fetchData(page, size)} total={totalOrderCount} />
             </>
           ) : (
             
