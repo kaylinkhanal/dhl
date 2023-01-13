@@ -7,10 +7,11 @@ import { message, DatePicker} from 'antd'
 
 const Orders = (props)=>{
     const navigate = useNavigate()
-    const {name} = useSelector(state=> state.user)
+    const {name, _id} = useSelector(state=> state.user)
 
     const orderItem = async(values)=>{
         values.senderName = name
+        values.userID = _id
         const requestOptions = {
             method: !props.isEdit ? "POST" : "PUT",
             headers: { 'Content-Type': 'application/json' },

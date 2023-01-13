@@ -1,11 +1,10 @@
 import { Formik, Field, Form } from "formik";
 import { useState } from "react";
 import * as Yup from "yup";
-import ShowhidePassword from "../../components/showhidePassword";
+import ShowhidePassword from "./showhidePassword";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { responseHandler } from "../../utils/responseHandler"
-
+import { responseHandler } from "../utils/responseHandler"
 const ChangePassword = () => {
 	const [isPasswordMatched, setIsPasswordMatched] = useState("");
 	const email = useSelector((state) => state.user.email);
@@ -13,15 +12,23 @@ const ChangePassword = () => {
 
 	const passwordRule = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
 
-	const PasswordSchema = Yup.object().shape({
-		currentPassword: Yup.string().required("Required"),
-		newPassword: Yup.string()
-			.required("Required")
-			.min(6)
-			.matches(passwordRule, { message: "Please create a stronger password" }),
-		confirmPassword: Yup.string().required("Required"),
-	});
 
+  const PasswordSchema = Yup.object().shape({
+    currentPassword: Yup.string().required("Required"),
+    newPassword: Yup.string()
+      .required("Required")
+      .min(6)
+      .matches(passwordRule, { message: "Please create a stronger password" }),
+    confirmPassword: Yup.string()
+      .min(6)
+      .when("newPassword", {
+        is: val => (val && val.length > 0 ? true : false),
+        then: Yup.string().oneOf(
+          [Yup.ref("newPassword")],
+          "password didn't match")
+      })
+      .required('Required'),
+  });
 
 	const changingPassword = async (values) => {
 		try {

@@ -24,6 +24,7 @@ app.post('/orders', async(req, res)=>{
 
 app.get('/orders', async(req, res)=>{
     try{
+        console.log(req)
         const orderData = await Orders.find()
         if(orderData){
             res.json({
