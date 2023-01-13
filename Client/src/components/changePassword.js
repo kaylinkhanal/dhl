@@ -39,7 +39,7 @@ const ChangePassword = () => {
 			};
 
 			const response = await fetch(
-				"http://localhost:5000/changepassword",
+				`${process.env.REACT_APP_BASE_URL}/changepassword`,
 				requestOptions
 			);
 			const statusMessage = responseHandler(response)
