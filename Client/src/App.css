@@ -333,5 +333,8 @@ span.cancel {
   background: #efeded;
 }
 
+.loader li{
+  line-height: 12px;
+}
 
 
