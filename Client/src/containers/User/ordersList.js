@@ -9,7 +9,7 @@ const OrdersList = () => {
   const {_id} = useSelector(state => state.user)
 
   const fetchData = async () => {
-    const response = await fetch('http://localhost:5000/users/'+_id+'/orders');
+    const response = await fetch(`${process.env.REACT_APP_BASE_URL}/users/${_id}/orders`)
     const data = await response.json();
 
 		if (data) {

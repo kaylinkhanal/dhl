@@ -7,7 +7,7 @@ import Orders from '../containers/User/orders';
 const Box = ({ item, fetchData }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const triggerDelete=  () => {
-         axios.delete('http://localhost:5000/orders', { data: { id: item._id } })
+         axios.delete(`${process.env.REACT_APP_BASE_URL}/orders`, { data: { id: item._id } })
         .then(response => response ? fetchData(): null)
         .catch(error => {
             console.error('There was an error!', error);

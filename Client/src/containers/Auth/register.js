@@ -18,7 +18,7 @@ const Register = ()=>{
                 body: JSON.stringify(values)
             };
     
-            const response = await fetch('http://localhost:5000/register', requestOptions);
+            const response = await fetch(`${process.env.REACT_APP_BASE_URL}/register`, requestOptions);
             const data = await response.json()
     
             if(data.msg === "users registered"){
