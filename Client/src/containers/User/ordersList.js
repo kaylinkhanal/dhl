@@ -3,12 +3,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Box from "../../components/box";
 import { faDolly } from "@fortawesome/free-solid-svg-icons";
 import { Skeleton } from "antd";
+import { useSelector } from "react-redux";
 
 const OrdersList = () => {
   const [orderList, setOrderList] = useState([]);
+  const {_id} = useSelector(state => state.user)
 
   const fetchData = async () => {
-    const response = await fetch("http://localhost:5000/orders");
+    const response = await fetch('http://localhost:5000/users/'+_id+'/orders');
     const data = await response.json();
 
     if (data) {

@@ -1,10 +1,10 @@
 import { Formik, Field, Form } from "formik";
 import { useEffect, useState } from "react";
 import * as Yup from "yup";
-import ShowhidePassword from "../../components/showhidePassword";
+import ShowhidePassword from "./showhidePassword";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {responseHandler} from "../../utils/responseHandler"
+import { responseHandler } from "../utils/responseHandler"
 const ChangePassword = () => {
   const [isPasswordMatched, setIsPasswordMatched] = useState("");
   const email = useSelector((state) => state.user.email);
@@ -18,18 +18,26 @@ const ChangePassword = () => {
       .required("Required")
       .min(6)
       .matches(passwordRule, { message: "Please create a stronger password" }),
-    confirmPassword: Yup.string().required("Required"),
+    confirmPassword: Yup.string()
+      .min(6)
+      .when("newPassword", {
+        is: val => (val && val.length > 0 ? true : false),
+        then: Yup.string().oneOf(
+          [Yup.ref("newPassword")],
+          "password didn't match")
+      })
+      .required('Required'),
   });
 
 
   const changingPassword = async (values) => {
-    try{
+    try {
       const requestOptions = {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
       };
-  
+
       const response = await fetch(
         "http://localhost:5000/changepassword",
         requestOptions
@@ -37,7 +45,7 @@ const ChangePassword = () => {
       const statusMessage = responseHandler(response)
       alert(JSON.stringify(statusMessage))
 
-    }catch(err){
+    } catch (err) {
       console.log(err)
     }
   };
@@ -55,9 +63,9 @@ const ChangePassword = () => {
             validationSchema={PasswordSchema}
             onSubmit={(values, { resetForm }) => {
               values.email = email;
-              if (values.newPassword === values.confirmPassword) {
+              if (values) {
                 changingPassword(values);
-                // resetForm();
+                resetForm();
               } else {
                 setIsPasswordMatched("Password doesn't match");
               }
