@@ -19,21 +19,11 @@ const CardSkeletion = (props)=>{
                             </div>
                             <div className='bottom'>
                                 <ul>
-                                    <li>
-                                        <Skeleton.Button active size={12} shape="round" /> 
-                                    </li>
-                                    <li>
-                                        <Skeleton.Button active size={12} shape="round" />
-                                    </li>
-                                    <li>
-                                        <Skeleton.Button active size={12} shape="round" /> 
-                                    </li>
-                                    <li>
-                                        <Skeleton.Button active size={12} shape="round" />
-                                    </li>
-                                    <li>
-                                        <Skeleton.Button active size={12} shape="round" />
-                                    </li>
+                                    <li><Skeleton.Button active size={12} shape="round" /></li>
+                                    <li><Skeleton.Button active size={12} shape="round" /></li>
+                                    <li><Skeleton.Button active size={12} shape="round" /></li>
+                                    <li><Skeleton.Button active size={12} shape="round" /></li>
+                                    <li><Skeleton.Button active size={12} shape="round" /></li>
                                 </ul>
                             </div>
                     </div>
