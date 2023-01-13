@@ -1,35 +1,53 @@
-import React from 'react'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faMap, faPhone, faCalendarAlt, faClock } from '@fortawesome/free-solid-svg-icons'
+import React,{useState} from 'react'
 import axios from  'axios'
+import { SlTrash, SlPencil, SlCalender, SlLocationPin, SlClock, SlPhone, SlUser } from "react-icons/sl";
+import { Modal } from 'antd';
+import Orders from '../containers/User/orders';
+
 const Box = ({ item, fetchData }) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const triggerDelete=  () => {
          axios.delete('http://localhost:5000/orders', { data: { id: item._id } })
         .then(response => response ? fetchData(): null)
         .catch(error => {
             console.error('There was an error!', error);
         });
-        
     }
+
+    const showModal = () => {
+        setIsModalOpen(true);
+    };
+    const handleOk = () => {
+        setIsModalOpen(false);
+    };
+    const handleCancel = () => {
+        setIsModalOpen(false);
+      };
+
     return (
         <>
+            <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={null}>
+                <Orders isEdit={true} item={item} onOk={handleOk}/>
+            </Modal>
+            <div className='btns'>
+                <button onClick={showModal}><i><SlPencil/></i></button>
+                <button onClick={()=> triggerDelete()}><i><SlTrash /></i></button>
+            </div>
+
             <div className='order_item'>
                 <div className='top'>
                     <p className='badge'>Status: <span className='pending'>{item.orderStatus}</span></p>
-                    <span>#{item._id}</span> <span><strong>{item.productType}</strong></span>
+                    <span>Sender: {item.senderName}</span>
+                    <span className='orderId'>#{item._id}</span> 
+                    <span>{item.productType}</span>
                 </div>
-
-                    <button onClick={()=> triggerDelete()}>
-                        Delete
-                    </button>
-
                 <div className='bottom'>
                     <ul>
-                        <li><i><FontAwesomeIcon icon={faUser} /></i> {item.receipentName}</li>
-                        <li><i><FontAwesomeIcon icon={faMap} /></i> {item.receipentLocation}</li>
-                        <li><i><FontAwesomeIcon icon={faPhone} /></i> {item.receipentNumber}</li>
-                        <li><i><FontAwesomeIcon icon={faCalendarAlt} /></i> {item.expectedDeliveryDate}</li>
-                        <li><i><FontAwesomeIcon icon={faClock} /></i> {item.expectedDeliveryTime}</li>
+                        <li><i><SlUser/></i> {item.receipentName}</li>
+                        <li><i><SlLocationPin/></i> {item.receipentLocation}</li>
+                        <li><i><SlPhone/></i> {item.receipentNumber}</li>
+                        <li><i><SlCalender/></i> {item.expectedDeliveryDate}</li>
+                        <li><i><SlClock/></i> {item.expectedDeliveryTime}</li>
                     </ul>
                 </div>
             </div>

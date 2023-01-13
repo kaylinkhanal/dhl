@@ -241,8 +241,8 @@ h4{
 
 .order_item{
   background: #e9e9e9;
-  padding: 10px;
   margin-bottom: 10px;
+  border: 1px solid #d7d5d5;
 }
 
 p.badge {
@@ -252,6 +252,10 @@ p.badge {
   border-radius: 10px;
   font-size: 12px;
   font-weight: 700;
+}
+
+.loader .badge{
+  padding: 0
 }
 
 span.pending {
@@ -266,22 +270,24 @@ span.cancel {
   color: red;
 }
 
-.bottom ul {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
+.btns{
+  text-align: right;
 }
 
-.bottom ul li i{
-  color: #a39f9f;
-  margin-right: 3px;
+.btns button {
+  padding: 5px;
+  background: none;
+  color: #333;
 }
 
 .top {
   border-bottom: 1px solid #ccc;
-  padding-bottom: 10px;
-  margin-bottom: 10px;
-  font-size: 16px
+  font-size: 16px;
+  background: rgb(255 204 0 / 40%);;
+}
+
+.top, .bottom{
+  padding: 5px 10px;
 }
 
 .title{
@@ -298,6 +304,33 @@ span.cancel {
     display: inline-block;
     text-align: center;
     line-height: 40px;
+    margin-right: 10px;
+}
+
+.top span {
+  font-size: 13px;
+  margin-right: 15px;
+  font-weight: 500;
+}
+
+.bottom ul {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.bottom ul li i{
+  color: #5e5e5e;
+  margin-right: 3px;
+}
+
+.loader .top, .order_item{
+  border: 0;
+  background: none;
+}
+
+.order_item {
+  background: #efeded;
 }
 
 

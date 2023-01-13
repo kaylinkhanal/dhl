@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { faUser, faChevronDown, faBars } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { HiOutlineMenuAlt3, HiOutlineChevronDown, HiOutlineUser } from "react-icons/hi";
 import { useSelector, useDispatch } from 'react-redux';
 import { resetDetails } from "../../reducers/userSlice";
 import { Button, Drawer, Dropdown, Space } from 'antd';
@@ -25,7 +24,7 @@ const Navigation = () => {
           },
 
         {
-            key: '2',
+            key: '3',
             label: (
                 <li onClick={() => logout()}>Logout</li>
             ),
@@ -71,7 +70,7 @@ const Navigation = () => {
                         <ul className="nav_list">
                             {userRole === 'admin' ? (
                                 <li>
-                                    <Button onClick={showDrawer} className="menu-icon"><FontAwesomeIcon icon={faBars} /></Button>
+                                    <Button onClick={showDrawer} className="menu-icon"><HiOutlineMenuAlt3/></Button>
                                     <Drawer placement="right" onClose={onClose} open={open}>
                                         <ul>
                                             <li><Link to="/">Dashboard</Link></li>
@@ -81,11 +80,11 @@ const Navigation = () => {
                             ) : null}
 
                             <li className="user_profile">
-                                <Dropdown menu={{ items, }}>
+                                <Dropdown menu={{ items }}>
                                     <a onClick={(e) => e.preventDefault()}>
                                         <Space>
-                                            <i><FontAwesomeIcon icon={faUser} /></i>
-                                            <span>{name} <FontAwesomeIcon icon={faChevronDown} /></span>
+                                            <i><HiOutlineUser /></i>
+                                            <span>{name} <HiOutlineChevronDown /></span>
                                         </Space>
                                     </a>
                                 </Dropdown>
