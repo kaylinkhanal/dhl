@@ -1,10 +1,12 @@
 import React,{useState} from 'react'
 import axios from  'axios'
+import {useSelector} from "react-redux"
 import { SlTrash, SlPencil, SlCalender, SlLocationPin, SlClock, SlPhone, SlUser } from "react-icons/sl";
 import { Modal } from 'antd';
 import Orders from '../containers/User/orders';
 
 const Box = ({ item, fetchData }) => {
+    const {userRole} = useSelector(state=> state.user)
     const [isModalOpen, setIsModalOpen] = useState(false);
     const triggerDelete=  () => {
          axios.delete(`${process.env.REACT_APP_BASE_URL}/orders`, { data: { id: item._id } })
@@ -41,6 +43,22 @@ const Box = ({ item, fetchData }) => {
                     <span className='orderId'>#{item._id}</span> 
                     <span>{item.productType}</span>
                 </div>
+                        {userRole =="admin" ? (
+                            <>
+                              <button>
+                                Accept
+                            </button>
+                            <button>
+                                Reject
+                            </button>
+                            </>
+                        ): (
+                        <button onClick={()=> triggerDelete()}>
+                        Delete
+                    </button>
+                    )}
+                        
+
                 <div className='bottom'>
                     <ul>
                         <li><i><SlUser/></i> {item.receipentName}</li>

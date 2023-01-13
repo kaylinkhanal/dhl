@@ -3,11 +3,13 @@ const Users = require('../models/users')
 const app = Router();
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+var jwt = require('jsonwebtoken');
+
 
 app.post('/login', async(req, res) => {
     try{
     const data = await Users.findOne({email: req.body.email})
-    
+    var token = jwt.sign({ foo: 'bar' }, 'shhhhh');
     if(data){
         const dbPassword = data.password
         console.log(data.password)
