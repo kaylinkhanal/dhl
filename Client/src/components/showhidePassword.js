@@ -1,14 +1,13 @@
 import React, {useState} from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const ShowhidePassword = (props)=>{
     const [showPassword, setShowPassword] = useState(false)
     return(
         <div className="input_wrap">
-            <i onClick={()=> setShowPassword(!showPassword)}>{showPassword ? <FontAwesomeIcon icon={faEye}/> : <FontAwesomeIcon icon={faEyeSlash}/>}</i>
+            <i onClick={()=> setShowPassword(!showPassword)}>{showPassword ? <FaEye/> : <FaEyeSlash/>}</i>
 
-            <input type={showPassword ? 'text' : 'password'} placeholder="enter password" {...props.field}></input>
+            <input type={showPassword ? 'text' : 'password'} placeholder="Your Password" {...props.field}></input>
         </div>
     )
 }

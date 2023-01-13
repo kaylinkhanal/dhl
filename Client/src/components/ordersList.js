@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FaDolly } from "react-icons/fa";
 import Box from "./box";
-import { faDolly } from "@fortawesome/free-solid-svg-icons";
 import { Skeleton } from "antd";
 import { Pagination } from 'antd';
 const OrdersList = () => {
@@ -10,7 +9,7 @@ const OrdersList = () => {
 
   
   const fetchData = async (page, size) => {
-    const response = await fetch(`http://localhost:5000/orders?page=${page || 1}&size=${size || 5}`);
+    const response = await fetch(`${process.env.REACT_APP_BASE_URL}/orders?page=${page || 1}&size=${size || 5}`);
     const data = await response.json();
     if (data) {
       setOrderList(data.ordersList);
@@ -28,7 +27,7 @@ const OrdersList = () => {
         <div className="orderList">
           <h1 className="title">
             <i>
-              <FontAwesomeIcon icon={faDolly} />
+            <FaDolly />
             </i>{" "}
             My Orders
           </h1>
