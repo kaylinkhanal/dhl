@@ -24,24 +24,26 @@ app.post('/orders', async(req, res)=>{
 
 app.get('/orders', async(req, res)=>{
     try{
-        const{page,size}=req.query
+        const page=req.query.page
+        const size=req.query.size
         const skipCount=(size*page-size)
-        console.log(skipCount)
-        if(page==!null){
-           const orderData=await Orders.find().skip(skipCount).limit(size)
-           console.log(orderData.length)
-        }
+        let orderData;
+        let totalOrderCount;
+        if(page!==null){
+            orderData=await Orders.find().skip(skipCount).limit(size)
+            totalOrderCount=await Orders.find().count()}
         else{
-          const  orderData=await Orders.find().limit(size)
-          console.log(orderData.length)
+           orderData=await Orders.find()
+         
 
         }
       
         
-        const orderData = await Orders.find()
+   
         if(orderData){
             res.json({
-                ordersList: orderData
+                ordersList: orderData,
+                totalOrderCount:totalOrderCount
             })
         }
         

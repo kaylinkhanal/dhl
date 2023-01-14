@@ -10,13 +10,15 @@ import { Pagination } from 'antd';
 
 const OrdersList = () => {
   const [orderList, setOrderList] = useState([]);
+  const [totalOrderCount, settotalOrderCount] = useState(0);
 
-  const fetchData = async () => {
-    const response = await fetch("http://localhost:5000/orders");
+  const fetchData = async (page,size) => {
+    const response = await fetch(`http://localhost:5000/orders?page=${page || 1}&size=${size || 10}`);
     const data = await response.json();
 
     if (data) {
       setOrderList(data.ordersList);
+      settotalOrderCount(data.totalOrderCount);
     }
   };
 
@@ -42,7 +44,7 @@ const OrdersList = () => {
             
           })
           }
-          <Pagination defaultCurrent={6} total={orderList.length*10} /> {/**Pagination added form antdesign **/}
+          <Pagination  onChange={(page,size)=>fetchData(page,size)} total={totalOrderCount} /> {/**Pagination added form antdesign **/}
 
           </>
             
