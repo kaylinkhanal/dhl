@@ -13,7 +13,7 @@ const OrdersList = () => {
   const [totalOrderCount, settotalOrderCount] = useState(0);
 
   const fetchData = async (page,size) => {
-    const response = await fetch(`http://localhost:5000/orders?page=${page || 1}&size=${size || 10}`);
+    const response = await fetch(`http://localhost:5000/orders?page=${page || 1}&size=${size || 5}`);
     const data = await response.json();
 
     if (data) {
@@ -44,7 +44,7 @@ const OrdersList = () => {
             
           })
           }
-          <Pagination  onChange={(page,size)=>fetchData(page,size)} total={totalOrderCount} /> {/**Pagination added form antdesign **/}
+          <Pagination  onChange={(page,size)=>fetchData(page,size)} total={totalOrderCount} onShowSizeChange  showQuickJumper  /> {/**Pagination added form antdesign **/}
 
           </>
             
