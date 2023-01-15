@@ -27,7 +27,8 @@ const Box = ({ item, fetchData }) => {
       };
 
     return (
-        <>
+        <>{userRole !=="admin" ? (
+            <>
             <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={null}>
                 <Orders isEdit={true} item={item} onOk={handleOk}/>
             </Modal>
@@ -35,6 +36,8 @@ const Box = ({ item, fetchData }) => {
                 <button onClick={showModal}><i><SlPencil/></i></button>
                 <button onClick={()=> triggerDelete()}><i><SlTrash /></i></button>
             </div>
+            </>
+            ):null}
 
             <div className='order_item'>
                 <div className='top'>
