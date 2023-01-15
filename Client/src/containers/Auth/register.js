@@ -91,6 +91,7 @@ const Register = ()=>{
                                     <option value="" disabled="disabled" label="Select a Role"></option>
                                     <option value="user" label="User">User</option>
                                     <option value="rider" label="Rider">Rider</option>
+                                    <option value="admin" label="Admin">Admin</option>
                                 </select>
                                 {errors.userRole && touched.userRole ? (<div className="error">{errors.userRole}</div>) : null}
 

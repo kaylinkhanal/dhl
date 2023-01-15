@@ -1,15 +1,12 @@
 import { Formik, Field, Form } from "formik";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import * as Yup from "yup";
 import ShowhidePassword from "../../components/showhidePassword";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import {responseHandler} from "../../utils/responseHandler"
 const ChangePassword = () => {
   const [isPasswordMatched, setIsPasswordMatched] = useState("");
   const email = useSelector((state) => state.user.email);
-  const navigate = useNavigate()
-
   const passwordRule = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
 
   const PasswordSchema = Yup.object().shape({
@@ -57,7 +54,7 @@ const ChangePassword = () => {
               values.email = email;
               if (values.newPassword === values.confirmPassword) {
                 changingPassword(values);
-                // resetForm();
+                resetForm();
               } else {
                 setIsPasswordMatched("Password doesn't match");
               }
@@ -74,7 +71,7 @@ const ChangePassword = () => {
               <Form onSubmit={handleSubmit}>
                 <Field
                   name="currentPassword"
-                  placeholder="Current Password"
+                  placeholder="Enter current password"
                   value={values.currentPassword}
                   component={ShowhidePassword}
                   onChange={handleChange}
@@ -86,7 +83,7 @@ const ChangePassword = () => {
 
                 <Field
                   name="newPassword"
-                  placeholder="New Password"
+                  placeholder="Enter new passoword"
                   value={values.newPassword}
                   component={ShowhidePassword}
                   onChange={handleChange}
@@ -96,8 +93,8 @@ const ChangePassword = () => {
                   <div className="error">{errors.newPassword}</div>
                 ) : null}
                 <Field
-                  name="confirmPassword"
-                  placeholder="Confirm Password"
+                  name="confirmPassword"  
+                  placeholder="Enter confirm password"
                   value={values.confirmPassword}
                   component={ShowhidePassword}
                   onChange={handleChange}

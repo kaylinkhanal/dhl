@@ -55,6 +55,8 @@ const AuthScreens=()=>{
     return(
       <Routes>
         <Route exact path='/' element={<AdminDashboard/>}/>
+        <Route exact path = '/changepassword' element = {<ChangePassword/>}/>
+
       </Routes>
     )
   }
