@@ -2,7 +2,9 @@ import React from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faMap, faPhone, faCalendarAlt, faClock } from '@fortawesome/free-solid-svg-icons'
 import axios from  'axios'
+import { useSelector } from 'react-redux';
 const Box = ({ item, fetchData }) => {
+  const name = useSelector((state) => state.user.name);
     const triggerDelete=  () => {
          axios.delete('http://localhost:5000/orders', { data: { id: item._id } })
         .then(response => response ? fetchData(): null)
@@ -16,7 +18,8 @@ const Box = ({ item, fetchData }) => {
             <div className='order_item'>
                 <div className='top'>
                     <p className='badge'>Status: <span className='pending'>{item.orderStatus}</span></p>
-                    <span>#{item._id}</span> <span><strong>{item.productType}</strong></span>
+                    <p className='sender'>Sender:{name}</p> <span>  </span>
+                    <span> #{item._id}</span> <span><strong>{item.productType}</strong></span>
                 </div>
 
                     <button onClick={()=> triggerDelete()}>

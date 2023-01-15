@@ -37,7 +37,7 @@ h1{
   margin: 0 auto
 }
 
-input,select, .ant-picker{
+input,select, .ant-picker{  
     height: 40px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -243,6 +243,14 @@ h4{
   background: #e9e9e9;
   padding: 10px;
   margin-bottom: 10px;
+}
+.order_item .top{
+  background:rgb(233, 245, 122);
+  padding: 10px;
+  margin-bottom: 10px;
+}
+p.sender{
+  float: left;
 }
 
 p.badge {
