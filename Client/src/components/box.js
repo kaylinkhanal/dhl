@@ -53,9 +53,7 @@ const Box = ({ item, fetchData }) => {
                             </button>
                             </>
                         ): (
-                        <button onClick={()=> triggerDelete()}>
-                        Delete
-                    </button>
+                        null
                     )}
                         
 
