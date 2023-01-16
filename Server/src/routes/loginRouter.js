@@ -9,12 +9,13 @@ var jwt = require('jsonwebtoken');
 app.post('/login', async(req, res) => {
     try{
     const data = await Users.findOne({email: req.body.email})
-    var token = jwt.sign({ foo: 'bar' }, 'shhhhh');
+    var token = jwt.sign({ email: req.body.email }, process.env.SECRET_KEY);
     if(data){
         const dbPassword = data.password
         console.log(data.password)
         const isValidPassword = bcrypt.compareSync(req.body.password, dbPassword)
         const {password, __v, ...refactoredData} = data.toObject()
+        // refactoredData.token = token
         if(isValidPassword){
             res.json({
                 msg: 'login success',

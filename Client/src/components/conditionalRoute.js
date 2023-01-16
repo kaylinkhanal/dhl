@@ -11,12 +11,12 @@ import { Routes, Route} from "react-router-dom";
 import ChangePassword from "./changePassword";
 
 const ConditionalRouting = ()=>{
-    const {userRole} = useSelector(state=>state.user)
-    if(userRole==='user'){
+    const {userRole , token} = useSelector(state=>state.user)
+    if(userRole==='user' && token){
         return <UserScreen/>
-      }else if(userRole === 'rider'){
+      }else if(userRole === 'rider' && token){
         return <RiderScreen/>
-      }else if(userRole === 'admin'){
+      }else if(userRole === 'admin' && token){
         return (<AdminScreen/>)
       }else{
         return <AuthScreens/>
