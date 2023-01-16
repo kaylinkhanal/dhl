@@ -4,7 +4,6 @@ import {useSelector} from "react-redux"
 import { SlTrash, SlPencil, SlCalender, SlLocationPin, SlClock, SlPhone, SlUser } from "react-icons/sl";
 import { Modal } from 'antd';
 import Orders from '../containers/User/orders';
-
 const Box = ({ item, fetchData }) => {
     const {userRole} = useSelector(state=> state.user)
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -31,10 +30,25 @@ const Box = ({ item, fetchData }) => {
             <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={null}>
                 <Orders isEdit={true} item={item} onOk={handleOk}/>
             </Modal>
-            <div className='btns'>
-                <button onClick={showModal}><i><SlPencil/></i></button>
-                <button onClick={()=> triggerDelete()}><i><SlTrash /></i></button>
-            </div>
+
+            {userRole !=="admin" ? (
+                
+                <div className='btns'>
+                  <button onClick={showModal}><i><SlPencil/></i></button>
+                  <button onClick={()=> triggerDelete()}><i><SlTrash /></i></button>
+                </div>
+    
+            ):(
+                
+               <div className='btns'>
+                 <button>
+                  Accept
+                </button>
+                <button>
+                  Reject
+                </button>
+              </div>
+            )}
 
             <div className='order_item'>
                 <div className='top'>
@@ -43,7 +57,11 @@ const Box = ({ item, fetchData }) => {
                     <span className='orderId'>#{item._id}</span> 
                     <span>{item.productType}</span>
                 </div>
-                        {userRole =="admin" ? (
+
+
+            
+                
+                         {/* {userRole =="admin" ? ( 
                             <>
                               <button>
                                 Accept
@@ -55,8 +73,8 @@ const Box = ({ item, fetchData }) => {
                         ): (
                         <button onClick={()=> triggerDelete()}>
                         Delete
-                    </button>
-                    )}
+                    </button> */}
+                    {/* )}  */}
                         
 
                 <div className='bottom'>
