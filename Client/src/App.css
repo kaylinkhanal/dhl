@@ -272,6 +272,7 @@ span.cancel {
 
 .btns{
   text-align: right;
+  
 }
 
 .btns button {
@@ -331,6 +332,14 @@ span.cancel {
 
 .order_item {
   background: #efeded;
+}
+
+.btn btn-success{
+  background-color: green;
+}
+
+.btn btn-danger{
+  background-color: red;
 }
 
 
