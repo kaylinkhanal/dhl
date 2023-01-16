@@ -14,7 +14,7 @@ const Navigation = () => {
         {
             key: '1',
             label: (
-                <li>Profile</li>
+                <li><Link to="/profile">Profile</Link></li>
             ),
         },
 

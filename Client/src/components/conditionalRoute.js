@@ -9,6 +9,7 @@ import OrdersList from "../containers/User/ordersList";
 import {useSelector} from 'react-redux';
 import { Routes, Route} from "react-router-dom";
 import ChangePassword from "./changePassword";
+import Profile from "../containers/SharedScreens/profile";
 
 const ConditionalRouting = ()=>{
     const {userRole} = useSelector(state=>state.user)
@@ -46,6 +47,7 @@ const AuthScreens=()=>{
         <Route exact path='/' element={<UserDashboard/>}/>
         <Route exact path='/orders' element={<Orders/>}/>
         <Route exact path='/orderslist' element={<OrdersList/>}/>
+        <Route exact path='/profile' element={<Profile/>}/>
         <Route exact path = '/changepassword' element = {<ChangePassword/>}/>
       </Routes>
 
