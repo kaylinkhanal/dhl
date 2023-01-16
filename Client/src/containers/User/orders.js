@@ -4,13 +4,11 @@ import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux"
 import { message, DatePicker} from 'antd'
-import moment from 'moment'
-import dayjs from 'dayjs';
+import dayjs from 'dayjs'
 
 const Orders = (props)=>{
     const navigate = useNavigate()
     const {name, _id} = useSelector(state=> state.user)
-
     const orderItem = async(values)=>{
         values.senderName = name
         values.userID = _id
@@ -25,7 +23,8 @@ const Orders = (props)=>{
 
         if(data){
             message.success(data.msg)
-            navigate('/')
+            props.isEdit?  props.onOk() : navigate('/orderslist')
+           
         }
     }
     
@@ -48,8 +47,7 @@ const Orders = (props)=>{
                     <h1>{!props.isEdit ? 'Make your' : 'Edit'} order</h1>
 
                     <Formik
-                        initialValues={props.item?
-                        {
+                        initialValues={props.item?{
                             _id:props.item._id,
                             productType: props.item.productType,
                             productWeight: props.item.productWeight,

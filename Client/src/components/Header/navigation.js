@@ -13,7 +13,7 @@ const Navigation = () => {
     const items = [
         {
             key: '1',
-            label: 'Profile',
+            label: <Link to={`/portfolio/${name}`}>Portfolio</Link>,
         },
 
         {

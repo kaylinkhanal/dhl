@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 
 const OrdersList = () => {
   const [orderList, setOrderList] = useState([]);
+  const [loading, setLoading] = useState(false)
   const {_id} = useSelector(state => state.user)
 
   const fetchData = async () => {
@@ -14,6 +15,7 @@ const OrdersList = () => {
 
 		if (data) {
 			setOrderList(data.ordersList);
+			setLoading(true)
 		}
 	};
 
@@ -29,7 +31,7 @@ const OrdersList = () => {
 
 					{orderList.length > 0 ? orderList.map((item, id) => {
 						return <Box key={id} item={item} fetchData={fetchData} />
-					}) : <CardSkeletion boxNumber={4} />}
+					}) : !loading ? <CardSkeletion boxNumber={4}/> : <h3>Orders not Found</h3>}
 				</div>
 			</div>
 		</section>
