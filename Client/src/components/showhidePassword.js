@@ -7,7 +7,7 @@ const ShowhidePassword = (props)=>{
         <div className="input_wrap">
             <i onClick={()=> setShowPassword(!showPassword)}>{showPassword ? <FaEye/> : <FaEyeSlash/>}</i>
 
-            <input type={showPassword ? 'text' : 'password'} placeholder="Your Password" {...props.field}></input>
+            <input type={showPassword ? 'text' : 'password'} placeholder={props.placeholder} {...props.field}></input>
         </div>
     )
 }
