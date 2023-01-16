@@ -13,18 +13,26 @@ const Box = ({ item, fetchData }) => {
         });
         
     }
+    // const acceptItem=()=>{
+
+    // }
     return (
         <>
             <div className='order_item'>
                 <div className='top'>
                     <p className='badge'>Status: <span className='pending'>{item.orderStatus}</span></p>
-                    <p className='sender'>Sender:{name}</p> <span>  </span>
+                    <p className='sender'>Sender:{name}</p>
                     <span> #{item._id}</span> <span><strong>{item.productType}</strong></span>
                 </div>
+                   <button >Accept</button>  <span> </span>
 
+                    
                     <button onClick={()=> triggerDelete()}>
                         Delete
                     </button>
+                
+                   
+
 
                 <div className='bottom'>
                     <ul>
