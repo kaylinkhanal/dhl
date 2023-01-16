@@ -5,8 +5,8 @@ const moment = require('moment')
 
 app.post('/orders', async(req, res)=>{
     try{
-        const formattedDate = moment(req.body.expectedDeliveryDate).format('YYYY-MM-DD')
-        req.body.expectedDeliveryDate = formattedDate
+        // const formattedDate = moment(req.body.expectedDeliveryDate).format('YYYY/MM/DD')
+        // req.body.expectedDeliveryDate = formattedDate
         const data = await Orders.create(req.body)
         if(data){
             res.json({
@@ -33,7 +33,7 @@ app.get('/orders', async(req, res)=>{
              orderData = await Orders.find().skip(skipCount).limit(size)
              totalOrderCount =  await Orders.find().count()
         }else{
-            orderData = await Orders.find()
+            orderData = await Orders.find().sort({expectedDeliveryDate: -1})
         }
         if(orderData){
             res.json({

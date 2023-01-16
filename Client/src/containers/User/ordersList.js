@@ -25,7 +25,7 @@ const OrdersList = () => {
 		<section>
 			<div className="container">
 				<div className="orderList">
-					<h1 className="title"><i><FaDolly /></i>My Orders</h1>
+					<h1 className="title"><i><FaDolly /></i> My Orders</h1>
 
 					{orderList.length > 0 ? orderList.map((item, id) => {
 						return <Box key={id} item={item} fetchData={fetchData} />

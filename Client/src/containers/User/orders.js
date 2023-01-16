@@ -4,6 +4,8 @@ import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux"
 import { message, DatePicker} from 'antd'
+import moment from 'moment'
+import dayjs from 'dayjs';
 
 const Orders = (props)=>{
     const navigate = useNavigate()
@@ -35,7 +37,7 @@ const Orders = (props)=>{
 		receipentLocation: Yup.string().required('Required'),
         receipentName: Yup.string().required('Required'),
         receipentNumber: Yup.number().required('Required'),
-		// expectedDeliveryDate: Yup.date().required('Required'),
+		expectedDeliveryDate: Yup.date().required('Required'),
         expectedDeliveryTime: Yup.string().required('Required'),
 	});
 
@@ -46,7 +48,19 @@ const Orders = (props)=>{
                     <h1>{!props.isEdit ? 'Make your' : 'Edit'} order</h1>
 
                     <Formik
-                        initialValues={props.item || {
+                        initialValues={props.item?
+                        {
+                            _id:props.item._id,
+                            productType: props.item.productType,
+                            productWeight: props.item.productWeight,
+                            maxSize: props.item.maxSize,
+                            senderLocation: props.item.senderLocation,
+                            receipentLocation: props.item.receipentLocation,
+                            receipentName: props.item.receipentName,
+                            receipentNumber: props.item.receipentNumber,
+                            expectedDeliveryDate: dayjs(props.item.expectedDeliveryDate),
+                            expectedDeliveryTime: props.item.expectedDeliveryTime
+                        } : {
                             productType: '',
                             productWeight: '',
                             maxSize: '',
@@ -58,6 +72,7 @@ const Orders = (props)=>{
                             expectedDeliveryTime: ''
                         }}
                         validationSchema={OrderSchema}
+                        enableReinitialize={true}
                         onSubmit={values=>{
                             orderItem(values)
                         }}
@@ -95,8 +110,8 @@ const Orders = (props)=>{
                                 <Field name="receipentNumber" placeholder="Receipent Number" value={values.receipentNumber} onChange={handleChange} onBlur={handleBlur}/>
                                 {errors.receipentNumber && touched.receipentNumber ? (<div className="error">{errors.receipentNumber}</div>) : null}
 
-                                {/* <DatePicker onChange={(date)=> setFieldValue('expectedDeliveryDate', date)}  name="expectedDeliveryDate" placeholder="Expected Delivery Date" value={values.expectedDeliveryDate} />
-                                {errors.expectedDeliveryDate && touched.expectedDeliveryDate ? (<div className="error">{errors.expectedDeliveryDate}</div>) : null} */}
+                                <DatePicker onChange={(date)=> setFieldValue('expectedDeliveryDate', date)}  name="expectedDeliveryDate" placeholder="Expected Delivery Date" value={values.expectedDeliveryDate} />
+                                {errors.expectedDeliveryDate && touched.expectedDeliveryDate ? (<div className="error">{errors.expectedDeliveryDate}</div>) : null}
 
                                 <select name="expectedDeliveryTime" value={values.expectedDeliveryTime} onChange={handleChange} onBlur={handleBlur}>
                                     <option value="" disabled="disabled" label="Expected Delivery Time"></option>

@@ -29,10 +29,11 @@ h1,h2,h3,h4,h5,h6{
 h1{
   font-size: 30px;
   line-height: 34px;
+  margin-bottom: 10px;
 }
 
 .container{
-  max-width: 80%;
+  max-width: 90%;
   width: 100%;
   margin: 0 auto
 }
@@ -245,7 +246,7 @@ h4{
   border: 1px solid #d7d5d5;
 }
 
-p.badge {
+.badge {
   float: right;
   padding: 5px 10px;
   line-height: 10px;
@@ -258,15 +259,15 @@ p.badge {
   padding: 0
 }
 
-span.pending {
+.pending {
   color: #d19100;
 }
 
-span.success {
+.success {
   color: green;
 }
 
-span.cancel {
+.cancel {
   color: red;
 }
 
@@ -319,9 +320,19 @@ span.cancel {
   justify-content: space-between;
 }
 
+.bottom ul li{
+display: flex;
+    align-items: center;
+    position: relative;
+    padding-left: 24px;
+    line-height: 22px;
+}
+
 .bottom ul li i{
-  color: #5e5e5e;
+  color: red;
   margin-right: 3px;
+  position: absolute;
+  left: 0;
 }
 
 .loader .top, .order_item{
@@ -333,5 +344,51 @@ span.cancel {
   background: #efeded;
 }
 
+.loader li{
+  line-height: 12px;
+}
 
+table {
+  width: 100%;
+  border-spacing: 0;
+  border: 1px solid #eee;
+  margin-bottom: 10px;
+}
 
+table button{
+  padding: 5px 8px;
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
+thead {
+  background: #ddd;
+  font-weight: 500;
+}
+
+th {
+  line-height: 20px;
+  font-weight: 600;
+}
+
+tr:nth-child(even) {
+  background: #f3f3f3;
+}
+
+td, th {
+  padding: 5px 10px;
+  text-align: left;
+}
+
+td:last-child {
+  display: flex;
+  gap: 5px;
+}
+
+button.cancel {
+  background: rgb(255 0 0 / 35%);
+}
+
+button.success {
+  background: #00800047;
+}

@@ -20,8 +20,10 @@ const Login = ()=>{
         const data = await response.json()
         console.log(data)
         if(data.msg === 'login success'){
+            data.userDetails.token = data.token
             dispatch(setUserDetails(data.userDetails))
             message.success(data.msg)
+            
         }else{
             message.error(data.msg)
         }
