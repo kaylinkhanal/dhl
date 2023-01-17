@@ -42,9 +42,9 @@ const Portfolio =()=>{
                         <p>{userDetail.permanentAddress}, {userDetail.country}</p>
                     </div>
 
-                    <div className="user_edit">
+                    {/* <div className="user_edit">
                         <FaPencilAlt/> Edit Details
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </section>

@@ -353,8 +353,6 @@ display: flex;
   background-color: red;
 }
 
-/* table
-================== */
 
 table {
   width: 100%;
@@ -400,6 +398,7 @@ button.cancel {
 button.success {
   background: #00800047;
 }
+=======
 
 /* profile 
 ======================== */
