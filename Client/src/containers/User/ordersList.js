@@ -12,6 +12,7 @@ const OrdersList = () => {
   const [orderList, setOrderList] = useState([]);
   const [totalOrderCount, settotalOrderCount] = useState(0);
 
+
   const fetchData = async (page,size) => {
     const response = await fetch(`http://localhost:5000/orders?page=${page || 1}&size=${size || 5}`);
     const data = await response.json();
