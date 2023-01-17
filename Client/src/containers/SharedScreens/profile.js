@@ -1,27 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { FaCamera, FaPencilAlt } from "react-icons/fa";
 import { useParams } from "react-router-dom";
-
+import {useSelector} from 'react-redux'
 const Portfolio =()=>{
-    const [userDetail, setUserDetail] = useState({})
-    const params = useParams()
-    const {name} = params
-    console.log(userDetail)
-
-    const getUser = async()=>{
-        const response = await fetch(`${process.env.REACT_APP_BASE_URL}/profile/${name}`)
-        const data = await response.json()
-
+    const {_id} = useSelector(state=> state.user)
+    const avatarupload  = async (file) => {
+        const formData = new FormData();
+        formData.append("avatar", file);
+        const data = await fetch(`${process.env.REACT_APP_BASE_URL}/profile/${_id}`, {
+            method: "POST",
+            body: formData,
+        })
         if(data){
-            setUserDetail(data.user)
-        }else{
-            alert('user details not found')
+            alert("uploaded")
         }
-    }
 
-    useEffect(()=>{
-        getUser()
-    },[name])
+    }
+   //task
+   // useEffect->  fetch -> localhost:5000/profile/63bb8b2fa2db5d18a67d744b
+   //-> data.user.avatarFileName
+   //save it into a state
+   
 
     return(
         <section>
@@ -31,20 +30,10 @@ const Portfolio =()=>{
                         <img src={require('../../../src/uploads/card_img.jpg').default} alt="profile" height={'100%'} width={'100%'}/>
                         
                         <div className="uploader">
-                            <input type="file" id="upload" hidden/>
+                            <input onChange={(e)=> avatarupload(e.target.files[0])} type="file" id="upload" hidden/>
                             <label htmlFor="upload"><FaCamera/></label>
                         </div>
                     </div>
-                    
-                    <div className="user_detail">
-                        <h3>{userDetail.name}</h3>
-                        <p>{userDetail.email}</p>
-                        <p>{userDetail.permanentAddress}, {userDetail.country}</p>
-                    </div>
-
-                    {/* <div className="user_edit">
-                        <FaPencilAlt/> Edit Details
-                    </div> */}
                 </div>
             </div>
         </section>
