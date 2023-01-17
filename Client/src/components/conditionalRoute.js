@@ -61,6 +61,7 @@ const AuthScreens=()=>{
         <Route exact path='/' element={<AdminDashboard/>}/>
         <Route exact path='/changepassword' element = {<ChangePassword/>}/>
         <Route path='/ordersdata' element = {<AdminOrdersList/>}/>
+        <Route path='/portfolio/:name' element={<Portfolio/>}/>
       </Routes>
     )
   }
