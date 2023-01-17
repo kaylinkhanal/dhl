@@ -13,21 +13,17 @@ const Navigation = () => {
     const items = [
         {
             key: '1',
-            label: (
-                <li>Profile</li>
-            ),
+            label: <Link to={`/portfolio/${name}`}>Portfolio</Link>,
         },
 
         {
             key: "2",
-            label: <li onClick={() => changePassword()}>Change Password</li>,
+            label: <Link to='/changepassword'>Change Password</Link>,
           },
 
         {
             key: '3',
-            label: (
-                <li onClick={() => logout()}>Logout</li>
-            ),
+            label: <button onClick={() => logout()}>Logout</button>,
         }
     ]
 
@@ -39,10 +35,6 @@ const Navigation = () => {
     const onClose = () => {
         setOpen(false);
     };
-
-    const changePassword = () => {
-        navigate("/changepassword");
-      };
 
     const logout = () => {
         dispatch(resetDetails())
@@ -59,11 +51,11 @@ const Navigation = () => {
                                 <li><Link to="/">Dashboard</Link></li>
                             </ul>
                         ) : userRole === 'rider' ?
-                            (
-                                <ul>
-                                    <li><Link to="/">Dashboard</Link></li>
-                                </ul>
-                            ) : null}
+                        (
+                            <ul>
+                                <li><Link to="/">Dashboard</Link></li>
+                            </ul>
+                        ) : null}
                     </div>
                     <div className="navbar_right">
 
@@ -74,6 +66,7 @@ const Navigation = () => {
                                     <Drawer placement="right" onClose={onClose} open={open}>
                                         <ul>
                                             <li><Link to="/">Dashboard</Link></li>
+                                            <li><Link to="/ordersdata">Orders</Link></li>
                                         </ul>
                                     </Drawer>
                                 </li>
@@ -81,12 +74,12 @@ const Navigation = () => {
 
                             <li className="user_profile">
                                 <Dropdown menu={{ items }}>
-                                    <a onClick={(e) => e.preventDefault()}>
+                                    <span onClick={(e) => e.preventDefault()}>
                                         <Space>
                                             <i><HiOutlineUser /></i>
                                             <span>{name} <HiOutlineChevronDown /></span>
                                         </Space>
-                                    </a>
+                                    </span>
                                 </Dropdown>
                             </li>
                         </ul>

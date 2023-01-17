@@ -9,7 +9,7 @@ var jwt = require('jsonwebtoken');
 app.post('/login', async(req, res) => {
     try{
     const data = await Users.findOne({email: req.body.email})
-    var token = jwt.sign({ foo: 'bar' }, 'shhhhh');
+    var token = jwt.sign({ email: req.body.email }, process.env.SECRET_KEY);
     if(data){
         const dbPassword = data.password
         console.log(data.password)
@@ -18,7 +18,8 @@ app.post('/login', async(req, res) => {
         if(isValidPassword){
             res.json({
                 msg: 'login success',
-                userDetails: refactoredData
+                userDetails: refactoredData,
+                token: token
             })
         }else{
             res.json({

@@ -4,54 +4,42 @@ import Box from "./box";
 import { Skeleton } from "antd";
 import { Pagination } from 'antd';
 const OrdersList = () => {
-  const [orderList, setOrderList] = useState([]);
-  const [totalOrderCount, setTotalOrderCount] = useState(0);
+	const [orderList, setOrderList] = useState([]);
+	const [totalOrderCount, setTotalOrderCount] = useState(0);
 
-  
-  const fetchData = async (page, size) => {
-    const response = await fetch(`${process.env.REACT_APP_BASE_URL}/orders?page=${page || 1}&size=${size || 5}`);
-    const data = await response.json();
-    if (data) {
-      setOrderList(data.ordersList);
-      setTotalOrderCount(data.totalOrderCount)
-    }
-  };
+	const fetchData = async (page, size) => {
+		const response = await fetch(`${process.env.REACT_APP_BASE_URL}/orders?page=${page || 1}&size=${size || 5}`);
+		const data = await response.json();
+		if (data) {
+			setOrderList(data.ordersList);
+			setTotalOrderCount(data.totalOrderCount)
+		}
+	};
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+	useEffect(() => {
+		fetchData();
+	}, []);
 
-  return (
-    <section>
-      <div className="container">
-        <div className="orderList">
-          <h1 className="title">
-            <i>
-            <FaDolly />
-            </i>{" "}
-            My Orders
-          </h1>
-          {orderList.length > 0 ? (
-            <>
-           { 
-           orderList.map((item) => {
-              return <Box item={item} fetchData={fetchData} />;
-            })
-            }
-            <Pagination
-            defaultPageSize={5}
-            onChange={(page,size)=>fetchData(page, size)} total={totalOrderCount} />
-            </>
-          ) : (
-            
-            <Skeleton active paragraph={{ rows: 3 }} />
-            // <Skeleton />
-          )}
-        </div>
-   
-      </div>
-    </section>
-  );
+	return (
+		<section>
+			<div className="container">
+				<div className="orderList">
+					<h1 className="title"><i><FaDolly /></i>My Orders</h1>
+					{orderList.length > 0 ? 
+						<>
+							{
+								orderList.map((item) => {
+									return <Box item={item} fetchData={fetchData} />;
+								})
+							}
+							<Pagination
+								defaultPageSize={5}
+								onChange={(page, size) => fetchData(page, size)} total={totalOrderCount} />
+						</>: <Skeleton active paragraph={{ rows: 3 }} />}
+				</div>
+			</div>
+		</section>
+	);
 };
 
 export default OrdersList;

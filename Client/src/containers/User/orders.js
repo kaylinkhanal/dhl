@@ -23,7 +23,8 @@ const Orders = (props)=>{
 
         if(data){
             message.success(data.msg)
-            navigate('/')
+            props.isEdit?  props.onOk() : navigate('/orderslist')
+           
         }
     }
     
@@ -69,6 +70,7 @@ const Orders = (props)=>{
                             expectedDeliveryTime: ''
                         }}
                         validationSchema={OrderSchema}
+                        enableReinitialize={true}
                         onSubmit={values=>{
                             orderItem(values)
                         }}
