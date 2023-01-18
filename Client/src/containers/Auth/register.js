@@ -19,7 +19,8 @@ const Register = ()=>{
     
             const response = await fetch('http://localhost:5000/register', requestOptions);
             const data = await response.json()
-    
+            console.log(data)
+            
             
             if(data.msg === "users registered"){
                 message.success(data.msg)
@@ -91,6 +92,7 @@ const Register = ()=>{
                                     <option value="" disabled="disabled" label="Select a Role"></option>
                                     <option value="user" label="User">User</option>
                                     <option value="rider" label="Rider">Rider</option>
+                                    <option value="admin" label="admin">Admin</option>
                                 </select>
                                 {errors.userRole && touched.userRole ? (<div className="error">{errors.userRole}</div>) : null}
 

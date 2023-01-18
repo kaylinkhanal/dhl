@@ -17,6 +17,7 @@ app.post('/register', async(req, res) => {
 			if (hash) {
 				req.body.password = hash
 				const data = await Users.create(req.body)
+				console.log(data)
 				if (data) {
 					res.json({ msg: 'users registered' })
 				} else {
