@@ -28,7 +28,7 @@ const Portfolio = () => {
 
     useEffect(() => {
         fetchAvatar()
-    }, [])
+    }, [fetchAvatar])
 
     return (
         <section>
