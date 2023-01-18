@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
@@ -6,7 +6,7 @@ import { useSelector } from "react-redux"
 import { message, DatePicker} from 'antd'
 import dayjs from 'dayjs'
 import { FileUploader } from "react-drag-drop-files";
-const fileTypes = ["JPG", "PNG", "GIF"];
+const fileTypes = ["JPG", "PNG", "GIF", "JPEG"];
 const Orders = (props)=>{
     const navigate = useNavigate()
     const {name, _id} = useSelector(state=> state.user)
@@ -30,7 +30,7 @@ const Orders = (props)=>{
     }
     
     const [file, setFile] = useState(null);
-    const handleChange = (file) => {
+    const saveFile = (file) => {
       setFile(file);
     };
 	const OrderSchema = Yup.object().shape({
@@ -127,9 +127,9 @@ const Orders = (props)=>{
                                     <option label="6am-9am">6am-9am</option>
                                     <option label="9am-12pm">9am-12pm</option>
                                 </select>
+                                <FileUploader handleChange={saveFile} type="file"  types={fileTypes} />
                                 
                                 {errors.expectedDeliveryTime && touched.expectedDeliveryTime ? (<div className="error">{errors.expectedDeliveryTime}</div>) : null}
-                                <FileUploader handleChange={handleChange} name="file" types={fileTypes} />
                                 <button type="submit">{!props.isEdit ? 'Send' : 'Edit'} order</button>
                             </Form>
                         )} 
