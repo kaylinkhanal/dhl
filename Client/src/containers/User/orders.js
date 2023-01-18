@@ -5,7 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux"
 import { message, DatePicker} from 'antd'
 import dayjs from 'dayjs'
-
+import { FileUploader } from "react-drag-drop-files";
+const fileTypes = ["JPG", "PNG", "GIF"];
 const Orders = (props)=>{
     const navigate = useNavigate()
     const {name, _id} = useSelector(state=> state.user)
@@ -28,6 +29,10 @@ const Orders = (props)=>{
         }
     }
     
+    const [file, setFile] = useState(null);
+    const handleChange = (file) => {
+      setFile(file);
+    };
 	const OrderSchema = Yup.object().shape({
 		productType: Yup.string().required('Required'),
 		productWeight: Yup.string().required('Required'),
@@ -124,7 +129,7 @@ const Orders = (props)=>{
                                 </select>
                                 
                                 {errors.expectedDeliveryTime && touched.expectedDeliveryTime ? (<div className="error">{errors.expectedDeliveryTime}</div>) : null}
-
+                                <FileUploader handleChange={handleChange} name="file" types={fileTypes} />
                                 <button type="submit">{!props.isEdit ? 'Send' : 'Edit'} order</button>
                             </Form>
                         )} 
