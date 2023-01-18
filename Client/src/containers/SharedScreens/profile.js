@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaCamera, FaPencilAlt } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import { message } from "antd";
 
 const Portfolio =()=>{
     const [userDetail, setUserDetail] = useState([])
@@ -33,7 +34,7 @@ const Portfolio =()=>{
         })
 
         if(data){
-            alert('uploaded')
+            message.success('avatar uploaded')
         }
     }
 
