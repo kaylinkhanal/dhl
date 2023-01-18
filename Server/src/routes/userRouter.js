@@ -25,12 +25,20 @@ app.get('/users/:id/orders', async (req, res) => {
     }
 })
 
-app.post('/profile/:name', upload, function (req, res, next) {
+app.post('/profile/:id', upload, async(req, res, next)=> {
+    // console.log(req)
+    const userAvatar = await Users.findByIdAndUpdate({_id: req.params.id}, {avatarFile: req.file.originalname})
+
+    if(userAvatar){
+        res.json({
+            msg: 'uploade user avatar'
+        })
+    }
   })
 
-app.get('/profile/:name',  async(req, res)=> {
+app.get('/profile/:id',  async(req, res)=> {
     try{
-        const userData = await Users.find({ name: req.params.name})
+        const userData = await Users.findById(req.params.id)
         res.json({
             user: userData
         })

@@ -11,6 +11,7 @@ const usersSchema = new Schema({
     temporaryAddress: {type:String, required: true},
     country:  {type:String, required: true},
     zipCode: {type:Number, required: true},
+    avatarFile: {type:String}
   },
   { collection: 'users' });
 

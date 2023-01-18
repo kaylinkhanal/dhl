@@ -1,50 +1,68 @@
 import React, { useEffect, useState } from "react";
 import { FaCamera, FaPencilAlt } from "react-icons/fa";
-import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Portfolio =()=>{
-    const [userDetail, setUserDetail] = useState({})
-    const params = useParams()
-    const {name} = params
-    console.log(userDetail)
+    const [userDetail, setUserDetail] = useState([])
+    const {_id} = useSelector(state=> state.user)
+    console.log(userDetail.avatarFile)
 
-    const getUser = async()=>{
-        const response = await fetch(`${process.env.REACT_APP_BASE_URL}/profile/${name}`)
+    const fetchUser = async()=>{
+        const response = await fetch(`${process.env.REACT_APP_BASE_URL}/profile/${_id}`)
         const data = await response.json()
+        // console.log(data)
 
         if(data){
             setUserDetail(data.user)
         }else{
-            alert('user details not found')
+            console.log('user not found')
         }
     }
 
     useEffect(()=>{
-        getUser()
-    },[name])
+        fetchUser()
+    }, [_id])
+
+    const uploadavatar = async(file)=>{
+        // console.log(file)
+        let formData = new FormData(); 
+        formData.append('avatar', file);
+        const data = await fetch (`${process.env.REACT_APP_BASE_URL}/profile/${_id}`, {
+            method: "POST",
+            body: formData,
+        })
+
+        if(data){
+            alert('uploaded')
+        }
+    }
 
     return(
         <section>
             <div className="container">
                 <div className="user_profile">
                     <div className="user_img">
-                        <img src={require('../../../src/uploads/card_img.jpg').default} alt="profile" height={'100%'} width={'100%'}/>
+                        <img src={
+                            userDetail.avatarFile ? require( '../../uploads/' + userDetail.avatarFile ).default : 
+                            require( '../../images/dummy_img.png').default
+                            } alt="profile"  height={'100%'} width={'100%'}
+                        />
                         
                         <div className="uploader">
-                            <input type="file" id="upload" hidden/>
+                            <input type="file" id="upload" onChange={(e)=> uploadavatar(e.target.files[0])} hidden/>
                             <label htmlFor="upload"><FaCamera/></label>
                         </div>
                     </div>
                     
                     <div className="user_detail">
-                        <h3>{userDetail.name}</h3>
+                        <h1>{userDetail.name}</h1>
                         <p>{userDetail.email}</p>
                         <p>{userDetail.permanentAddress}, {userDetail.country}</p>
                     </div>
 
-                    <div className="user_edit">
+                    {/* <div className="user_edit">
                         <FaPencilAlt/> Edit Details
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </section>
