@@ -29,10 +29,11 @@ h1,h2,h3,h4,h5,h6{
 h1{
   font-size: 30px;
   line-height: 34px;
+  margin-bottom: 10px;
 }
 
 .container{
-  max-width: 80%;
+  max-width: 90%;
   width: 100%;
   margin: 0 auto
 }
@@ -241,11 +242,11 @@ h4{
 
 .order_item{
   background: #e9e9e9;
-  padding: 10px;
   margin-bottom: 10px;
+  border: 1px solid #d7d5d5;
 }
 
-p.badge {
+.badge {
   float: right;
   padding: 5px 10px;
   line-height: 10px;
@@ -254,34 +255,41 @@ p.badge {
   font-weight: 700;
 }
 
-span.pending {
+.loader .badge{
+  padding: 0
+}
+
+.pending {
   color: #d19100;
 }
 
-span.success {
+.success {
   color: green;
 }
 
-span.cancel {
+.cancel {
   color: red;
 }
 
-.bottom ul {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
+.btns{
+  text-align: right;
+  
 }
 
-.bottom ul li i{
-  color: #a39f9f;
-  margin-right: 3px;
+.btns button {
+  padding: 5px;
+  background: none;
+  color: #333;
 }
 
 .top {
   border-bottom: 1px solid #ccc;
-  padding-bottom: 10px;
-  margin-bottom: 10px;
-  font-size: 16px
+  font-size: 16px;
+  background: rgb(255 204 0 / 40%);;
+}
+
+.top, .bottom{
+  padding: 5px 10px;
 }
 
 .title{
@@ -298,7 +306,138 @@ span.cancel {
     display: inline-block;
     text-align: center;
     line-height: 40px;
+    margin-right: 10px;
+}
+
+.top span {
+  font-size: 13px;
+  margin-right: 15px;
+  font-weight: 500;
+}
+
+.bottom ul {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.bottom ul li{
+display: flex;
+    align-items: center;
+    position: relative;
+    padding-left: 24px;
+    line-height: 22px;
+}
+
+.bottom ul li i{
+  color: red;
+  margin-right: 3px;
+  position: absolute;
+  left: 0;
+}
+
+.loader .top, .order_item{
+  border: 0;
+  background: none;
+}
+
+.order_item {
+  background: #efeded;
+}
+
+.btn btn-success{
+  background-color: green;
+}
+
+.btn btn-danger{
+  background-color: red;
 }
 
 
+table {
+  width: 100%;
+  border-spacing: 0;
+  border: 1px solid #eee;
+  margin-bottom: 10px;
+}
 
+table button{
+  padding: 5px 8px;
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
+thead {
+  background: #ddd;
+  font-weight: 500;
+}
+
+th {
+  line-height: 20px;
+  font-weight: 600;
+}
+
+tr:nth-child(even) {
+  background: #f3f3f3;
+}
+
+td, th {
+  padding: 5px 10px;
+  text-align: left;
+}
+
+td:last-child {
+  display: flex;
+  gap: 5px;
+}
+
+button.cancel {
+  background: rgb(255 0 0 / 35%);
+}
+
+button.success {
+  background: #00800047;
+}
+=======
+
+/* profile 
+======================== */
+.user_profile {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.user_img {
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  background: #ccc;
+  line-height: 200px;
+  border: 6px solid #eee;
+  position: relative;
+  overflow: hidden;
+}
+
+.user_detail{
+  margin-left: 15px;
+}
+
+.uploader{
+  height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 30px;
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    position: absolute;
+    right: 15px;
+    bottom: 20%;
+}
+
+.user_edit {
+  position: absolute;
+  right: 0;
+  top: 0;
+}

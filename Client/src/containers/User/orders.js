@@ -1,31 +1,38 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux"
 import { message, DatePicker} from 'antd'
-
-const Orders = ()=>{
+import dayjs from 'dayjs'
+import { FileUploader } from "react-drag-drop-files";
+const fileTypes = ["JPG", "PNG", "GIF", "JPEG"];
+const Orders = (props)=>{
     const navigate = useNavigate()
-    const {name} = useSelector(state=> state.user)
-
+    const {name, _id} = useSelector(state=> state.user)
     const orderItem = async(values)=>{
         values.senderName = name
+        values.userID = _id
         const requestOptions = {
-            method: "POST",
+            method: !props.isEdit ? "POST" : "PUT",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(values)
         };
 
-        const response = await fetch('http://localhost:5000/orders', requestOptions);
+        const response = await fetch( `${process.env.REACT_APP_BASE_URL}/orders`, requestOptions);
         const data = await response.json()
 
         if(data){
             message.success(data.msg)
-            navigate('/')
+            props.isEdit?  props.onOk() : navigate('/orderslist')
+           
         }
     }
     
+    const [file, setFile] = useState(null);
+    const saveFile = (file) => {
+      setFile(file);
+    };
 	const OrderSchema = Yup.object().shape({
 		productType: Yup.string().required('Required'),
 		productWeight: Yup.string().required('Required'),
@@ -42,10 +49,21 @@ const Orders = ()=>{
         <section className='form_section'>
             <div className='container'>
                 <div className='form'>
-                    <h1>Make your order</h1>
+                    <h1>{!props.isEdit ? 'Make your' : 'Edit'} order</h1>
 
                     <Formik
-                        initialValues={{
+                        initialValues={props.item?{
+                            _id:props.item._id,
+                            productType: props.item.productType,
+                            productWeight: props.item.productWeight,
+                            maxSize: props.item.maxSize,
+                            senderLocation: props.item.senderLocation,
+                            receipentLocation: props.item.receipentLocation,
+                            receipentName: props.item.receipentName,
+                            receipentNumber: props.item.receipentNumber,
+                            expectedDeliveryDate: dayjs(props.item.expectedDeliveryDate),
+                            expectedDeliveryTime: props.item.expectedDeliveryTime
+                        } : {
                             productType: '',
                             productWeight: '',
                             maxSize: '',
@@ -57,6 +75,7 @@ const Orders = ()=>{
                             expectedDeliveryTime: ''
                         }}
                         validationSchema={OrderSchema}
+                        enableReinitialize={true}
                         onSubmit={values=>{
                             orderItem(values)
                         }}
@@ -108,10 +127,10 @@ const Orders = ()=>{
                                     <option label="6am-9am">6am-9am</option>
                                     <option label="9am-12pm">9am-12pm</option>
                                 </select>
+                                <FileUploader handleChange={saveFile} type="file"  types={fileTypes} />
                                 
                                 {errors.expectedDeliveryTime && touched.expectedDeliveryTime ? (<div className="error">{errors.expectedDeliveryTime}</div>) : null}
-
-                                <button type="submit">Send order</button>
+                                <button type="submit">{!props.isEdit ? 'Send' : 'Edit'} order</button>
                             </Form>
                         )} 
                     </Formik>

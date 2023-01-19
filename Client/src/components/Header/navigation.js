@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { faUser, faChevronDown, faBars } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { HiOutlineMenuAlt3, HiOutlineChevronDown, HiOutlineUser } from "react-icons/hi";
 import { useSelector, useDispatch } from 'react-redux';
 import { resetDetails } from "../../reducers/userSlice";
 import { Button, Drawer, Dropdown, Space } from 'antd';
@@ -14,21 +13,17 @@ const Navigation = () => {
     const items = [
         {
             key: '1',
-            label: (
-                <li>Profile</li>
-            ),
+            label: <Link to={`/portfolio/${name}`}>Portfolio</Link>,
         },
 
         {
             key: "2",
-            label: <li onClick={() => changePassword()}>Change Password</li>,
+            label: <Link to='/changepassword'>Change Password</Link>,
           },
 
         {
-            key: '2',
-            label: (
-                <li onClick={() => logout()}>Logout</li>
-            ),
+            key: '3',
+            label: <button onClick={() => logout()}>Logout</button>,
         }
     ]
 
@@ -40,10 +35,6 @@ const Navigation = () => {
     const onClose = () => {
         setOpen(false);
     };
-
-    const changePassword = () => {
-        navigate("/changepassword");
-      };
 
     const logout = () => {
         dispatch(resetDetails())
@@ -60,34 +51,35 @@ const Navigation = () => {
                                 <li><Link to="/">Dashboard</Link></li>
                             </ul>
                         ) : userRole === 'rider' ?
-                            (
-                                <ul>
-                                    <li><Link to="/">Dashboard</Link></li>
-                                </ul>
-                            ) : null}
+                        (
+                            <ul>
+                                <li><Link to="/">Dashboard</Link></li>
+                            </ul>
+                        ) : null}
                     </div>
                     <div className="navbar_right">
 
                         <ul className="nav_list">
                             {userRole === 'admin' ? (
                                 <li>
-                                    <Button onClick={showDrawer} className="menu-icon"><FontAwesomeIcon icon={faBars} /></Button>
+                                    <Button onClick={showDrawer} className="menu-icon"><HiOutlineMenuAlt3/></Button>
                                     <Drawer placement="right" onClose={onClose} open={open}>
                                         <ul>
                                             <li><Link to="/">Dashboard</Link></li>
+                                            <li><Link to="/ordersdata">Orders</Link></li>
                                         </ul>
                                     </Drawer>
                                 </li>
                             ) : null}
 
                             <li className="user_profile">
-                                <Dropdown menu={{ items, }}>
-                                    <a onClick={(e) => e.preventDefault()}>
+                                <Dropdown menu={{ items }}>
+                                    <span onClick={(e) => e.preventDefault()}>
                                         <Space>
-                                            <i><FontAwesomeIcon icon={faUser} /></i>
-                                            <span>{name} <FontAwesomeIcon icon={faChevronDown} /></span>
+                                            <i><HiOutlineUser /></i>
+                                            <span>{name} <HiOutlineChevronDown /></span>
                                         </Space>
-                                    </a>
+                                    </span>
                                 </Dropdown>
                             </li>
                         </ul>

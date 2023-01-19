@@ -1,6 +1,6 @@
 const app = require('express')()
 require('dotenv').config()
-const port = process.env.PORT
+const port = 5000
 const cors = require('cors')
 const bodyParser = require('body-parser')
 
@@ -12,9 +12,12 @@ app.use(cors())
 const registerRouter = require('./routes/registerRouter');
 const loginRouter = require('./routes/loginRouter');
 const ordersRouter = require('./routes/ordersRouter');
+const userRoute = require('./routes/userRouter');
+
 app.use(registerRouter)
 app.use(loginRouter)
 app.use(ordersRouter)
+app.use(userRoute)
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
