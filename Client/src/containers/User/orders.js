@@ -8,30 +8,27 @@ import dayjs from 'dayjs'
 import { FileUploader } from "react-drag-drop-files";
 const fileTypes = ["JPG", "PNG", "GIF", "JPEG"];
 const Orders = (props)=>{
+    const [file, setFile] = useState(null);
     const navigate = useNavigate()
     const {name, _id} = useSelector(state=> state.user)
-    const orderItem = async(values)=>{
-        values.senderName = name
-        values.userID = _id
-        const requestOptions = {
-            method: !props.isEdit ? "POST" : "PUT",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(values)
-        };
-
-        const response = await fetch( `${process.env.REACT_APP_BASE_URL}/orders`, requestOptions);
-        const data = await response.json()
-
-        if(data){
-            message.success(data.msg)
-            props.isEdit?  props.onOk() : navigate('/orderslist')
-           
-        }
+    const orderItem = async(formFields)=>{
+        const formData = new FormData();
+        formData.append("orders", file);
+        formData.append("userID", _id);
+        formData.append("senderName", name);
+        Object.keys(formFields).map((item, id)=>{
+            formData.append(item, Object.values(formFields)[id]);
+        })
+        const res = await fetch(`${process.env.REACT_APP_BASE_URL}/orders`, {
+            method: "POST",
+            body: formData,
+        })
     }
     
-    const [file, setFile] = useState(null);
+   
     const saveFile = (file) => {
       setFile(file);
+      console.log(file)
     };
 	const OrderSchema = Yup.object().shape({
 		productType: Yup.string().required('Required'),
