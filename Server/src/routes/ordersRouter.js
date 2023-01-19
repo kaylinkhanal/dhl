@@ -2,11 +2,23 @@ const { Router } = require('express');
 const Orders = require('../models/orders')
 const app = Router();
 const moment = require('moment')
+const multer  = require('multer')
 
-app.post('/orders', async(req, res)=>{
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, '../Client/src/uploads/orders')
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname)
+    }
+  })
+const upload = multer({ storage: storage }).single('orders')
+
+app.post('/orders',upload, async(req, res)=>{
     try{
         const formattedDate = moment(req.body.expectedDeliveryDate).format('YYYY/MM/DD')
         req.body.expectedDeliveryDate = formattedDate
+        req.body.orderImg = req.file.originalname
         const data = await Orders.create(req.body)
         if(data){
             res.json({
