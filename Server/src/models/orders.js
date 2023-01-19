@@ -14,7 +14,8 @@ const ordersSchema = new Schema({
     expectedDeliveryDate: { type: String, required: true },
     expectedDeliveryTime: { type: String, required: true },
     orderStatus: { type: String, default: 'pending' },
-    userID: { type: String, required: true }
+    userID: { type: String, required: true },
+    productImg: {type: String}
   },
   { collection: 'Orders' });
 

@@ -1,25 +1,62 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux"
 import { message, DatePicker} from 'antd'
 import dayjs from 'dayjs'
+import {useDropzone} from 'react-dropzone'
+import { FaFolderPlus } from "react-icons/fa";
 
 const Orders = (props)=>{
     const navigate = useNavigate()
     const {name, _id} = useSelector(state=> state.user)
-    const orderItem = async(values)=>{
-        values.senderName = name
-        values.userID = _id
-        const requestOptions = {
-            method: !props.isEdit ? "POST" : "PUT",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(values)
-        };
+    const [imgFile, setimgFile] = useState(null)
+    console.log(imgFile)
 
-        const response = await fetch( `${process.env.REACT_APP_BASE_URL}/orders`, requestOptions);
-        const data = await response.json()
+    const {getRootProps, getInputProps,acceptedFiles, fileRejections} = useDropzone(
+        {
+            maxFiles: 4,
+            accept: {
+                "image/png": [".png",".jpg",".gif", ".jpeg"]
+            },
+            onDrop: (acceptedFiles)=>{
+                setimgFile(
+                    acceptedFiles.map((file)=>Object.assign(file, {
+                        preview: URL.createObjectURL(file)
+                    })),
+                )
+            }
+        }
+    )
+
+    const orderItem = async(formValues)=>{
+        let formData = new FormData(); 
+        formData.append('order', imgFile);
+        formData.append('senderName', name);
+        formData.append('userID', _id);
+        console.log(formValues)    
+    
+        Object.keys(formValues).map((item, id)=>{
+           return formData.append(item, Object.values(formValues)[id])
+        })
+        // const requestOptions = {
+        //     method: !props.isEdit ? "POST" : "PUT",
+        //     body: formData,
+        //     // headers: { 'Content-Type': 'application/json' },
+        //     // body: JSON.stringify(values)\
+            
+        // };
+        const data = await fetch (`${process.env.REACT_APP_BASE_URL}/orders`, {
+            method: !props.isEdit ? "POST" : "PUT",
+            body: formData,
+            // headers: { 'Content-Type': 'application/json' },
+            // body: JSON.stringify(values)\
+            
+        })
+
+        // const response = await fetch( `${process.env.REACT_APP_BASE_URL}/orders`, requestOptions);
+        // const data = await response.json()
 
         if(data){
             message.success(data.msg)
@@ -57,7 +94,8 @@ const Orders = (props)=>{
                             receipentName: props.item.receipentName,
                             receipentNumber: props.item.receipentNumber,
                             expectedDeliveryDate: dayjs(props.item.expectedDeliveryDate),
-                            expectedDeliveryTime: props.item.expectedDeliveryTime
+                            expectedDeliveryTime: props.item.expectedDeliveryTime,
+                            productImg: props.item.productImg
                         } : {
                             productType: '',
                             productWeight: '',
@@ -67,7 +105,8 @@ const Orders = (props)=>{
                             receipentName: '',
                             receipentNumber: '',
                             expectedDeliveryDate: '',
-                            expectedDeliveryTime: ''
+                            expectedDeliveryTime: '',
+                            productImg: ''
                         }}
                         validationSchema={OrderSchema}
                         enableReinitialize={true}
@@ -125,10 +164,23 @@ const Orders = (props)=>{
                                 
                                 {errors.expectedDeliveryTime && touched.expectedDeliveryTime ? (<div className="error">{errors.expectedDeliveryTime}</div>) : null}
 
+                                <div {...getRootProps()}>
+                                    <input {...getInputProps()} />
+                                    
+                                    <p><FaFolderPlus/> Drag 'n' drop some files here, or click to select files</p>
+                                </div>
+                                {/* <div className='img_preview'>
+                                    {imgFile.map((file)=>{
+                                        return <img src={file.preview} alt="thumbnail" onLoad={()=> {URL.revokeObjectURL(file.preview)}}></img>
+                                    })}
+                                </div> */}
                                 <button type="submit">{!props.isEdit ? 'Send' : 'Edit'} order</button>
                             </Form>
                         )} 
                     </Formik>
+                    {/* <div className='rejection_msg'>
+                        {fileRejections[0] ? ("😒 too many file, only 4 file are accepted"): ''}
+                    </div> */}
                 </div>
             </div>
         </section>
