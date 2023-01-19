@@ -3,6 +3,7 @@ import { FaCamera, FaPencilAlt } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import axios from 'axios';
 import {useSelector} from 'react-redux'
+import { message } from "antd";
 const Portfolio =()=>{
     const {_id} = useSelector(state=> state.user)
     const [userDetails, setUserDetails] = useState({})
@@ -19,6 +20,11 @@ const Portfolio =()=>{
             method: "POST",
             body: formData,
         })
+        const data = await res.json()
+        if(data.msg){
+         message.success(data.msg)
+        }
+       
         if(res.status == 200){
             //rodo this code, 
             //disk storage-> 
@@ -26,6 +32,11 @@ const Portfolio =()=>{
             setTimeout(() => {
             fetchUserProfileDetails()
             }, 3000);
+            
+        }
+
+        if(data.msg === 'successfully uploaded'){
+            message.success(data.msg)         
         }
     }
  
