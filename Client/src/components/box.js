@@ -31,6 +31,7 @@ const Box = ({ item, fetchData }) => {
 
 	return (
 		<>
+
 			<Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={null} >
 				<Orders isEdit={true} item={item} onOk={handleOk} />
 			</Modal>
@@ -47,6 +48,10 @@ const Box = ({ item, fetchData }) => {
 			</div>
 
 			<div className="order_item">
+			{ !item.orderImg ? <img src={require('../uploads/Capture.PNG').default} 
+					width={100} height={100} alt="orders" /> : 
+					<img src={require('../uploads/orders/'+item.orderImg).default} 
+					width={100} height={100} alt="orders" /> }
 				<div className="top">
 					<p className="badge">
 						Status: <span className="pending">{item.orderStatus}</span>
