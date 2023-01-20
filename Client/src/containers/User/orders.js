@@ -6,6 +6,7 @@ import { useSelector } from "react-redux"
 import { message, DatePicker} from 'antd'
 import dayjs from 'dayjs'
 import { FileUploader } from "react-drag-drop-files";
+
 const fileTypes = ["JPG", "PNG", "GIF", "JPEG"];
 const Orders = (props)=>{
     const [file, setFile] = useState(null);
