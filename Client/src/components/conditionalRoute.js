@@ -11,6 +11,7 @@ import {useSelector} from 'react-redux';
 import { Routes, Route} from "react-router-dom";
 import ChangePassword from "./changePassword";
 import Portfolio from "../containers/SharedScreens/profile";
+import ErrorPage from "../containers/ErrorPage/error";
 
 const ConditionalRouting = ()=>{
     const {userRole} = useSelector(state=>state.user)
@@ -30,7 +31,7 @@ const AuthScreens=()=>{
       <Routes>
           <Route exact path='/' element={<Login/>}/>
           <Route exact path='/register' element={<Register/>}/>
-          
+          <Route path="*" element={<ErrorPage/>}/>
       </Routes>
     )
   }
@@ -39,6 +40,7 @@ const AuthScreens=()=>{
     return(
       <Routes>
         <Route exact path='/' element={<RiderDashboard/>}/>
+        <Route path="*" element={<ErrorPage/>}/>
       </Routes>
     )
   }
@@ -51,6 +53,7 @@ const AuthScreens=()=>{
         <Route exact path='/orderslist' element={<OrdersList/>}/>
         <Route exact path = '/changepassword' element = {<ChangePassword/>}/>
         <Route path='/portfolio/:name' element={<Portfolio/>}/>
+        <Route path="*" element={<ErrorPage/>}/>
       </Routes>
 
     )
@@ -61,6 +64,7 @@ const AuthScreens=()=>{
         <Route exact path='/' element={<AdminDashboard/>}/>
         <Route exact path='/changepassword' element = {<ChangePassword/>}/>
         <Route path='/ordersdata' element = {<AdminOrdersList/>}/>
+        <Route path="*" element={<ErrorPage/>}/>
       </Routes>
     )
   }

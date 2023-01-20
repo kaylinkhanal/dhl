@@ -398,7 +398,6 @@ button.cancel {
 button.success {
   background: #00800047;
 }
-=======
 
 /* profile 
 ======================== */
@@ -440,4 +439,28 @@ button.success {
   position: absolute;
   right: 0;
   top: 0;
+}
+
+.error-page{
+  display: flex;
+  background-color: #FFFF8F;
+  height: 90vh;
+}
+
+.error-texts h1 {
+  font-size: 300px;
+  color: #fc0;
+  line-height: 220px;
+  margin-bottom: 40px;
+  font-weight: 700 !important;
+}
+
+.error-texts h2 {
+  font-size: 30px;
+  color: #d19100;
+}
+
+.error-icon{
+  font-size: 400px;
+  color: #d19100;
 }
