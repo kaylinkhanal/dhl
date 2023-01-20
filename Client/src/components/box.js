@@ -8,6 +8,7 @@ import Orders from "../containers/User/orders";
 const Box = ({ item, fetchData }) => {
 	const { userRole } = useSelector((state) => state.user);
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	console.log(item.productImg)
 	const triggerDelete = () => {
 		axios
 			.delete(`${process.env.REACT_APP_BASE_URL}/orders`, {
@@ -64,6 +65,7 @@ const Box = ({ item, fetchData }) => {
 
 				<div className="bottom">
 					<ul>
+						<li><img src={require('../uploads/orders/' + item.productImg)} height={40}/></li>
 						<li><i><SlUser /></i> Receipant Name:<br/>{item.receipentName}</li>
 						<li><i><SlLocationPin /></i> Receipant Location:<br/>{item.receipentLocation}</li>
 						<li><i><SlPhone /></i> Receipant Contact:<br/>{item.receipentNumber}</li>

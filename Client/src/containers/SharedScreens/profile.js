@@ -44,7 +44,7 @@ const Portfolio =()=>{
                 <div className="user_profile">
                     <div className="user_img">
                         <img src={
-                            userDetail.avatarFile ? require( '../../uploads/' + userDetail.avatarFile ).default : 
+                            userDetail.avatarFile ? require( '../../uploads/' + userDetail.avatarFile ) : 
                             require( '../../images/dummy_img.png').default
                             } alt="profile"  height={'100%'} width={'100%'}
                         />

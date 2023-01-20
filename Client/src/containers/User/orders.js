@@ -1,67 +1,51 @@
-import React,{useState} from 'react'
+import React, {useState} from 'react'
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux"
 import { message, DatePicker} from 'antd'
 import dayjs from 'dayjs'
-import {useDropzone} from 'react-dropzone'
-import { FaFolderPlus } from "react-icons/fa";
+import { FileUploader } from "react-drag-drop-files";
+const fileTypes = ["JPG", "PNG", "GIF"];
 
 const Orders = (props)=>{
     const navigate = useNavigate()
     const {name, _id} = useSelector(state=> state.user)
-    const [imgFile, setimgFile] = useState(null)
-    console.log(imgFile)
+    const [imgFile, setImgFile] = useState(null);
 
-    const {getRootProps, getInputProps,acceptedFiles, fileRejections} = useDropzone(
-        {
-            maxFiles: 4,
-            accept: {
-                "image/png": [".png",".jpg",".gif", ".jpeg"]
-            },
-            onDrop: (acceptedFiles)=>{
-                setimgFile(
-                    acceptedFiles.map((file)=>Object.assign(file, {
-                        preview: URL.createObjectURL(file)
-                    })),
-                )
-            }
-        }
-    )
+    const saveFile = (file) => {
+        setImgFile(file);
+        console.log(file)
+      };
 
-    const orderItem = async(formValues)=>{
-        let formData = new FormData(); 
-        formData.append('order', imgFile);
-        formData.append('senderName', name);
-        formData.append('userID', _id);
-        console.log(formValues)    
-    
-        Object.keys(formValues).map((item, id)=>{
-           return formData.append(item, Object.values(formValues)[id])
+    const orderItem = async(FormValues)=>{
+        console.log(FormValues)
+        const formData = new FormData();
+        formData.append("order", imgFile)
+        formData.append("senderName", name)
+        formData.append("userID", _id)
+
+        // dynamic append formDadte to all the form Field values
+        console.log(Object.keys(FormValues))
+        Object.keys(FormValues).map((item, id)=>{
+            console.log(item)
+            const fieldVal = Object.values(FormValues)[id]
+
+            formData.append(item, fieldVal)
         })
-        // const requestOptions = {
-        //     method: !props.isEdit ? "POST" : "PUT",
-        //     body: formData,
-        //     // headers: { 'Content-Type': 'application/json' },
-        //     // body: JSON.stringify(values)\
-            
-        // };
-        const data = await fetch (`${process.env.REACT_APP_BASE_URL}/orders`, {
+
+        const requestOptions = {
             method: !props.isEdit ? "POST" : "PUT",
-            body: formData,
             // headers: { 'Content-Type': 'application/json' },
-            // body: JSON.stringify(values)\
-            
-        })
+            body: formData
+        };
 
-        // const response = await fetch( `${process.env.REACT_APP_BASE_URL}/orders`, requestOptions);
-        // const data = await response.json()
+        const response = await fetch( `${process.env.REACT_APP_BASE_URL}/orders`, requestOptions);
+        const data = await response.json()
 
         if(data){
             message.success(data.msg)
             props.isEdit?  props.onOk() : navigate('/orderslist')
-           
         }
     }
     
@@ -94,8 +78,7 @@ const Orders = (props)=>{
                             receipentName: props.item.receipentName,
                             receipentNumber: props.item.receipentNumber,
                             expectedDeliveryDate: dayjs(props.item.expectedDeliveryDate),
-                            expectedDeliveryTime: props.item.expectedDeliveryTime,
-                            productImg: props.item.productImg
+                            expectedDeliveryTime: props.item.expectedDeliveryTime
                         } : {
                             productType: '',
                             productWeight: '',
@@ -105,8 +88,7 @@ const Orders = (props)=>{
                             receipentName: '',
                             receipentNumber: '',
                             expectedDeliveryDate: '',
-                            expectedDeliveryTime: '',
-                            productImg: ''
+                            expectedDeliveryTime: ''
                         }}
                         validationSchema={OrderSchema}
                         enableReinitialize={true}
@@ -164,23 +146,12 @@ const Orders = (props)=>{
                                 
                                 {errors.expectedDeliveryTime && touched.expectedDeliveryTime ? (<div className="error">{errors.expectedDeliveryTime}</div>) : null}
 
-                                <div {...getRootProps()}>
-                                    <input {...getInputProps()} />
-                                    
-                                    <p><FaFolderPlus/> Drag 'n' drop some files here, or click to select files</p>
-                                </div>
-                                {/* <div className='img_preview'>
-                                    {imgFile.map((file)=>{
-                                        return <img src={file.preview} alt="thumbnail" onLoad={()=> {URL.revokeObjectURL(file.preview)}}></img>
-                                    })}
-                                </div> */}
+                                <FileUploader handleChange={saveFile} name="file" types={fileTypes} />
+
                                 <button type="submit">{!props.isEdit ? 'Send' : 'Edit'} order</button>
                             </Form>
                         )} 
                     </Formik>
-                    {/* <div className='rejection_msg'>
-                        {fileRejections[0] ? ("😒 too many file, only 4 file are accepted"): ''}
-                    </div> */}
                 </div>
             </div>
         </section>

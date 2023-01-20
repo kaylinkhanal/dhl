@@ -1,6 +1,12 @@
 body{
   font-size: 14px;
   line-height: 25px;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 *{
@@ -329,6 +335,10 @@ display: flex;
     line-height: 22px;
 }
 
+.bottom ul li:first-child{
+  padding-left: 0
+}
+
 .bottom ul li i{
   color: red;
   margin-right: 3px;
@@ -440,4 +450,21 @@ button.success {
   position: absolute;
   right: 0;
   top: 0;
+}
+
+label.sc-bcXHqe.lkjDVC {
+  border: 0;
+  background: #f1f1f1;
+  border-radius: 0;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+}
+
+
+.sc-dkrFOg.dmajdp {
+  margin-left: 10px;
+}
+
+.bXgVCj span {
+  color: green;
 }

@@ -6,10 +6,10 @@ const multer  = require('multer')
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, '../Client/src/uploads/order')
+      cb(null, '../Client/src/uploads/orders')
     },
     filename: function (req, file, cb) {
-        console.log(req, '1')
+        // console.log(req, '1')
       cb(null, file.originalname)
     }
   })
@@ -17,10 +17,10 @@ const upload = multer({ storage: storage }).single('order')
 
 app.post('/orders', upload, async(req, res)=>{
     try{
-        console.log(req)
+        // console.log(req)
         const formattedDate = moment(req.body.expectedDeliveryDate).format('YYYY/MM/DD')
         req.body.expectedDeliveryDate = formattedDate
-        req.body.productImg= req.file.path
+        req.body.productImg= req.file.originalname
         const data = await Orders.create(req.body)
         if(data){
             res.json({

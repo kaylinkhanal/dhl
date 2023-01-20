@@ -7,6 +7,8 @@
 .pnp.js
 /package-lock.json
 /yarn.lock
+/uploads
+/uploads/orders
 
 # testing
 /coverage
