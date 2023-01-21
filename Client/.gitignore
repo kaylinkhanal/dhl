@@ -4,6 +4,7 @@
 # dependencies
 /node_modules
 /uploads
+/uploads/orders
 /.pnp
 .pnp.js
 /package-lock.json

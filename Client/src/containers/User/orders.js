@@ -12,6 +12,7 @@ const Orders = (props)=>{
     const [file, setFile] = useState(null);
     const navigate = useNavigate()
     const {name, _id} = useSelector(state=> state.user)
+    
     const orderItem = async(formFields)=>{
         const formData = new FormData();
         formData.append("orders", file);
