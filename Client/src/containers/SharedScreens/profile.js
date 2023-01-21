@@ -6,7 +6,6 @@ import { message } from "antd";
 const Portfolio =()=>{
     const [userDetail, setUserDetail] = useState([])
     const {_id} = useSelector(state=> state.user)
-    console.log(userDetail.avatarFile)
 
     const fetchUser = async()=>{
         const response = await fetch(`${process.env.REACT_APP_BASE_URL}/profile/${_id}`)

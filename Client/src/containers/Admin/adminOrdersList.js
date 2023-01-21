@@ -2,13 +2,21 @@ import React, {useState, useEffect} from "react";
 import OrdersData from "../../components/ordersDataTable";
 import { Pagination } from 'antd';
 import { FaDolly } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 const AdminOrdersList = ()=>{
     const [orderList, setOrderList] = useState([]);
 	const [totalOrderCount, setTotalOrderCount] = useState(0);
-    console.log(orderList)
+    const {token} = useSelector(state=> state.user)
+    
 	const fetchData = async (page, size) => {
-		const response = await fetch(`${process.env.REACT_APP_BASE_URL}/orders?page=${page || 1}&size=${size || 5}`);
+        const requestOptions = {
+            method: "GET",
+            headers: {
+                'Authorization': `Bearer ${token}` ,
+            }
+        }
+		const response = await fetch(`${process.env.REACT_APP_BASE_URL}/orders?page=${page || 1}&size=${size || 5}`, requestOptions);
 		const data = await response.json();
 		if (data) {
 			setOrderList(data.ordersList);

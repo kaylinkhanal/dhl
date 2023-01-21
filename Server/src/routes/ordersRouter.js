@@ -3,6 +3,7 @@ const Orders = require('../models/orders')
 const app = Router();
 const moment = require('moment')
 const multer  = require('multer')
+var jwt = require('jsonwebtoken');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -36,8 +37,28 @@ app.post('/orders', upload, async(req, res)=>{
     }
 })
 
-app.get('/orders', async(req, res)=>{
+const isAuthorized = async(req, res, next)=>{
+    console.log(req.headers.authorization) // check authorization
+    // to get only the token code from authorization (split Bearer fron the string)
+    // console.log(req.headers.authorization.split(' ')[1])
+
+    const token = req.headers.authorization.split(' ')[1]
+
+    // verify a token symmetric
+    jwt.verify(token, process.env.SECRET_KEY, function(err, decoded) {
+        console.log(decoded.email)
+        // console.log(err)
+        if(err) res.sendStatus(403)
+        if(decoded.email){
+            next()
+        }
+    });
+    // next()
+}
+
+app.get('/orders', isAuthorized, async(req, res)=>{
     try{
+        
         const size = req.query.size || 10
         const page = req.query.page
         const skipCount = (size * page - size)
