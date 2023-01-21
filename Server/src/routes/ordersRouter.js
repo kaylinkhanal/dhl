@@ -3,7 +3,7 @@ const Orders = require('../models/orders')
 const app = Router();
 const moment = require('moment')
 const multer  = require('multer')
-var jwt = require('jsonwebtoken');
+const isAuthorized = require('../middleware/tokenAuthorize')
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -34,20 +34,6 @@ app.post('/orders',upload, async(req, res)=>{
         console.log(err)
     }
 })
-
-const isAuthorized = async(req, res, next)=>{
-    const token = req.headers.authorization.split(' ')[1]
-
-    jwt.verify(token, process.env.SECRET_KEY, function(err, decoded) {
-        console.log(decoded) // bar
-        // console.log(err)
-
-        if(err) res.sendStatus(403)
-        if(decoded.email){
-            next()
-        }
-    });
-}
 
 app.get('/orders', isAuthorized, async(req, res)=>{
     try{
