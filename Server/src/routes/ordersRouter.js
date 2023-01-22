@@ -3,6 +3,7 @@ const Orders = require('../models/orders')
 const app = Router();
 const moment = require('moment')
 const multer  = require('multer')
+const isAuthorized = require('../middleware/tokenAuthorize')
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -34,11 +35,13 @@ app.post('/orders',upload, async(req, res)=>{
     }
 })
 
-app.get('/orders', async(req, res)=>{
+app.get('/orders', isAuthorized, async(req, res)=>{
     try{
+        // console.log(req.headers.authorization.split(' ')[1])
         const size = req.query.size || 10
         const page = req.query.page
         const skipCount = (size * page - size)
+
         let orderData
         let totalOrderCount 
         if(page!==null){

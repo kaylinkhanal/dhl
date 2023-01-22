@@ -2,9 +2,8 @@ import React from "react"
 
 
 const OrdersData = ({orderList})=>{
-    
     return(
-        <>
+        <div style={{'overflowX':'auto'}}>
             <table>
                 <thead>
                     <tr>
@@ -26,7 +25,7 @@ const OrdersData = ({orderList})=>{
                 <tbody>
                     {orderList.length > 0 ? orderList.map((item, id) => {
                         return( 
-                            <tr>
+                            <tr key={id}>
                                 <td>{id+1}.</td>
                                 <td>{item.productType}</td>
                                 <td>{item.productWeight}kg</td>
@@ -47,7 +46,7 @@ const OrdersData = ({orderList})=>{
                     }) : 'data not found'}
                 </tbody>
             </table>
-        </>
+        </div>
     )
 } 
 export default OrdersData
