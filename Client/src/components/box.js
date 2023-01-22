@@ -48,10 +48,6 @@ const Box = ({ item, fetchData }) => {
 			</div>
 
 			<div className="order_item">
-			{ !item.orderImg ? <img src={require('../uploads/Capture.PNG').default} 
-					width={100} height={100} alt="orders" /> : 
-					<img src={require('../uploads/orders/'+item.orderImg).default} 
-					width={100} height={100} alt="orders" /> }
 				<div className="top">
 					<p className="badge">
 						Status: <span className="pending">{item.orderStatus}</span>
@@ -69,6 +65,12 @@ const Box = ({ item, fetchData }) => {
 
 				<div className="bottom">
 					<ul>
+						<li>
+							{ 
+							!item.orderImg ? <img src={require('../images/dhl.png')} height={40} alt="orders" /> : 
+							<img src={require('../uploads/orders/'+item.orderImg)} height={40} alt="orders" /> 
+							}
+						</li>
 						<li><i><SlUser /></i> Receipant Name:<br/>{item.receipentName}</li>
 						<li><i><SlLocationPin /></i> Receipant Location:<br/>{item.receipentLocation}</li>
 						<li><i><SlPhone /></i> Receipant Contact:<br/>{item.receipentNumber}</li>

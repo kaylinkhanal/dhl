@@ -1,6 +1,16 @@
 body{
   font-size: 14px;
   line-height: 25px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
 }
 
 *{
@@ -329,6 +339,10 @@ display: flex;
     line-height: 22px;
 }
 
+.bottom ul li:first-child{
+  padding-left: 0;
+}
+
 .bottom ul li i{
   color: red;
   margin-right: 3px;
@@ -384,6 +398,7 @@ tr:nth-child(even) {
 td, th {
   padding: 5px 10px;
   text-align: left;
+  font-size: 13px;
 }
 
 td:last-child {
@@ -423,16 +438,17 @@ button.success {
 }
 
 .uploader{
-  height: 30px;
-    width: 30px;
+  height: 35px;
+    width: 35px;
     border-radius: 50%;
     text-align: center;
-    line-height: 30px;
-    background: rgba(0,0,0,0.7);
+    line-height: 35px;
+    background: rgba(0,0,0,0.6);
     color: #fff;
     position: absolute;
-    right: 15px;
-    bottom: 20%;
+    left: 136px;
+    top: 0;
+    font-size: 20px;
 }
 
 .user_edit {
@@ -442,25 +458,73 @@ button.success {
 }
 
 .error-page{
+  background-color: #ffcc00;
+  height: calc(100vh - 63px);;
+  text-align: center;
   display: flex;
-  background-color: #FFFF8F;
-  height: 90vh;
+  justify-content: center;
+  align-items: center;
 }
 
 .error-texts h1 {
-  font-size: 300px;
-  color: #fc0;
-  line-height: 220px;
+  font-size: 200px;
+  line-height: 160px;
   margin-bottom: 40px;
   font-weight: 700 !important;
 }
 
 .error-texts h2 {
-  font-size: 30px;
-  color: #d19100;
+  font-size: 25px;
+  color: #fff;
+  font-weight: normal;
+  margin-bottom: 15px;
 }
 
-.error-icon{
-  font-size: 400px;
-  color: #d19100;
+.error-texts svg{
+  font-size: 100px;
+  color: red;
+}
+
+label.sc-bcXHqe.lkjDVC {
+  border: 1px solid #ccc;
+  background: #f1f1f1;
+  border-radius: 0;
+  margin-bottom: 10px;
+}
+
+.sc-dkrFOg.dmajdp {
+  font-style: italic;
+  margin-left: 10px;
+}
+
+.ant-drawer-wrapper-body {
+  background: #000;
+}
+
+.ant-drawer-body a {
+  color: #fff;
+  display: block;
+  padding: 5px;
+  margin-bottom: 5px;
+  font-size: 17px;
+  transition: all .5s ease;
+}
+
+.ant-drawer-body a:hover {
+  background: rgb(255 255 255 / 20%);
+  color: #fff;
+}
+
+button.ant-drawer-close {
+  height: 40px;
+  width: 40px;
+  text-align: center !important;
+  color: #fff !important;
+  padding: 0;
+  background: rgba(255,255,255,.3) !important;
+  border-radius: 50%;
+}
+
+span.anticon.anticon-close {
+  color: #fff;
 }
