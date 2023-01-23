@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import { SlTrash, SlPencil, SlCalender, SlLocationPin, SlClock, SlPhone, SlUser, } from "react-icons/sl";
 import { Modal, Popconfirm } from "antd";
 import Orders from "../containers/User/orders";
+import io from 'socket.io-client';
+const socket = io("http://localhost:5000");
 
 const Box = ({ item, fetchData }) => {
 	const { userRole } = useSelector((state) => state.user);
