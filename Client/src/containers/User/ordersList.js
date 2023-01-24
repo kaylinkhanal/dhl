@@ -3,6 +3,8 @@ import Box from "../../components/box";
 import { FaDolly } from "react-icons/fa";
 import CardSkeletion from "../../components/cardSkeletion";
 import { useSelector } from "react-redux";
+import { io } from "socket.io-client";
+const socket = io(process.env.REACT_APP_BASE_URL);
 
 const OrdersList = () => {
   const [orderList, setOrderList] = useState([]);
@@ -22,6 +24,21 @@ const OrdersList = () => {
 	useEffect(() => {
 		fetchData();
 	}, []);
+
+	useEffect(() => {
+		socket.on('orderDetails', (orderDetails)=>{
+			const tempOrderList = [...orderList]
+
+			tempOrderList.map((orderItem)=>{
+				if(orderItem._id == orderDetails.id){
+					orderItem.orderStatus = orderDetails.status
+					console.log(orderItem)
+					return orderItem
+				}
+			})
+			setOrderList(tempOrderList)
+		})
+	}, [socket, orderList]);
 
 	return (
 		<section>

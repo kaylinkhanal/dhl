@@ -38,7 +38,7 @@ app.post('/orders',upload, async(req, res)=>{
 app.get('/orders', isAuthorized, async(req, res)=>{
     try{
         // console.log(req.headers.authorization.split(' ')[1])
-        const size = req.query.size || 10
+        const size = req.query.size 
         const page = req.query.page
         const skipCount = (size * page - size)
 
@@ -67,7 +67,7 @@ app.put('/orders', async(req, res)=>{
     const formattedDate = moment(req.body.expectedDeliveryDate).format('YYYY-MM-DD')
     req.body.expectedDeliveryDate = formattedDate
     const data = await Orders.findByIdAndUpdate(req.body._id, req.body)
-    console.log(data);
+  
     if(data){
         res.json({
             msg: "updated successfully"

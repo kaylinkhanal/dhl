@@ -1,7 +1,22 @@
-import React from "react"
-
+import React, {useEffect} from "react"
+import { io } from "socket.io-client";
+const socket = io(process.env.REACT_APP_BASE_URL);
 
 const OrdersData = ({orderList})=>{
+    useEffect(()=>{
+        socket.on('connect', ()=>{
+            console.log(socket.id)
+        })
+    }, [])
+
+    const changeStatus = (status, id)=>{
+        const requestObj = {
+            status,
+            id,
+        }
+        socket.emit('requestOrder', requestObj)
+    }
+
     return(
         <div style={{'overflowX':'auto'}}>
             <table>
@@ -38,8 +53,8 @@ const OrdersData = ({orderList})=>{
                                 <td>{item.expectedDeliveryDate}</td>
                                 <td>{item.orderStatus}</td>
                                 <td>
-                                    <button className="success" onClick={()=> null}>Accept</button>
-                                    <button className="cancel" onClick={()=> null}>Reject</button>
+                                    <button className="success" onClick={()=> changeStatus('accept', item._id)}>Accept</button>
+                                    <button className="cancel" onClick={()=> changeStatus('reject', item._id)}>Reject</button>
                                 </td>
                             </tr>
                         )

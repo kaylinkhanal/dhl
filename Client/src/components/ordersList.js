@@ -3,6 +3,9 @@ import { FaDolly } from "react-icons/fa";
 import Box from "./box";
 import { Skeleton } from "antd";
 import { Pagination } from 'antd';
+import { io } from "socket.io-client";
+const socket = io(process.env.REACT_APP_BASE_URL);
+
 const OrdersList = () => {
 	const [orderList, setOrderList] = useState([]);
 	const [totalOrderCount, setTotalOrderCount] = useState(0);
@@ -19,6 +22,12 @@ const OrdersList = () => {
 	useEffect(() => {
 		fetchData();
 	}, []);
+
+	useEffect(() => {
+		socket.on('orderDetails', orderDetails=>{
+			console.log(orderDetails)
+		})
+	}, [socket]);
 
 	return (
 		<section>
