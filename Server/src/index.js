@@ -23,14 +23,17 @@ connect()
 //1. import and coonect express=> socket
 //2. io.on > connection established
 // socket.on('requestOrder' < try to relate with app.post('/requestOrder')
+const Orders = require('./models/orders')
+
 io.on('connection', (socket) => {
-  socket.on('requestOrder', (orderDetails) => {
+  socket.on('requestOrder', async(orderDetails) => {
     //send to other connected clients
     io.emit('orderDetails',orderDetails)
+    // console.log(orderDetails.id)
+    const updatedResult = await Orders.findByIdAndUpdate({_id: orderDetails.id}, {orderStatus: orderDetails.status})
+    console.log('updated status', updatedResult)
   });
 });
-
-
 
 app.use(bodyParser.json())
 app.use(cors())

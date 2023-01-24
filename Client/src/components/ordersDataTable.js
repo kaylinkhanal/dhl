@@ -51,8 +51,8 @@ const OrdersData = ({orderList})=>{
                                 <td>{item.expectedDeliveryDate}</td>
                                 <td>{item.orderStatus}</td>
                                 <td>
-                                    <button className="success" onClick={()=> changeStatus('accept', item._id)}>Accept</button>
-                                    <button className="cancel" onClick={()=> changeStatus('reject', item._id)}>Reject</button>
+                                    <button className="success" onClick={()=> changeStatus('accepted', item._id)}>Accept</button>
+                                    <button className="cancel" onClick={()=> changeStatus('rejected', item._id)}>Reject</button>
                                 </td>
                             </tr>
                         )

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { SlTrash, SlPencil, SlCalender, SlLocationPin, SlClock, SlPhone, SlUser, } from "react-icons/sl";
+import { SlTrash, SlPencil, SlCalender, SlLocationPin, SlClock, SlPhone, SlUser, SlClose, } from "react-icons/sl";
 import { Modal, Popconfirm } from "antd";
 import Orders from "../containers/User/orders";
 import io from 'socket.io-client';
@@ -50,10 +50,8 @@ const Box = ({ item, fetchData }) => {
 			</div>
 
 			<div className="order_item">
-				<div className="top">
-					<p className="badge">
-						Status: <span className="pending">{item.orderStatus}</span>
-					</p>
+				<div className={"top " + (item.orderStatus === 'rejected' ? 'error' : item.orderStatus === 'accepted' ? 'success' : '')}>
+					<p className="badge">Status: <span >{item.orderStatus}</span></p>
 					<span>Sender: {item.senderName}</span>
 					<span className="orderId">#{item._id}</span>
 					<span>{item.productType}</span>
