@@ -27,7 +27,6 @@
   - [x] Display Orders Data
   - [x] Pagination
   - [x] Accept/ Reject Orders
-  - [x] Add, Update, Delete Foods
  - [ ] Rider
   
 
