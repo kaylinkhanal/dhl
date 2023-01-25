@@ -33,7 +33,7 @@ app.post("/profile/:id", upload, async (req, res, next) => {
 
 app.get("/profile/:id", async (req, res) => {
   try {
-    const userData = await Users.findById(req.params.id);
+    const userData = await Users.findById(req.params.id)
     const {password, __v, ...refactoredData} = userData.toObject()
    
     res.json({
