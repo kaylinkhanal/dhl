@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FaCamera, FaPencilAlt } from "react-icons/fa";
-import { useParams } from "react-router-dom";
+import { FaCamera } from "react-icons/fa";
 import axios from 'axios';
 import {useSelector} from 'react-redux'
 import { message, Skeleton } from "antd";
@@ -27,10 +26,7 @@ const Portfolio =()=>{
             //rodo this code, 
             //disk storage-> 
             //delete if the user updates new profile picture : BE
-            setTimeout(() => {
             fetchUserProfileDetails()
-            }, 3000);
-            
         }
 
         if(data.msg === 'successfully uploaded'){

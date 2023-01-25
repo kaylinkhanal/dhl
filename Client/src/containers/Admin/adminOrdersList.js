@@ -23,8 +23,9 @@ const AdminOrdersList = ()=>{
 	};
 
 	useEffect(() => {
-		fetchData();
+        fetchData();
 	}, []);
+
 
     return(
         <section id="orders">
