@@ -31,6 +31,7 @@ const Box = ({ item, fetchData }) => {
 
 	return (
 		<>
+
 			<Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={null} >
 				<Orders isEdit={true} item={item} onOk={handleOk} />
 			</Modal>
@@ -64,6 +65,12 @@ const Box = ({ item, fetchData }) => {
 
 				<div className="bottom">
 					<ul>
+						<li>
+							{ 
+							!item.orderImg ? <img src={require('../images/dhl.png')} height={40} alt="orders" /> : 
+							<img src={require('../uploads/orders/'+item.orderImg)} height={40} alt="orders" /> 
+							}
+						</li>
 						<li><i><SlUser /></i> Receipant Name:<br/>{item.receipentName}</li>
 						<li><i><SlLocationPin /></i> Receipant Location:<br/>{item.receipentLocation}</li>
 						<li><i><SlPhone /></i> Receipant Contact:<br/>{item.receipentNumber}</li>
