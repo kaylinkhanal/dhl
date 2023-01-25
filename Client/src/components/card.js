@@ -1,9 +1,5 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-// library.add(
-//     FaDolly,
-//     FaTelegramPlane
-// );
 
 const Card = ({icon, title, link})=>{
     return(
