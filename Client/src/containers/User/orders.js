@@ -10,7 +10,7 @@ import { FileUploader } from "react-drag-drop-files";
 const fileTypes = ["JPG", "PNG", "GIF", "JPEG"];
 const Orders = (props)=>{
     const [file, setFile] = useState(null);
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
     const {name, _id} = useSelector(state=> state.user)
 
     const orderItem = async(formFields)=>{
