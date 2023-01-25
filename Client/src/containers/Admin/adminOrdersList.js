@@ -3,7 +3,7 @@ import OrdersData from "../../components/ordersDataTable";
 import { Pagination } from 'antd';
 import { FaDolly } from "react-icons/fa";
 import { useSelector } from "react-redux";
-
+import { Input } from 'antd';
 const AdminOrdersList = ()=>{
     const [orderList, setOrderList] = useState([]);
 	const [totalOrderCount, setTotalOrderCount] = useState(0);
@@ -32,6 +32,7 @@ const AdminOrdersList = ()=>{
             <div className="container">
                 <div className="orders-data">
                     <h1 className="title"><i><FaDolly /></i> Orders List</h1>
+                    <Input size="large" onKeyUp={(e)=>  console.log(e.target.value)} placeholder="Search orders" prefix={<>s</>} />
                     <OrdersData orderList={orderList}/>
                     <Pagination defaultPageSize={5} onChange={(page, size) => fetchData(page, size)} total={totalOrderCount} showSizeChanger/>
                 </div>

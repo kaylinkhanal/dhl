@@ -38,24 +38,24 @@ app.post('/orders',upload, async(req, res)=>{
 app.get('/orders', isAuthorized, async(req, res)=>{
     try{
         // console.log(req.headers.authorization.split(' ')[1])
-        const size = req.query.size || 10
-        const page = req.query.page
-        const skipCount = (size * page - size)
+        // const size = req.query.size || 10
+        // const page = req.query.page
+        // const skipCount = (size * page - size)
 
-        let orderData
-        let totalOrderCount 
-        if(page!==null){
-             orderData = await Orders.find().skip(skipCount).limit(size)
-             totalOrderCount =  await Orders.find().count()
-        }else{
-            orderData = await Orders.find().sort({expectedDeliveryDate: -1})
-        }
-        if(orderData){
-            res.json({
-                ordersList: orderData,
-                totalOrderCount: totalOrderCount
-            })
-        }
+        // let orderData
+        // let totalOrderCount 
+        // if(page!==null){
+        //      orderData = await Orders.find().skip(skipCount).limit(size)
+        //      totalOrderCount =  await Orders.find().count()
+        // }else{
+        //     orderData = await Orders.find().sort({expectedDeliveryDate: -1})
+        // }
+        // if(orderData){
+        //     res.json({
+        //         ordersList: orderData,
+        //         totalOrderCount: totalOrderCount
+        //     })
+        // }
         
     }catch(err){
         console.log(err)

@@ -9,11 +9,8 @@ const OrdersData = ({orderList})=>{
       }, []);
 
     const changeStatus = async(status , id) => {
-        const orderDetails = {
-            status,
-            id
-        }
-       socket.emit('requestOrder',orderDetails)
+        const orderDetails = { status, id }
+      socket.emit('requestOrder',orderDetails)
     }
     return(
         <div style={{'overflowX':'auto'}}>

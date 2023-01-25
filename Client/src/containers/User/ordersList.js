@@ -26,21 +26,19 @@ const OrdersList = () => {
 	}, []);
 		
 	useEffect(()=> {
-		if(orderList.length>0){
-			socket.on('orderDetails',(orderDetails)=>{
+		if(orderList.length> 0){
+			socket.on('orderDetails', (orderDetails)=>{
 				const bckUpList = [...orderList]
-				if(bckUpList.length>0 ){
-					bckUpList.map(item=>{
-						if(item._id== orderDetails.id){
-						  item.orderStatus = orderDetails.status
-						  return item
-						}
-					  })
-					  setOrderList(bckUpList)
+				bckUpList.map(item=>{
+				if(item._id== orderDetails.id){
+					item.orderStatus = orderDetails.status
+					return item
 				}
+				})
+				setOrderList(bckUpList)
 			})
 		}
-	},[socket,orderList])
+	},[socket, orderList])
 
 
 	return (

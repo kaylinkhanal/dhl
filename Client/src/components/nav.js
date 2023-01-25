@@ -1,10 +1,15 @@
-import React from "react";
+import React, {useState} from "react";
+import NavChildren from "./navChildren"
 
-const Nav = () => {
+const Nav = (setKey) => {
+  const [userDetails,setUserDetails] = useState('')
+
   return (
     <>
-      <button>Logout</button>
+    {userDetails}
+      <NavChildren  setUserDetails={setUserDetails} />
     </>
   );
 };
 export default Nav;
+

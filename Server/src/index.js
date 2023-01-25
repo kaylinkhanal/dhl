@@ -7,8 +7,8 @@ const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server, {
   cors: {
-    origin: "*"
-  }
+    origin: "*",
+  },
 });
 
 require('dotenv').config()
@@ -27,6 +27,7 @@ io.on('connection', (socket) => {
   socket.on('requestOrder', (orderDetails) => {
     //send to other connected clients
     io.emit('orderDetails',orderDetails)
+    //
   });
 });
 
