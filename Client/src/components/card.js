@@ -1,19 +1,17 @@
 import React from 'react'
-import { faDolly, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
-import { library } from '@fortawesome/fontawesome-svg-core';
-library.add(
-    faDolly,
-    faPaperPlane
-);
+// library.add(
+//     FaDolly,
+//     FaTelegramPlane
+// );
 
 const Card = ({icon, title, link})=>{
     return(
         <>
             <div className="card">
                 <Link to={link}>
-                    <i><FontAwesomeIcon icon={icon['prefix', 'iconName']} /></i>
+                    <i> {icon}</i>
+                    {/* <FontAwesomeIcon icon={icon['prefix', 'iconName']} /> */}
                     <p>{title}</p>
                 </Link>
             </div>

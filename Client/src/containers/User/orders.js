@@ -1,32 +1,35 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux"
 import { message, DatePicker} from 'antd'
-
+import dayjs from 'dayjs'
+import { FileUploader } from "react-drag-drop-files";
+const fileTypes = ["JPG", "PNG", "GIF", "JPEG"];
 const Orders = (props)=>{
-    console.log(props.item)
-    const navigate = useNavigate()
-    const {name} = useSelector(state=> state.user)
-     
-    const orderItem = async(values)=>{
-        values.senderName = name
-        const requestOptions = {
-            method: props.isEdit ? "PUT" : "POST",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(values)
-        };
-
-        const response = await fetch('http://localhost:5000/orders', requestOptions);
-        const data = await response.json()
-
-        if(data){
-            message.success(data.msg)
-            navigate('/')
-        }
+    const [file, setFile] = useState(null);
+    // const navigate = useNavigate()
+    const {name, _id} = useSelector(state=> state.user)
+    const orderItem = async(formFields)=>{
+        const formData = new FormData();
+        formData.append("orders", file);
+        formData.append("userID", _id);
+        formData.append("senderName", name);
+        Object.keys(formFields).map((item, id)=>{
+            formData.append(item, Object.values(formFields)[id]);
+        })
+        const res = await fetch(`${process.env.REACT_APP_BASE_URL}/orders`, {
+            method: "POST",
+            body: formData,
+        })
     }
     
+   
+    const saveFile = (file) => {
+      setFile(file);
+      console.log(file)
+    };
 	const OrderSchema = Yup.object().shape({
 		productType: Yup.string().required('Required'),
 		productWeight: Yup.string().required('Required'),
@@ -35,7 +38,7 @@ const Orders = (props)=>{
 		receipentLocation: Yup.string().required('Required'),
         receipentName: Yup.string().required('Required'),
         receipentNumber: Yup.number().required('Required'),
-		expectedDeliveryDate: Yup.string().required('Required'),
+		expectedDeliveryDate: Yup.date().required('Required'),
         expectedDeliveryTime: Yup.string().required('Required'),
 	});
 
@@ -43,11 +46,33 @@ const Orders = (props)=>{
         <section className='form_section'>
             <div className='container'>
                 <div className='form'>
-                    <h1>{props.isEdit ? 'Edit order' : 'Make your order'}</h1>
+                    <h1>{!props.isEdit ? 'Make your' : 'Edit'} order</h1>
 
                     <Formik
-                        initialValues={props.item || {}}
+                        initialValues={props.item?{
+                            _id:props.item._id,
+                            productType: props.item.productType,
+                            productWeight: props.item.productWeight,
+                            maxSize: props.item.maxSize,
+                            senderLocation: props.item.senderLocation,
+                            receipentLocation: props.item.receipentLocation,
+                            receipentName: props.item.receipentName,
+                            receipentNumber: props.item.receipentNumber,
+                            expectedDeliveryDate: dayjs(props.item.expectedDeliveryDate),
+                            expectedDeliveryTime: props.item.expectedDeliveryTime
+                        } : {
+                            productType: '',
+                            productWeight: '',
+                            maxSize: '',
+                            senderLocation: '',
+                            receipentLocation: '',
+                            receipentName: '',
+                            receipentNumber: '',
+                            expectedDeliveryDate: '',
+                            expectedDeliveryTime: ''
+                        }}
                         validationSchema={OrderSchema}
+                        enableReinitialize={true}
                         onSubmit={values=>{
                             orderItem(values)
                         }}
@@ -85,8 +110,8 @@ const Orders = (props)=>{
                                 <Field name="receipentNumber" placeholder="Receipent Number" value={values.receipentNumber} onChange={handleChange} onBlur={handleBlur}/>
                                 {errors.receipentNumber && touched.receipentNumber ? (<div className="error">{errors.receipentNumber}</div>) : null}
 
-                                {/* <DatePicker onChange={(date)=> setFieldValue('expectedDeliveryDate', date)}  name="expectedDeliveryDate" placeholder="Expected Delivery Date" value={values.expectedDeliveryDate} />
-                                {errors.expectedDeliveryDate && touched.expectedDeliveryDate ? (<div className="error">{errors.expectedDeliveryDate}</div>) : null} */}
+                                <DatePicker onChange={(date)=> setFieldValue('expectedDeliveryDate', date)}  name="expectedDeliveryDate" placeholder="Expected Delivery Date" value={values.expectedDeliveryDate} />
+                                {errors.expectedDeliveryDate && touched.expectedDeliveryDate ? (<div className="error">{errors.expectedDeliveryDate}</div>) : null}
 
                                 <select name="expectedDeliveryTime" value={values.expectedDeliveryTime} onChange={handleChange} onBlur={handleBlur}>
                                     <option value="" disabled="disabled" label="Expected Delivery Time"></option>
@@ -99,10 +124,10 @@ const Orders = (props)=>{
                                     <option label="6am-9am">6am-9am</option>
                                     <option label="9am-12pm">9am-12pm</option>
                                 </select>
+                                <FileUploader handleChange={saveFile} type="file"  types={fileTypes} />
                                 
                                 {errors.expectedDeliveryTime && touched.expectedDeliveryTime ? (<div className="error">{errors.expectedDeliveryTime}</div>) : null}
-
-                                <button type="submit">{props.isEdit ? 'Save' : 'Send'} order</button>
+                                <button type="submit">{!props.isEdit ? 'Send' : 'Edit'} order</button>
                             </Form>
                         )} 
                     </Formik>

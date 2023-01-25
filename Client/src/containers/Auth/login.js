@@ -2,12 +2,13 @@ import React from "react";
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 import { message } from "antd";
-import {  Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ShowhidePassword from "../../components/showhidePassword";
 import { useDispatch } from "react-redux";
 import { setUserDetails } from "../../reducers/userSlice";
 const Login = () => {
   const dispatch = useDispatch();
+
   const loginUser = async (values, resetForm) => {
     const requestOptions = {
       method: "POST",
@@ -15,16 +16,21 @@ const Login = () => {
       body: JSON.stringify(values),
     };
 
-    const response = await fetch("http://localhost:5000/login", requestOptions);
+    const response = await fetch(
+      `${process.env.REACT_APP_BASE_URL}/login`,
+      requestOptions
+    );
     const data = await response.json();
     console.log(data);
     if (data.msg === "login success") {
+      data.userDetails.token = data.token;
       dispatch(setUserDetails(data.userDetails));
       message.success(data.msg);
     } else {
       message.error(data.msg);
     }
   };
+
   const SignupSchema = Yup.object().shape({
     password: Yup.string().required("Required"),
     email: Yup.string().email("Invalid email").required("Required"),

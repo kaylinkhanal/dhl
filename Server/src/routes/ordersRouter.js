@@ -2,11 +2,23 @@ const { Router } = require("express");
 const Orders = require("../models/orders");
 const app = Router();
 const moment = require('moment')
+const multer  = require('multer')
 
-app.post('/orders', async(req, res)=>{
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, '../Client/src/uploads/orders')
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname)
+    }
+  })
+const upload = multer({ storage: storage }).single('orders')
+
+app.post('/orders',upload, async(req, res)=>{
     try{
-        const formattedDate = moment(req.body.expectedDeliveryDate).format('YYYY-MM-DD')
+        const formattedDate = moment(req.body.expectedDeliveryDate).format('YYYY/MM/DD')
         req.body.expectedDeliveryDate = formattedDate
+        req.body.orderImg = req.file.originalname
         const data = await Orders.create(req.body)
         if(data){
             res.json({
@@ -24,10 +36,21 @@ app.post('/orders', async(req, res)=>{
 
 app.get('/orders', async(req, res)=>{
     try{
-        const orderData = await Orders.find().sort({expectedDeliveryDate: -1})
+        const size = req.query.size || 10
+        const page = req.query.page
+        const skipCount = (size * page - size)
+        let orderData
+        let totalOrderCount 
+        if(page!==null){
+             orderData = await Orders.find().skip(skipCount).limit(size)
+             totalOrderCount =  await Orders.find().count()
+        }else{
+            orderData = await Orders.find().sort({expectedDeliveryDate: -1})
+        }
         if(orderData){
             res.json({
-                ordersList: orderData
+                ordersList: orderData,
+                totalOrderCount: totalOrderCount
             })
         }
         
@@ -38,7 +61,10 @@ app.get('/orders', async(req, res)=>{
 
 app.put('/orders', async(req, res)=>{
     try{
+    const formattedDate = moment(req.body.expectedDeliveryDate).format('YYYY-MM-DD')
+    req.body.expectedDeliveryDate = formattedDate
     const data = await Orders.findByIdAndUpdate(req.body._id, req.body)
+    console.log(data);
     if(data){
         res.json({
             msg: "updated successfully"
