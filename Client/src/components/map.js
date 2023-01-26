@@ -64,9 +64,30 @@ const Map = ()=> {
          const currentDragLatLng = markerRef.current.getLatLng()
          // latlng of sender(non-moving marker) can be fetched from redux using use selector :senderLocationDetails 
          const currentSenderLatLng = senderLocationDetails
+         
         //please write a distance calculation code here
         console.log(currentDragLatLng,currentSenderLatLng)
-        return 450
+        
+        const toRadian = n => (n * Math.PI) / 180
+
+    let lat2 = currentSenderLatLng.lat
+    let lon2 = currentSenderLatLng.lng
+    let lat1 = currentDragLatLng.lat
+    let lon1 = currentDragLatLng.lng
+
+    console.log(currentDragLatLng+"==="+currentSenderLatLng)
+    let R = 6371  // km
+    let x1 = lat2 - lat1
+    let dLat = toRadian(x1)
+    let x2 = lon2 - lon1
+    let dLon = toRadian(x2)
+    let a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(toRadian(lat1)) * Math.cos(toRadian(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2)
+    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+    let d = R * c
+    console.log("distance==?",d)
+    return d
         // it should be based on selectors
         //if you generate
     }
