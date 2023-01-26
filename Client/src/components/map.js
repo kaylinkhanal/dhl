@@ -1,21 +1,29 @@
 import React, { useEffect, useState, useMemo, useRef,useCallback } from "react";
+///useref, usecallback, useMemo
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-
+import {useDispatch,useSelector} from "react-redux";
+import { BsPinMapFill } from "react-icons/bs";
+import {setSenderLocationDetails,setRecepientLocationDetails} from "../reducers/locationSlice"
 import icon from "./constant";
+
 const center = { lat: 27.685590690097943, lng: 85.34457821701662 }
 const Map = ()=> {
   function LocationMarker() {
     const [position, setPosition] = useState(null);
     const [bbox, setBbox] = useState([]);
-
+    const {senderLocationDetails} = useSelector(state=>state.location)
     const map = useMap();
-
+    const dispatch =useDispatch()
     useEffect(() => {
       map.locate().on("locationfound", function (e) {
-          console.log(e)
         setPosition(e.latlng);
+        debugger;
+
+        if(senderLocationDetails.lat != e.latlng.lat || senderLocationDetails.lng != e.latlng.lng){
+            dispatch(setSenderLocationDetails(e.latlng))
+        }
         map.flyTo(e.latlng, map.getZoom());
         const radius = e.accuracy;
         const circle = L.circle(e.latlng, radius);
@@ -23,8 +31,10 @@ const Map = ()=> {
         setBbox(e.bounds.toBBoxString().split(","));
       });
     }, [map]);
-    console.log(position)
+
     return position === null ? null : (
+        <>
+        {JSON.stringify(position)}
       <Marker position={position} icon={icon}>
         <Popup>
           You are here. <br />
@@ -35,21 +45,41 @@ const Map = ()=> {
           <b>Northeast lat</b>: {bbox[3]}
         </Popup>
       </Marker>
+      </>
     );
   }
 
-
+  
   function DraggableMarker() {
+    const {senderLocationDetails} = useSelector(state=>state.location)
+    const dispatch =useDispatch()
     const [draggable, setDraggable] = useState(false)
+    const [distance, setDistance] = useState(0)
     const [position, setPosition] = useState(center)
+    
     const markerRef = useRef(null)
+
+    const caculateDistance =()=> {
+        //current draggle marker latlng can be retrieved from current markerReference
+         const currentDragLatLng = markerRef.current.getLatLng()
+         // latlng of sender(non-moving marker) can be fetched from redux using use selector :senderLocationDetails 
+         const currentSenderLatLng = senderLocationDetails
+        //please write a distance calculation code here
+        console.log(currentDragLatLng,currentSenderLatLng)
+        return 450
+        // it should be based on selectors
+        //if you generate
+    }
+ 
+
     const eventHandlers = useMemo(
       () => ({
         dragend() {
           const marker = markerRef.current
           if (marker != null) {
-              console.log(marker.getLatLng())
             setPosition(marker.getLatLng())
+            dispatch(setRecepientLocationDetails(markerRef.current.getLatLng())) 
+            alert(caculateDistance())
           }
         },
       }),
@@ -58,18 +88,20 @@ const Map = ()=> {
     const toggleDraggable = useCallback(() => {
       setDraggable((d) => !d)
     }, [])
-  
+
+   
+    
+    
     return (
       <Marker
-        draggable={draggable}
+        draggable={true}
         eventHandlers={eventHandlers}
         position={position}
+        icon={icon}
         ref={markerRef}>
         <Popup minWidth={90}>
           <span onClick={toggleDraggable}>
-            {draggable
-              ? 'Marker is draggable'
-              : 'Click here to make marker draggable'}
+            'Drag and Drop to any location'
           </span>
         </Popup>
       </Marker>
