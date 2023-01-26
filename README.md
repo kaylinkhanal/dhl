@@ -27,6 +27,7 @@
   - [x] Display Orders Data
   - [x] Pagination
   - [x] Accept/ Reject Orders
+  - [ ] Search orders feature
  - [ ] Rider
   
 
