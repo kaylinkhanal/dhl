@@ -1,9 +1,13 @@
 import React, { useEffect, useState, useMemo, useRef,useCallback } from "react";
+///useref, usecallback, useMemo
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-
+import {useDispatch} from "react-redux";
+import { BsPinMapFill } from "react-icons/bs";
+import {setSenderLocationDetails,setRecepientLocationDetails} from "../reducers/locationSlice"
 import icon from "./constant";
+
 const center = { lat: 27.685590690097943, lng: 85.34457821701662 }
 const Map = ()=> {
   function LocationMarker() {
@@ -11,11 +15,11 @@ const Map = ()=> {
     const [bbox, setBbox] = useState([]);
 
     const map = useMap();
-
+    const dispatch =useDispatch()
     useEffect(() => {
       map.locate().on("locationfound", function (e) {
-          console.log(e)
         setPosition(e.latlng);
+        dispatch(setSenderLocationDetails(e.latlng))
         map.flyTo(e.latlng, map.getZoom());
         const radius = e.accuracy;
         const circle = L.circle(e.latlng, radius);
@@ -25,6 +29,8 @@ const Map = ()=> {
     }, [map]);
     console.log(position)
     return position === null ? null : (
+        <>
+        {JSON.stringify(position)}
       <Marker position={position} icon={icon}>
         <Popup>
           You are here. <br />
@@ -35,11 +41,13 @@ const Map = ()=> {
           <b>Northeast lat</b>: {bbox[3]}
         </Popup>
       </Marker>
+      </>
     );
   }
 
 
   function DraggableMarker() {
+    const dispatch =useDispatch()
     const [draggable, setDraggable] = useState(false)
     const [position, setPosition] = useState(center)
     const markerRef = useRef(null)
@@ -58,18 +66,24 @@ const Map = ()=> {
     const toggleDraggable = useCallback(() => {
       setDraggable((d) => !d)
     }, [])
-  
+    // {latLonSer, latLonRe}= useSt
+    // function calculateDistance(){
+    //     /// 
+    //     return 8432
+    // }
+    useEffect(()=>{
+        dispatch(setRecepientLocationDetails(markerRef.current.getLatLng())) 
+    },[position])
     return (
       <Marker
-        draggable={draggable}
+        draggable={true}
         eventHandlers={eventHandlers}
         position={position}
+        icon={icon}
         ref={markerRef}>
         <Popup minWidth={90}>
           <span onClick={toggleDraggable}>
-            {draggable
-              ? 'Marker is draggable'
-              : 'Click here to make marker draggable'}
+            'Drag and Drop to any location'
           </span>
         </Popup>
       </Marker>
