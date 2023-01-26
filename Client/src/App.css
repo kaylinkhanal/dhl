@@ -528,3 +528,8 @@ button.ant-drawer-close {
 span.anticon.anticon-close {
   color: #fff;
 }
+.search{
+  max-width: 400px;
+  display: inline-flex;
+  float: right;
+}

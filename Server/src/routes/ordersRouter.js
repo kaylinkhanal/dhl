@@ -44,11 +44,17 @@ app.get('/orders', isAuthorized, async(req, res)=>{
 
         let orderData
         let totalOrderCount 
+
+        var regexp = new RegExp("^"+ req.query.search);
+        console.log('search', regexp)
+
         if(page!==null){
-             orderData = await Orders.find().skip(skipCount).limit(size)
-             totalOrderCount =  await Orders.find().count()
+            orderData = await Orders.find().skip(skipCount).limit(size)
+            totalOrderCount =  await Orders.find().count()
+        }else if(req.query.search){
+            orderData = await Orders.find({senderName: regexp})
         }else{
-            orderData = await Orders.find().sort({expectedDeliveryDate: -1})
+            orderData = await Orders.find()
         }
         if(orderData){
             res.json({
