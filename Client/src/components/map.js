@@ -64,9 +64,18 @@ const Map = ()=> {
          const currentDragLatLng = markerRef.current.getLatLng()
          // latlng of sender(non-moving marker) can be fetched from redux using use selector :senderLocationDetails 
          const currentSenderLatLng = senderLocationDetails
+
+         let dragLat=currentDragLatLng.lat
+         let dragLng=currentDragLatLng.lng
+
+         let senderLat=currentSenderLatLng.lat
+         let senderLng=currentSenderLatLng.lng
+
+         const dist = Math.sqrt((dragLat - dragLng) ** 2 + (senderLat - senderLng) ** 2);
+
         //please write a distance calculation code here
         console.log(currentDragLatLng,currentSenderLatLng)
-        return 450
+        return dist
         // it should be based on selectors
         //if you generate
     }
