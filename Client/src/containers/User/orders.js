@@ -6,6 +6,7 @@ import { useSelector } from "react-redux"
 import { message, DatePicker} from 'antd'
 import dayjs from 'dayjs'
 import { FileUploader } from "react-drag-drop-files";
+import LocationMap from '../../components/Map/map';
 
 const fileTypes = ["JPG", "PNG", "GIF", "JPEG"];
 const Orders = (props)=>{
@@ -53,6 +54,7 @@ const Orders = (props)=>{
     return(
         <section className='form_section'>
             <div className='container'>
+            <LocationMap/>
                 <div className='form'>
                     <h1>{!props.isEdit ? 'Make your' : 'Edit'} order</h1>
 
