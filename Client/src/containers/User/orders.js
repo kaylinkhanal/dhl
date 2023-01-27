@@ -6,8 +6,11 @@ import { useSelector } from "react-redux"
 import { message, DatePicker} from 'antd'
 import dayjs from 'dayjs'
 import { FileUploader } from "react-drag-drop-files";
+import Map from '../../components/map'
 
 const fileTypes = ["JPG", "PNG", "GIF", "JPEG"];
+const position = [51.505, -0.09]
+
 const Orders = (props)=>{
     const [file, setFile] = useState(null);
     const navigate = useNavigate()
@@ -53,8 +56,10 @@ const Orders = (props)=>{
     return(
         <section className='form_section'>
             <div className='container'>
+                <Map/>
                 <div className='form'>
                     <h1>{!props.isEdit ? 'Make your' : 'Edit'} order</h1>
+                    
 
                     <Formik
                         initialValues={props.item?{
