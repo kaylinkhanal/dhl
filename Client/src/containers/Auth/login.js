@@ -62,7 +62,7 @@ const Login = () => {
 
                         {({ errors, touched, values, handleChange, handleBlur, handleSubmit }) => (
                             <Form onSubmit={handleSubmit}>
-                                <Field name="email" placeholder="Enter Email" value={values.email} onChange={handleChange} onBlur={handleBlur} innerref={emailInput} />
+                                <Field name="email" placeholder="Enter Email" value={values.email} onChange={handleChange} onBlur={handleBlur} ref={emailInput} />
                                 {errors.email && touched.email ? (<div className="error">{errors.email}</div>) : null}
 
                                 <Field name="password" placeholder="Enter Password" value={values.password} component={ShowhidePassword} onChange={handleChange} onBlur={handleBlur} />
