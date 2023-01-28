@@ -1,14 +1,13 @@
 const express = require('express');
 const app = express();
 
+//socket.io
 const http = require('http');
 const server = http.createServer(app);
 
 const { Server } = require("socket.io");
 const io = new Server(server, {
-  cors: {
-    origin: "*"
-  }
+  cors: {origin: "*" }
 });
 
 require('dotenv').config()
@@ -25,6 +24,7 @@ connect()
 // socket.on('requestOrder' < try to relate with app.post('/requestOrder')
 io.on('connection', (socket) => {
   socket.on('requestOrder', (orderDetails) => {
+    console.log("i am anil", orderDetails)
     //send to other connected clients
     io.emit('orderDetails',orderDetails)
   });

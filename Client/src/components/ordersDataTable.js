@@ -9,6 +9,7 @@ const OrdersData = ({orderList})=>{
       }, []);
 
     const changeStatus = async(status , id) => {
+        debugger;
         const orderDetails = {
             status,
             id
