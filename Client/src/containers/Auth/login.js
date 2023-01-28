@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import { message } from 'antd';
@@ -6,9 +6,10 @@ import { useNavigate, Link } from 'react-router-dom';
 import ShowhidePassword from "../../components/showhidePassword";
 import { useDispatch } from "react-redux"
 import {setUserDetails}  from "../../reducers/userSlice"
+
 const Login = ()=>{
     const dispatch = useDispatch()
- 
+    const inputRef = useRef();
     const loginUser = async(values, resetForm)=>{
         const requestOptions = {
             method: "POST",
@@ -32,12 +33,16 @@ const Login = ()=>{
 		password: Yup.string().required('Required'),
 		email: Yup.string().email('Invalid email').required('Required'),
 	});
+
+    useEffect(()=>{
+        console.log(inputRef.current);
+        inputRef.current.focus();
+    }, [])
     return(
         <section>
             <div className='container'>
                 <div className='form'>
                     <h1>Login</h1>
-                     
                     <Formik
                         initialValues={{
                             email: '',
@@ -52,7 +57,7 @@ const Login = ()=>{
 
                         {({ errors, touched, values, handleChange, handleBlur, handleSubmit }) => (
                             <Form onSubmit={handleSubmit}>
-                                <Field name="email" placeholder="Enter Email" value={values.email} onChange={handleChange} onBlur={handleBlur} />
+                                <Field name="email" placeholder="Enter Email" innerRef={inputRef} value={values.email} onChange={handleChange} onBlur={handleBlur} />
                                 {errors.email && touched.email ? (<div className="error">{errors.email}</div>) : null}
 
                                 <Field name="password" placeholder="Enter Password" value={values.password} component={ShowhidePassword} onChange={handleChange} onBlur={handleBlur} />
