@@ -14,6 +14,7 @@
 * JsonWebToken Authentication/Authorization
 * Multer for file upload feature
 * Middlewares
+* React Leaflet for Map
 
 ## Features
 - [x] User
