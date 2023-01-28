@@ -6,10 +6,9 @@ import { useSelector } from "react-redux"
 import { message, DatePicker} from 'antd'
 import dayjs from 'dayjs'
 import { FileUploader } from "react-drag-drop-files";
-import Map from '../../components/map'
+import Map from '../../components/Map/map';
 
 const fileTypes = ["JPG", "PNG", "GIF", "JPEG"];
-const position = [51.505, -0.09]
 
 const Orders = (props)=>{
     const [file, setFile] = useState(null);

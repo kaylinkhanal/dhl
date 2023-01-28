@@ -5,7 +5,7 @@ import UserDashboard from "../containers/User/dashboard"
 import AdminDashboard from "../containers/Admin/dashboard"
 import RiderDashboard from "../containers/Rider/dashboard"
 import Orders from "../containers/User/orders";
-import OrdersList from "../containers/User/ordersList";
+import OrdersList from "../containers/User/userOrdersList";
 import AdminOrdersList from "../containers/Admin/adminOrdersList";
 import {useSelector} from 'react-redux';
 import { Routes, Route} from "react-router-dom";
@@ -50,7 +50,7 @@ const AuthScreens=()=>{
       <Routes>
         <Route exact path='/' element={<UserDashboard/>}/>
         <Route exact path='/orders' element={<Orders/>}/>
-        <Route exact path='/orderslist' element={<OrdersList/>}/>
+        <Route exact path='/UserO rderslist' element={<OrdersList/>}/>
         <Route exact path = '/changepassword' element = {<ChangePassword/>}/>
         <Route path='/portfolio/:name' element={<Portfolio/>}/>
         <Route path="*" element={<ErrorPage/>}/>
