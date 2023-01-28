@@ -50,7 +50,7 @@ const AuthScreens=()=>{
       <Routes>
         <Route exact path='/' element={<UserDashboard/>}/>
         <Route exact path='/orders' element={<Orders/>}/>
-        <Route exact path='/UserO rderslist' element={<OrdersList/>}/>
+        <Route exact path='/UserOrderslist' element={<OrdersList/>}/>
         <Route exact path = '/changepassword' element = {<ChangePassword/>}/>
         <Route path='/portfolio/:name' element={<Portfolio/>}/>
         <Route path="*" element={<ErrorPage/>}/>
