@@ -1,11 +1,10 @@
 import React, { useEffect, useState, useMemo, useRef,useCallback } from "react";
-///useref, usecallback, useMemo
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMap, Polyline, } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import {useDispatch,useSelector} from "react-redux";
 import { BsPinMapFill } from "react-icons/bs";
-import {setSenderLocationDetails,setRecepientLocationDetails} from "../reducers/locationSlice"
+import {setSenderLocationDetails,setCurrentDistance,setRecepientLocationDetails} from "../reducers/locationSlice"
 import icon from "./constant";
 
 const center = { lat: 27.685590690097943, lng: 85.34457821701662 }
@@ -48,7 +47,6 @@ const Map = ()=> {
       </>
     );
   }
-
   
   function DraggableMarker() {
     const {senderLocationDetails} = useSelector(state=>state.location)
@@ -91,7 +89,6 @@ const Map = ()=> {
         // it should be based on selectors
         //if you generate
     }
- 
 
     const eventHandlers = useMemo(
       () => ({
@@ -100,7 +97,8 @@ const Map = ()=> {
           if (marker != null) {
             setPosition(marker.getLatLng())
             dispatch(setRecepientLocationDetails(markerRef.current.getLatLng())) 
-            alert(caculateDistance())
+            const distance= caculateDistance()
+            dispatch(setCurrentDistance(distance))
           }
         },
       }),
@@ -129,8 +127,6 @@ const Map = ()=> {
     )
   }
 
-  
-
   return (
     <MapContainer
       center={[ 27.685590690097943, 85.34457821701662]}
@@ -138,6 +134,10 @@ const Map = ()=> {
       scrollWheelZoom
       style={{ height: "100vh" }}
     >
+         <Polyline positions={[
+        [36.460353, 126.440674],
+        [40.085148, 116.552407] 
+    ]} color="red" />
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
