@@ -45,7 +45,7 @@ app.get('/orders', isAuthorized, async(req, res)=>{
         let orderData
         let totalOrderCount 
         if(page!==null){
-             orderData = await Orders.fuzzySearch('').skip(skipCount).limit(size)
+             orderData = await Orders.find().skip(skipCount).limit(size)
              totalOrderCount =  await Orders.find().count()
         }else{
             orderData = await Orders.fuzzySearch('').sort({expectedDeliveryDate: -1})
