@@ -23,7 +23,7 @@ const postOrder = async(req, res)=>{
 
 const getOrder = async(req, res)=>{
     try{
-        // console.log(req.headers.authorization.split(' ')[1])
+        
         const size = req.query.size || 10
         const page = req.query.page
         const skipCount = (size * page - size)

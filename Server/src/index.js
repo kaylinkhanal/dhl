@@ -41,11 +41,13 @@ const registerRouter = require('./routes/registerRouter');
 const loginRouter = require('./routes/loginRouter');
 const ordersRouter = require('./routes/ordersRouter');
 const userRoute = require('./routes/userRouter');
+const categoryRoute = require('./routes/categoryRouter');
 
 app.use(registerRouter)
 app.use(loginRouter)
 app.use(ordersRouter)
 app.use(userRoute)
+app.use(categoryRoute)
 
 server.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
