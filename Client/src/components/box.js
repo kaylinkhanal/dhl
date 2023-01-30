@@ -7,7 +7,7 @@ import Orders from "../containers/User/orders";
 import io from 'socket.io-client';
 const socket = io("http://localhost:5000");
 
-const Box = ({ item, fetchData }) => {
+const Box = ({ item, fetchData, isRider }) => {
 	const { userRole } = useSelector((state) => state.user);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const triggerDelete = () => {
@@ -37,6 +37,7 @@ const Box = ({ item, fetchData }) => {
 			<Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={null} >
 				<Orders isEdit={true} item={item} onOk={handleOk} />
 			</Modal>
+			{!isRider ? 
 			<div className="btns">
 				<button onClick={showModal}><i><SlPencil /></i></button>
 
@@ -47,11 +48,11 @@ const Box = ({ item, fetchData }) => {
 				>
 					<button><i><SlTrash /></i></button>
 				</Popconfirm>
-			</div>
+			</div> : null}
 
 			<div className="order_item" >
 				<div className={"top " + (item.orderStatus === 'rejected' ? 'error' : item.orderStatus === 'accepted' ? 'success' : '')}>
-					<p className="badge">Status: <span >{item.orderStatus}</span></p>
+					{!isRider?<p className="badge">Status: <span >{item.orderStatus}</span></p>: null}
 					<span>Sender: {item.senderName}</span>
 					<span className="orderId">#{item._id}</span>
 					<span>{item.productType}</span>

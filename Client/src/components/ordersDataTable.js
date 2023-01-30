@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 const socket = io(process.env.REACT_APP_BASE_URL);
 
 //to send data to sockets, we just emit the data
-const OrdersData = ({orderList})=>{
+const OrdersData = ({orderList, fetchData})=>{
     useEffect(() => {
         socket.on('connect');
       }, []);
@@ -14,6 +14,7 @@ const OrdersData = ({orderList})=>{
             id
         }
        socket.emit('requestOrder',orderDetails)
+       fetchData()
     }
     return(
         <div style={{'overflowX':'auto'}}>
@@ -38,11 +39,7 @@ const OrdersData = ({orderList})=>{
                 <tbody>
                     {orderList.length > 0 ? orderList.map((item, id) => {
                         return( 
-                            <tr style={item.orderStatus==="accepted"
-                                ?{background: '#b6f2c7'}
-                                :item.orderStatus==="rejected"
-                                ?{background:"#f2b6b6"}:null} 
-                             key={id}>
+                            <tr key={id}>
                                 <td>{id+1}.</td>
                                 <td>{item.productType}</td>
                                 <td>{item.productWeight}kg</td>
