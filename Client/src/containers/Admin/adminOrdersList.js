@@ -3,7 +3,18 @@ import OrdersData from "../../components/ordersDataTable";
 import { Pagination } from 'antd';
 import { FaDolly } from "react-icons/fa";
 import { useSelector } from "react-redux";
-
+import { AudioOutlined } from '@ant-design/icons';
+import { Input, Space } from 'antd';
+const { Search } = Input;
+const suffix = (
+  <AudioOutlined
+    style={{
+      fontSize: 16,
+      color: '#1890ff',
+    }}
+  />
+);
+const onSearch = (value) => console.log(value);
 const AdminOrdersList = ()=>{
     const [orderList, setOrderList] = useState([]);
 	const [totalOrderCount, setTotalOrderCount] = useState(0);
@@ -32,6 +43,7 @@ const AdminOrdersList = ()=>{
             <div className="container">
                 <div className="orders-data">
                     <h1 className="title"><i><FaDolly /></i> Orders List</h1>
+                    <Search placeholder="input search text" onSearch={onSearch} enterButton />
                     <OrdersData orderList={orderList}/>
                     <Pagination defaultPageSize={5} onChange={(page, size) => fetchData(page, size)} total={totalOrderCount} showSizeChanger/>
                 </div>

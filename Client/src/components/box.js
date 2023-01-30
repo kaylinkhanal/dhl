@@ -49,7 +49,7 @@ const Box = ({ item, fetchData }) => {
 				</Popconfirm>
 			</div>
 
-			<div className="order_item">
+			<div className="order_item" >
 				<div className={"top " + (item.orderStatus === 'rejected' ? 'error' : item.orderStatus === 'accepted' ? 'success' : '')}>
 					<p className="badge">Status: <span >{item.orderStatus}</span></p>
 					<span>Sender: {item.senderName}</span>

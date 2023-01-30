@@ -10,6 +10,7 @@ import categorySlice from "./reducers/categorySlice";
 const persistConfig = {
   key: 'root',
   storage,
+  blacklist: ['location']
 }
 
 const reducer = combineReducers({

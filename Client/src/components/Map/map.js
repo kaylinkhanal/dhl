@@ -6,9 +6,9 @@ import DraggableMarker from "./draggableMarker";
 import { useSelector } from "react-redux";
 
 const Map = () => {
-	const {senderLocationDetails, receipentLocationDetails} = useSelector(state=> state.location)
-	const senderLocationValues = Object.values(senderLocationDetails)
-	const receiverLocationValues = Object.values(receipentLocationDetails)
+  const {senderLocationDetails, recepientLocationDetails} = useSelector(state=> state.location)
+  const senderLocationValues =senderLocationDetails ?  Object.values(senderLocationDetails) : ''
+	const receiverLocationValues =Object.values(recepientLocationDetails).length > 0 ? Object.values(recepientLocationDetails) : Object.values(senderLocationDetails) 
 	const pos = [
 		senderLocationValues,
 		receiverLocationValues, 

@@ -60,7 +60,6 @@ const Orders = (props)=>{
                 <div className='form'>
                     <h1>{!props.isEdit ? 'Make your' : 'Edit'} order</h1>
                     
-
                     <Formik
                         initialValues={props.item?{
                             _id:props.item._id,
