@@ -38,7 +38,11 @@ const OrdersData = ({orderList})=>{
                 <tbody>
                     {orderList.length > 0 ? orderList.map((item, id) => {
                         return( 
-                            <tr key={id}>
+                            <tr style={item.orderStatus==="accepted"
+                                ?{background: '#b6f2c7'}
+                                :item.orderStatus==="rejected"
+                                ?{background:"#f2b6b6"}:null} 
+                             key={id}>
                                 <td>{id+1}.</td>
                                 <td>{item.productType}</td>
                                 <td>{item.productWeight}kg</td>
