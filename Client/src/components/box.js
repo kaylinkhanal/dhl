@@ -52,7 +52,7 @@ const Box = ({ item, fetchData, isRider }) => {
 					<button><i><SlTrash /></i></button>
 				</Popconfirm>
 			</div> : 
-			<div className="btns">
+			<div className="btns rider">
 				<button ><i><BiRun /></i></button>
 				<button><i><GiCardPickup /></i></button>
 				<button><i><TbTruckDelivery /></i></button>

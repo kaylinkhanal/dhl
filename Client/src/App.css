@@ -304,6 +304,34 @@ h4 {
   color: #333;
 }
 
+.btns.rider button {
+  background: rgb(0 0 0 / 18%);
+  border-radius: 50%;
+  padding: 0;
+  height: 25px;
+  width: 25px;
+  text-align: center;
+  line-height: 30px;
+  margin-left: 20px;
+  position: relative;
+  font-size: 16px;
+  position: relative;
+}
+
+.btns.rider button::before {
+  position: absolute;
+  right: -14px;
+  content: '';
+  height: 1px;
+  width: 9px;
+  background: rgb(0 0 0 / 18%);
+  top: 50%;
+}
+
+.btns.rider  button:last-child::before {
+  content: none;
+}
+
 .top {
   border-bottom: 1px solid #ccc;
   font-size: 16px;

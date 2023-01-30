@@ -17,6 +17,8 @@ const ordersSchema = new Schema({
     expectedDeliveryTime: { type: String, required: true },
     orderStatus: { type: String, default: 'pending' },
     currentDistance: { type: Number, required: true },
+    senderLocationDetail: { type: Object, required: true },
+    recipientLocationDetail: { type: Object, required: true },
     userID: { type: String, required: true },
     orderImg: { type: String }
   },
