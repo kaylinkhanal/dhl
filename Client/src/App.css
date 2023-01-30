@@ -214,8 +214,6 @@ li.active .menu-dropdown {
   display: flex;
   flex-flow: column;
   justify-content: center;
-  font-weight: 700;
-  font-size: 18px;
   text-decoration: none;
   margin: 10px;
   transition: all .3s ease;
@@ -236,6 +234,11 @@ li.active .menu-dropdown {
   margin: 0 auto;
   display: inline-block;
   margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.card_title{
+  font-weight: 700;
   font-size: 18px;
 }
 
@@ -527,4 +530,15 @@ button.ant-drawer-close {
 
 span.anticon.anticon-close {
   color: #fff;
+}
+
+.category_list{
+  display: flex;
+  flex-direction: row;
+}
+
+.category_list .card{
+  max-width: 200px;
+  padding: 15px;
+  text-align: left;
 }

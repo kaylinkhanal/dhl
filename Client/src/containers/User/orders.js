@@ -14,6 +14,7 @@ const Orders = (props)=>{
     const [file, setFile] = useState(null);
     const navigate = useNavigate()
     const {name, _id} = useSelector(state=> state.user)
+    const {productCategories} = useSelector(state=> state.category)
 
     const orderItem = async(formFields)=>{
         const formData = new FormData();
@@ -94,13 +95,16 @@ const Orders = (props)=>{
                             <Form  onSubmit={handleSubmit}>
                                 <select name="productType" value={values.productType} onChange={handleChange} onBlur={handleBlur}>
                                     <option value="" disabled="disabled" label="Product Type"></option>
-                                    <option value="documents" label="Documents">Documents</option>
+                                    {productCategories.length > 0 ? productCategories.map((category)=>{
+                                        return <option value={category.categoryName} label={category.categoryName}>{category.categoryName}</option>
+                                    }): null}
+                                    {/* <option value="documents" label="Documents">Documents</option>
                                     <option value="clothing" label="Clothing">Clothing</option>
                                     <option value="jewelleries" label="Jewelleries">Jewelleries</option>
                                     <option value="stationary" label="Stationary">Stationary</option>
                                     <option value="electronics" label="Electronics">Electronics</option>
                                     <option value="furniture" label="Furniture">Furniture</option>
-                                    <option value="other" label="Other">Other</option>
+                                    <option value="other" label="Other">Other</option> */}
                                 </select>
                                 {errors.productType && touched.productType ? (<div className="error">{errors.productType}</div>) : null}
 
