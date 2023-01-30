@@ -17,7 +17,7 @@ const locationSlice = createSlice({
       state.recepientLocationDetails = actions.payload
       },
       setCurrentDistance:  (state, actions) => {
-        state.recepientLocationDetails = actions.payload
+        state.currentDistance = actions.payload
         },
   }
 });

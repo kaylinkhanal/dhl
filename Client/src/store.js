@@ -9,6 +9,7 @@ import { persistReducer, persistStore } from 'redux-persist';
 const persistConfig = {
   key: 'root',
   storage,
+  blacklist: ['location']
 }
 
 const reducer = combineReducers({

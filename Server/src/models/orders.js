@@ -9,6 +9,7 @@ const ordersSchema = new Schema({
     senderLocation: { type: String, required: true },
     receipentLocation: { type: String, required: true },
     senderName: { type: String, required: true },
+    rejectedReasons: { type: String},
     receipentName: { type: String, required: true },
     receipentNumber: { type: Number, required: true },
     expectedDeliveryDate: { type: String, required: true },

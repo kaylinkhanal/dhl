@@ -16,14 +16,12 @@ const DraggableMarker = ()=>{
 
     const markerRef = useRef(null)
 
-    const caculateDistance = () => {
+    const caculateDistance = (senderLocationDetails) => {
       //current draggle marker latlng can be retrieved from current markerReference
       const currentDragLatLng = markerRef.current.getLatLng()
       // latlng of sender(non-moving marker) can be fetched from redux using use selector :senderLocationDetails 
       const currentSenderLatLng = senderLocationDetails
       //please write a distance calculation code here
-      console.log(currentDragLatLng, currentSenderLatLng)
-
         const toRadian = n => (n * Math.PI) / 180
 
         let lat2 = currentSenderLatLng.lat
@@ -51,12 +49,17 @@ const DraggableMarker = ()=>{
           const marker = markerRef.current
           if (marker != null) {
             setPosition(marker.getLatLng())
-            dispatch(setRecepientLocationDetails(markerRef.current.getLatLng()))
-            dispatch(setCurrentDistance(caculateDistance()))
+            const recepientDetails = {
+             lat: markerRef.current.getLatLng().lat ,
+             lng: markerRef.current.getLatLng().lng ,
+            }
+            dispatch(setRecepientLocationDetails(recepientDetails))
+            const distance = caculateDistance(senderLocationDetails)
+            dispatch(setCurrentDistance(distance))
           }
         },
       }),
-      [],
+      [senderLocationDetails],
     )
     const toggleDraggable = useCallback(() => {
       setDraggable((d) => !d)
