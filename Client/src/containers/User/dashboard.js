@@ -12,7 +12,7 @@ const Dashboard = ()=>{
             <div className="bg-image"></div>
             <div className="card_block">
                 <Card title='Send Item' link="/orders" icon={<FaTelegramPlane/>}/>
-                <Card title='My Orders' link="/ordersList"  icon={<FaDolly/>}/>
+                <Card title='My Orders' link="/userOrdersList"  icon={<FaDolly/>}/>
             </div>
         </>
     )
