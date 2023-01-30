@@ -15,11 +15,16 @@ const Orders = (props)=>{
     const navigate = useNavigate()
     const {name, _id} = useSelector(state=> state.user)
     const {currentDistance} = useSelector(state=> state.location)
+    const {senderLocationDetails} = useSelector(state=> state.location)
+    const {recepientLocationDetails} = useSelector(state=> state.location)
     const orderItem = async(formFields)=>{
         const formData = new FormData();
         formData.append("orders", file);
         formData.append("userID", _id);
         formData.append("senderName", name);
+        formData.append("currentDistance", currentDistance);
+        formData.append("senderLocationDetails", senderLocationDetails);
+        formData.append("recepientLocationDetails", recepientLocationDetails);
         Object.keys(formFields).map((item, id)=>{
             formData.append(item, Object.values(formFields)[id]);
         })
