@@ -115,7 +115,7 @@ const Orders = (props)=>{
                                 <Field name="maxSize" placeholder="Max Size (in meters)" value={values.maxSize} onChange={handleChange} onBlur={handleBlur} />
                                 {errors.maxSize && touched.maxSize ? (<div className="error">{errors.maxSize}</div>) : null}
 
-                                <Field name="senderLocation" placeholder="Sender Location"  onBlur={handleBlur} value={senderLocationDetails} onChange={handleChange} onBlur={handleBlur} />
+                                <Field name="senderLocation" placeholder="Sender Location" value={senderLocationDetails} onChange={handleChange} onBlur={handleBlur} />
                                 {errors.senderLocation && touched.senderLocation ? (<div className="error">{errors.senderLocation}</div>) : null}
 
                                 <Field name="receipentLocation" placeholder="Receipent Location" value={recepientLocationDetails} onChange={handleChange} onBlur={handleBlur} />
