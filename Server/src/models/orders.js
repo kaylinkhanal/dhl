@@ -1,4 +1,5 @@
 
+const mongoose_fuzzy_searching = require('mongoose-fuzzy-searching');
 const mongoose = require('mongoose')
 const { Schema } = mongoose;
 
@@ -19,5 +20,6 @@ const ordersSchema = new Schema({
     orderImg: { type: String }
   },
   { collection: 'Orders' });
+  ordersSchema.plugin(mongoose_fuzzy_searching, { fields: ['senderName']})
 
 module.exports= mongoose.model('Orders', ordersSchema);
