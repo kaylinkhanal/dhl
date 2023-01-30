@@ -53,6 +53,7 @@ const DraggableMarker = ()=>{
              lat: markerRef.current.getLatLng().lat ,
              lng: markerRef.current.getLatLng().lng ,
             }
+            console.log("anskjhd", recepientDetails)
             dispatch(setRecepientLocationDetails(recepientDetails))
             const distance = caculateDistance(senderLocationDetails)
             dispatch(setCurrentDistance(distance))

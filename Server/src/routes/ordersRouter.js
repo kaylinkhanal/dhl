@@ -14,5 +14,7 @@ app.put('/orders', ordersControllers.updateOrder )
 
 app.delete('/orders',ordersControllers.deleteOrder)
 
+app.post('/searchdelivery', ordersControllers.searchDelivery)
+
 
 module.exports = app;

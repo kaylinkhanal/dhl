@@ -14,12 +14,17 @@ const Orders = (props)=>{
     const [file, setFile] = useState(null);
     const navigate = useNavigate()
     const {name, _id} = useSelector(state=> state.user)
-    const {currentDistance} = useSelector(state=> state.location)
+    const {currentDistance, senderLocationDetails, recepientLocationDetails} = useSelector(state=> state.location)
+
+    console.log("anil", recepientLocationDetails)
+    console.log("bhusal", senderLocationDetails)
+
     const orderItem = async(formFields)=>{
         const formData = new FormData();
         formData.append("orders", file);
         formData.append("userID", _id);
         formData.append("senderName", name);
+        formData.append("distance", currentDistance)
         Object.keys(formFields).map((item, id)=>{
             formData.append(item, Object.values(formFields)[id]);
         })
@@ -56,7 +61,6 @@ const Orders = (props)=>{
         <section className='form_section'>
             <div className='container'>
                 <Map/>
-                {currentDistance}
                 <div className='form'>
                     <h1>{!props.isEdit ? 'Make your' : 'Edit'} order</h1>
                     
@@ -111,11 +115,12 @@ const Orders = (props)=>{
                                 <Field name="maxSize" placeholder="Max Size (in meters)" value={values.maxSize} onChange={handleChange} onBlur={handleBlur} />
                                 {errors.maxSize && touched.maxSize ? (<div className="error">{errors.maxSize}</div>) : null}
 
-                                <Field name="senderLocation" placeholder="Sender Location" value={values.senderLocation} onChange={handleChange} onBlur={handleBlur} />
+                                <Field name="senderLocation" placeholder="Sender Location"  onBlur={handleBlur} value={senderLocationDetails} onChange={handleChange} onBlur={handleBlur} />
                                 {errors.senderLocation && touched.senderLocation ? (<div className="error">{errors.senderLocation}</div>) : null}
 
-                                <Field name="receipentLocation" placeholder="Receipent Location" value={values.receipentLocation} onChange={handleChange} onBlur={handleBlur} />
+                                <Field name="receipentLocation" placeholder="Receipent Location" value={recepientLocationDetails} onChange={handleChange} onBlur={handleBlur} />
                                 {errors.receipentLocation && touched.receipentLocation ? (<div className="error">{errors.receipentLocation}</div>) : null}
+                                    { currentDistance ? <h5>The distance is {currentDistance} KM</h5> : ''}
 
                                 <Field name="receipentName" placeholder="Receipent Name" value={values.receipentName} onChange={handleChange} onBlur={handleBlur} />
                                 {errors.receipentName && touched.receipentName ? (<div className="error">{errors.receipentName}</div>) : null}

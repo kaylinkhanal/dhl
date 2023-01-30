@@ -9,6 +9,7 @@ const ordersSchema = new Schema({
     maxSize: { type: String, required: true },
     senderLocation: { type: String, required: true },
     receipentLocation: { type: String, required: true },
+    distance: { type: String, required: true },
     senderName: { type: String, required: true },
     rejectedReasons: { type: String},
     receipentName: { type: String, required: true },

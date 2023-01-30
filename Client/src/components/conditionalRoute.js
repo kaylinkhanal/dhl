@@ -12,6 +12,7 @@ import { Routes, Route} from "react-router-dom";
 import ChangePassword from "./changePassword";
 import Portfolio from "../containers/SharedScreens/profile";
 import ErrorPage from "../containers/ErrorPage/error";
+import TrackDelivery from "../containers/trackDelivery";
 
 const ConditionalRouting = ()=>{
     const {userRole} = useSelector(state=>state.user)
@@ -32,6 +33,7 @@ const AuthScreens=()=>{
           <Route exact path='/' element={<Login/>}/>
           <Route exact path='/register' element={<Register/>}/>
           <Route path="*" element={<ErrorPage/>}/>
+          <Route path="/trackdelivery" element={<TrackDelivery/>}/>
       </Routes>
     )
   }
