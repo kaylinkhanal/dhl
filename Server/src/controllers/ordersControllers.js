@@ -3,6 +3,7 @@ const moment = require('moment')
 
 const postOrder = async (req, res) => {
     try {
+        console.log(req.body)
         const formattedDate = moment(req.body.expectedDeliveryDate).format('YYYY/MM/DD')
         req.body.expectedDeliveryDate = formattedDate
         req.body.orderImg = req.file.originalname
@@ -51,6 +52,7 @@ const getOrder = async (req, res) => {
 const orderStatus = async (req, res) => {
     try {
         await Orders.findByIdAndUpdate(req.body.id, { orderStatus: req.body.status })
+
     } catch (err) {
         console.log(err)
     }

@@ -12,6 +12,7 @@ const Login = async(req, res) => {
         const isValidPassword = bcrypt.compareSync(req.body.password, dbPassword)
         const {password, __v, ...refactoredData} = data.toObject()
         if(isValidPassword){
+            
             res.json({
                 msg: 'login success',
                 userDetails: refactoredData,

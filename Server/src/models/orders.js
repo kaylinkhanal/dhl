@@ -18,7 +18,8 @@ const ordersSchema = new Schema({
     expectedDeliveryTime: { type: String, required: true },
     orderStatus: { type: String, default: 'pending' },
     userID: { type: String, required: true },
-    orderImg: { type: String }
+    orderImg: { type: String },
+    orderCount: { type: Number, default: 0}
   },
   { collection: 'Orders' });
   ordersSchema.plugin(mongoose_fuzzy_searching, { fields: ['senderName']})
