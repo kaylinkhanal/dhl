@@ -6,7 +6,14 @@ import React, {
   useCallback,
 } from "react";
 ///useref, usecallback, useMemo
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  useMap,
+  Polyline,
+} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,11 +26,15 @@ import icon from "./constant";
 
 const center = { lat: 27.685590690097943, lng: 85.34457821701662 };
 const Map = () => {
+  // const [senderLatLng, setSenderLatLng] = useState({ lat: 27.685590690097943, lng: 85.34457821701662 });
+  // const [receiverLatLng, setReceiverLatLng] = useState({ lat: 27.685590690097943, lng: 85.34457821701662 });
+
   function LocationMarker() {
     const [position, setPosition] = useState(null);
     const [bbox, setBbox] = useState([]);
     const { senderLocationDetails } = useSelector((state) => state.location);
     const map = useMap();
+
     const dispatch = useDispatch();
     useEffect(() => {
       map.locate().on("locationfound", function (e) {
@@ -70,13 +81,24 @@ const Map = () => {
 
     const markerRef = useRef(null);
 
-    const caculateDistance = () => {
+    const caculateDistance = (map) => {
       //current draggle marker latlng can be retrieved from current markerReference
       const currentDragLatLng = markerRef.current.getLatLng();
       // latlng of sender(non-moving marker) can be fetched from redux using use selector :senderLocationDetails
       const currentSenderLatLng = senderLocationDetails;
       //please write a distance calculation code here
       console.log(currentDragLatLng, currentSenderLatLng);
+      // var line = L.Polyline ([currentDragLatLng, currentSenderLatLng], {color: 'red'}).addTo(map);
+
+      // var pointList = [currentDragLatLng, currentSenderLatLng];
+      // var firstpolyline = new L.Polyline(pointList, {
+      //   color: "red",
+      //   weight: 3,
+      //   opacity: 0.5,
+      //   smoothFactor: 1,
+      // });
+      // firstpolyline.addTo(map);
+
       function getDistance(lat1, lon1, lat2, lon2) {
         const R = 6371; // radius of Earth in km
         const dLat = (lat2 - lat1) * (Math.PI / 180);
@@ -100,13 +122,16 @@ const Map = () => {
         currentSenderLatLng.lat,
         currentSenderLatLng.lng
       );
+      const pointA = [currentDragLatLng.lat, currentDragLatLng.lng];
+      const pointB = [currentSenderLatLng.lat, currentSenderLatLng.lng];
+      const point = [pointA, pointB];
 
-      return distance;
+      return (distance(), point)
 
       // it should be based on selectors
       //if you generate
     };
-
+  
     const eventHandlers = useMemo(
       () => ({
         dragend() {
@@ -154,6 +179,7 @@ const Map = () => {
       />
       <LocationMarker />
       <DraggableMarker />
+      {/* <Polyline positions={point} /> */}
     </MapContainer>
   );
 };
