@@ -23,7 +23,6 @@ const postOrder = async(req, res)=>{
 
 const getOrder = async(req, res)=>{
     try{
-        
         const size = req.query.size || 10
         const page = req.query.page
         const skipCount = (size * page - size)
@@ -31,10 +30,10 @@ const getOrder = async(req, res)=>{
         let orderData
         let totalOrderCount 
         if(page!==null){
-             orderData = await Orders.fuzzySearch('').skip(skipCount).limit(size)
+             orderData = await Orders.find().skip(skipCount).limit(size)
              totalOrderCount =  await Orders.find().count()
         }else{
-            orderData = await Orders.fuzzySearch('').sort({expectedDeliveryDate: -1})
+            orderData = await Orders.find()
         }
         if(orderData){
             res.json({
@@ -45,6 +44,18 @@ const getOrder = async(req, res)=>{
         
     }catch(err){
         console.log(err)
+    }
+}
+
+const getFilteredOrders = async(req, res)=>{
+    try{
+        const filterOrders = await Orders.find(req.query)
+        console.log(filterOrders)
+        res.json({
+            orderList : filterOrders
+        })
+    }catch(error){
+
     }
 }
 
@@ -98,3 +109,4 @@ exports.getOrder = getOrder;
 exports.orderStatus = orderStatus;
 exports.updateOrder = updateOrder;
 exports.deleteOrder = deleteOrder;
+exports.getFilteredOrders = getFilteredOrders;

@@ -1,5 +1,5 @@
 
-const mongoose_fuzzy_searching = require('mongoose-fuzzy-searching');
+// const mongoose_fuzzy_searching = require('mongoose-fuzzy-searching');
 const mongoose = require('mongoose')
 const { Schema } = mongoose;
 
@@ -16,10 +16,13 @@ const ordersSchema = new Schema({
     expectedDeliveryDate: { type: String, required: true },
     expectedDeliveryTime: { type: String, required: true },
     orderStatus: { type: String, default: 'pending' },
+    currentDistance: { type: Number, required: true },
+    senderLocationDetail: { type: Object, required: true },
+    recipientLocationDetail: { type: Object, required: true },
     userID: { type: String, required: true },
     orderImg: { type: String }
   },
   { collection: 'Orders' });
-  ordersSchema.plugin(mongoose_fuzzy_searching, { fields: ['senderName']})
+  // ordersSchema.plugin(mongoose_fuzzy_searching, { fields: ['senderName']})
 
 module.exports= mongoose.model('Orders', ordersSchema);

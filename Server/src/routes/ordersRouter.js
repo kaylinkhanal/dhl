@@ -8,6 +8,8 @@ app.post('/orders',uploadMiddleware.orderUpload,ordersControllers.postOrder )
 
 app.get('/orders', isAuthorized, ordersControllers.getOrder )
 
+app.get('/filterOrders', ordersControllers.getFilteredOrders )
+
 app.patch('/requestorder', ordersControllers.orderStatus )
 
 app.put('/orders', ordersControllers.updateOrder )

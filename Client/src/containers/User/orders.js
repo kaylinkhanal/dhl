@@ -14,12 +14,16 @@ const Orders = (props)=>{
     const [file, setFile] = useState(null);
     const navigate = useNavigate()
     const {name, _id} = useSelector(state=> state.user)
-    const {currentDistance} = useSelector(state=> state.location)
+    const {currentDistance, senderLocationDetails, recepientLocationDetails} = useSelector(state=> state.location)
+
     const orderItem = async(formFields)=>{
         const formData = new FormData();
         formData.append("orders", file);
         formData.append("userID", _id);
         formData.append("senderName", name);
+        formData.append("currentDistance", currentDistance);
+        formData.append("senderLocationDetail", senderLocationDetails);
+        formData.append("recipientLocationDetail", recepientLocationDetails)
         Object.keys(formFields).map((item, id)=>{
             formData.append(item, Object.values(formFields)[id]);
         })
@@ -31,7 +35,7 @@ const Orders = (props)=>{
 
         if(data){
             message.success(data.msg)
-            props.isEdit?  props.onOk() : navigate('/orderslist')
+            props.isEdit?  props.onOk() : navigate('/userOrderslist')
         }
     }
     
