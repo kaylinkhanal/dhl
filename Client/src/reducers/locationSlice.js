@@ -11,18 +11,18 @@ const locationSlice = createSlice({
   initialState,
   reducers: {
     setSenderLocationDetails: (state, actions) => {
-    state.senderLocationDetails = actions.payload
+      state.senderLocationDetails = actions.payload
     },
     setRecepientLocationDetails: (state, actions) => {
       state.recepientLocationDetails = actions.payload
-      },
-      setCurrentDistance:  (state, actions) => {
-        state.currentDistance = actions.payload
-        },
+    },
+    setCurrentDistance: (state, actions) => {
+      state.currentDistance = actions.payload
+    },
   }
 });
 
-export const { setSenderLocationDetails, setRecepientLocationDetails,setCurrentDistance } = locationSlice.actions;
+export const { setSenderLocationDetails, setRecepientLocationDetails, setCurrentDistance } = locationSlice.actions;
 export default locationSlice.reducer;
 
 

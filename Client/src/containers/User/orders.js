@@ -1,7 +1,7 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
-import { useNavigate } from 'react-router-dom';
+import { json, useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux"
 import { message, DatePicker} from 'antd'
 import dayjs from 'dayjs'
@@ -12,6 +12,8 @@ const fileTypes = ["JPG", "PNG", "GIF", "JPEG"];
 
 const Orders = (props)=>{
     const [file, setFile] = useState(null);
+    const [loc, setLoc] = useState();
+
     const navigate = useNavigate()
     const {name, _id} = useSelector(state=> state.user)
     const {currentDistance} = useSelector(state=> state.location)
@@ -61,7 +63,6 @@ const Orders = (props)=>{
         <section className='form_section'>
             <div className='container'>
                 <Map/>
-                {currentDistance}
                 <div className='form'>
                     <h1>{!props.isEdit ? 'Make your' : 'Edit'} order</h1>
                     
@@ -98,6 +99,7 @@ const Orders = (props)=>{
 
                         {({ errors, touched, values, setFieldValue, handleChange, handleBlur, handleSubmit }) => (
                             <Form  onSubmit={handleSubmit}>
+                                {/* {loc} */}
                                 <select name="productType" value={values.productType} onChange={handleChange} onBlur={handleBlur}>
                                     <option value="" disabled="disabled" label="Product Type"></option>
                                     <option value="documents" label="Documents">Documents</option>
@@ -116,11 +118,12 @@ const Orders = (props)=>{
                                 <Field name="maxSize" placeholder="Max Size (in meters)" value={values.maxSize} onChange={handleChange} onBlur={handleBlur} />
                                 {errors.maxSize && touched.maxSize ? (<div className="error">{errors.maxSize}</div>) : null}
 
-                                <Field name="senderLocation" placeholder="Sender Location" value={values.senderLocation} onChange={handleChange} onBlur={handleBlur} />
+                                <Field name="senderLocation" placeholder="Sender Location" value={senderLocationDetails} onChange={handleChange} onBlur={handleBlur} />
                                 {errors.senderLocation && touched.senderLocation ? (<div className="error">{errors.senderLocation}</div>) : null}
 
-                                <Field name="receipentLocation" placeholder="Receipent Location" value={values.receipentLocation} onChange={handleChange} onBlur={handleBlur} />
+                                <Field name="receipentLocation" placeholder="Receipent Location" value={JSON.stringify(recepientLocationDetails)} onChange={handleChange} onBlur={handleBlur} />
                                 {errors.receipentLocation && touched.receipentLocation ? (<div className="error">{errors.receipentLocation}</div>) : null}
+                                    { currentDistance ? <h5>The distance is {currentDistance} KM</h5> : ''}
 
                                 <Field name="receipentName" placeholder="Receipent Name" value={values.receipentName} onChange={handleChange} onBlur={handleBlur} />
                                 {errors.receipentName && touched.receipentName ? (<div className="error">{errors.receipentName}</div>) : null}
@@ -142,6 +145,7 @@ const Orders = (props)=>{
                                     <option label="6am-9am">6am-9am</option>
                                     <option label="9am-12pm">9am-12pm</option>
                                 </select>
+                                
                                 <FileUploader handleChange={saveFile} type="file"  types={fileTypes} />
                                 
                                 {errors.expectedDeliveryTime && touched.expectedDeliveryTime ? (<div className="error">{errors.expectedDeliveryTime}</div>) : null}
