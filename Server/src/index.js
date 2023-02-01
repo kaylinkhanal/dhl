@@ -31,7 +31,6 @@ io.on('connection', (socket) => {
     io.emit('orderDetails',orderDetails)
     // console.log(orderDetails.id)
     const updatedResult = await Orders.findByIdAndUpdate({_id: orderDetails.id}, {orderStatus: orderDetails.status})
-    console.log('updated status', updatedResult)
   });
 });
 

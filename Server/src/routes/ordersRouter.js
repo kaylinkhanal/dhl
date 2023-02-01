@@ -6,7 +6,7 @@ const isAuthorized = require('../middleware/tokenAuthorize')
 
 app.post('/orders',uploadMiddleware.orderUpload,ordersControllers.postOrder )
 
-app.get('/orders', isAuthorized, ordersControllers.getOrder )
+app.get('/orders', ordersControllers.getOrder )
 
 app.patch('/requestorder', ordersControllers.orderStatus )
 

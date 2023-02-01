@@ -30,11 +30,17 @@ const getOrder = async(req, res)=>{
 
         let orderData
         let totalOrderCount 
-        if(page!==null){
-             orderData = await Orders.find.skip(skipCount).limit(size)
+        if(page){
+             orderData = await Orders.find().skip(skipCount).limit(size)
              totalOrderCount =  await Orders.find().count()
-        }else{
-            orderData = await Orders.find.sort({expectedDeliveryDate: -1})
+        }else if(req.query.orderStatus && req.query.flag == 'unresolved'){
+            orderData = await Orders.find({'orderStatus': {$nin : ["pending", "rejected"]}})
+        }
+        else if(req.query.orderStatus){
+            orderData = await Orders.find({orderStatus: req.query.orderStatus})
+        }
+        else{
+            orderData = await Orders.find().sort({expectedDeliveryDate: -1})
         }
         if(orderData){
             res.json({

@@ -23,8 +23,8 @@ const Orders = (props)=>{
         formData.append("userID", _id);
         formData.append("senderName", name);
         formData.append("currentDistance", currentDistance);
-        formData.append("senderLocationDetails", senderLocationDetails);
-        formData.append("recepientLocationDetails", recepientLocationDetails);
+        formData.append("senderLocationDetails", JSON.stringify(senderLocationDetails));
+        formData.append("recepientLocationDetails", JSON.stringify(recepientLocationDetails));
         Object.keys(formFields).map((item, id)=>{
             formData.append(item, Object.values(formFields)[id]);
         })
@@ -34,10 +34,10 @@ const Orders = (props)=>{
         })
         const data = await res.json()
 
-        if(data){
-            message.success(data.msg)
-            props.isEdit?  props.onOk() : navigate('/orderslist')
-        }
+        // if(data){
+        //     message.success(data.msg)
+        //     props.isEdit?  props.onOk() : navigate('/orderslist')
+        // }
     }
     
    
