@@ -1,9 +1,12 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Formik, Field, Form } from 'formik';
-import * as Yup from 'yup';
 import { message, Steps } from 'antd';
 import { Link } from 'react-router-dom';
-import  statusMapping from "../configs/statusMapping.json"
+import statusMapping from "../configs/statusMapping.json"
+import { BiRun } from "react-icons/bi";
+import { GiCardPickup } from "react-icons/gi";
+import { TbTruckDelivery, TbClipboardCheck } from "react-icons/tb";
+import { MdOutlineFactCheck } from "react-icons/md";
 
 const TrackDelivery = () => {
     const inputRef = useRef();
@@ -65,28 +68,37 @@ const TrackDelivery = () => {
                     </div>
                 </div>
             </section>
-           
+
             <div className="container">
                 {deliveryStatus ? (<Steps
                     size="small"
                     current={statusMapping[deliveryStatus]}
                     items={[
                         {
-                            title: deliveryStatus,
-                            description: (deliveryStatus == 'pending') ? 'Your item needs to be approved' : 'item has been approved'
+                            title: "Approved / pending",
+                            description: (deliveryStatus == 'pending') ? 'Your item needs to be approved' : 'item has been approved',
+                            icon: <TbClipboardCheck />
                         },
-                       { 
-                           title: "riderOnHisWay"
+                        {
+                            title: "riderOnHisWay",
+                            description: (deliveryStatus == 'riderOnHisWay') ? 'Rider id oh his way' : '',
+                            icon: <BiRun />
                         },
-                        { 
-                            title: "riderPickedUp"
-                         },
-                         { 
-                            title: "productDispatched"
-                         },
-                         { 
-                            title: "productDelivered"
-                         },
+                        {
+                            title: "riderPickedUp",
+                            description: (deliveryStatus == 'riderPickedUp') ? 'Rider has picked up your order' : '',
+                            icon: <GiCardPickup />
+                        },
+                        {
+                            title: "productDispatched",
+                            description: (deliveryStatus == 'productDispatched') ? 'Order has been dispatched to deliver' : '',
+                            icon: <TbTruckDelivery />
+                        },
+                        {
+                            title: "productDelivered",
+                            description: (deliveryStatus == 'productDelivered') ? 'Order Delivered' : '',
+                            icon: <MdOutlineFactCheck />
+                        },
                     ]}
                 />) : ''}
             </div>
