@@ -40,28 +40,28 @@ const Box = ({ item, fetchData, isRider }) => {
 			<Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={null} >
 				<Orders isEdit={true} item={item} onOk={handleOk} />
 			</Modal>
-			{!isRider ? 
-			<div className="btns">
-				<button onClick={showModal}><i><SlPencil /></i></button>
+			{!isRider ?
+				<div className="btns">
+					<button onClick={showModal}><i><SlPencil /></i></button>
 
-				<Popconfirm
-					title="Delete order"
-					description="Are you sure you want to delete this order?"
-					onConfirm={() => triggerDelete()}
-				>
-					<button><i><SlTrash /></i></button>
-				</Popconfirm>
-			</div> : 
-			<div className="btns rider">
-				<button ><i><BiRun /></i></button>
-				<button><i><GiCardPickup /></i></button>
-				<button><i><TbTruckDelivery /></i></button>
-			</div>
+					<Popconfirm
+						title="Delete order"
+						description="Are you sure you want to delete this order?"
+						onConfirm={() => triggerDelete()}
+					>
+						<button><i><SlTrash /></i></button>
+					</Popconfirm>
+				</div> :
+				<div className="btns rider">
+					<button ><i><BiRun /></i></button>
+					<button><i><GiCardPickup /></i></button>
+					<button><i><TbTruckDelivery /></i></button>
+				</div>
 			}
 
 			<div className="order_item" >
 				<div className={"top " + (item.orderStatus === 'rejected' ? 'error' : item.orderStatus === 'aproved' ? 'success' : '')}>
-				{!isRider ? <p className="badge">Status: <span >{item.orderStatus}</span></p> : null}
+					<p className="badge">Status: <span >{item.orderStatus}</span></p>
 					<span>Sender: {item.senderName}</span>
 					<span className="orderId">#{item._id}</span>
 					<span>{item.productType}</span>
@@ -76,16 +76,16 @@ const Box = ({ item, fetchData, isRider }) => {
 				<div className="bottom">
 					<ul>
 						<li>
-							{ 
-							!item.orderImg ? <img src={require('../images/dhl.png')} height={40} alt="orders" /> : 
-							<img src={require('../uploads/orders/'+item.orderImg)} height={40} alt="orders" /> 
+							{
+								!item.orderImg ? <img src={require('../images/dhl.png')} height={40} alt="orders" /> :
+									<img src={require('../uploads/orders/' + item.orderImg)} height={40} alt="orders" />
 							}
 						</li>
-						<li><i><SlUser /></i> Receipant Name:<br/>{item.receipentName}</li>
-						<li><i><SlLocationPin /></i> Receipant Location:<br/>{item.receipentLocation}</li>
-						<li><i><SlPhone /></i> Receipant Contact:<br/>{item.receipentNumber}</li>
-						<li><i><SlCalender /></i> Delivery Date:<br/>{item.expectedDeliveryDate}</li>
-						<li><i><SlClock /></i> Delivery time:<br/>{item.expectedDeliveryTime} </li>
+						<li><i><SlUser /></i> Receipant Name:<br />{item.receipentName}</li>
+						<li><i><SlLocationPin /></i> Receipant Location:<br />{item.receipentLocation}</li>
+						<li><i><SlPhone /></i> Receipant Contact:<br />{item.receipentNumber}</li>
+						<li><i><SlCalender /></i> Delivery Date:<br />{item.expectedDeliveryDate}</li>
+						<li><i><SlClock /></i> Delivery time:<br />{item.expectedDeliveryTime} </li>
 					</ul>
 				</div>
 			</div>

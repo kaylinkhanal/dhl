@@ -66,7 +66,7 @@ select,
 }
 input:focus,
 select:focus {
-  outline: solid;
+  outline: 1px solid;
 }
 
 textarea:focus,
@@ -569,4 +569,27 @@ button.ant-drawer-close {
 
 span.anticon.anticon-close {
   color: #fff;
+}
+
+.ant-steps-item-icon {
+  height: 40px !important;
+  width: 40px !important;
+  border-radius: 50%;
+  background: #d5d3d3 !important;
+  display: inline-block;
+  line-height: 46px !important;
+  padding: 0;
+}
+
+.ant-steps-item-finish span.ant-steps-icon,
+.ant-steps-item-finish .ant-steps-item-title{
+  color: green !important;
+}
+
+.ant-steps-item-finish .ant-steps-item-icon {
+  background: rgb(0 128 0 / 26%) !important;
+}
+
+.ant-steps-item-finish ::after {
+  background-color: green !important;
 }

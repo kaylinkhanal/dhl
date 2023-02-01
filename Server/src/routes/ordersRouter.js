@@ -4,17 +4,19 @@ const uploadMiddleware = require("../middleware/uploadMiddleware")
 const ordersControllers = require("../controllers/ordersControllers")
 const isAuthorized = require('../middleware/tokenAuthorize')
 
-app.post('/orders',uploadMiddleware.orderUpload,ordersControllers.postOrder )
+app.post('/orders', uploadMiddleware.orderUpload, ordersControllers.postOrder)
 
-app.get('/orders', isAuthorized, ordersControllers.getOrder )
+app.get('/orders', ordersControllers.getOrder)
 
-app.get('/filterOrders', ordersControllers.getFilteredOrders )
+// app.get('/filterOrders', ordersControllers.getFilteredOrders)
 
-app.patch('/requestorder', ordersControllers.orderStatus )
+app.patch('/requestorder', ordersControllers.orderStatus)
 
-app.put('/orders', ordersControllers.updateOrder )
+app.put('/orders', ordersControllers.updateOrder)
 
-app.delete('/orders',ordersControllers.deleteOrder)
+app.delete('/orders', ordersControllers.deleteOrder)
+
+app.post('/trackorders', ordersControllers.trackOrders)
 
 
 module.exports = app;
