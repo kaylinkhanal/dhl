@@ -19,7 +19,7 @@ const Navigation = () => {
         {
             key: "2",
             label: <Link to='/changepassword'>Change Password</Link>,
-          },
+        },
 
         {
             key: '3',
@@ -51,22 +51,22 @@ const Navigation = () => {
                                 <li><Link to="/">Dashboard</Link></li>
                             </ul>
                         ) : userRole === 'rider' ?
-                        (
-                            <ul>
-                                <li><Link to="/">Dashboard</Link></li>
-                            </ul>
-                        ) : null}
+                            (
+                                <ul>
+                                    <li><Link to="/">Dashboard</Link></li>
+                                </ul>
+                            ) : null}
                     </div>
                     <div className="navbar_right">
 
                         <ul className="nav_list">
                             {userRole === 'admin' ? (
                                 <li>
-                                    <Button onClick={showDrawer} className="menu-icon"><HiOutlineMenuAlt3/></Button>
+                                    <Button onClick={showDrawer} className="menu-icon"><HiOutlineMenuAlt3 /></Button>
                                     <Drawer placement="right" onClose={onClose} open={open}>
                                         <ul>
-                                            <li><Link to="/">Dashboard</Link></li>
-                                            <li><Link to="/ordersdata">Orders</Link></li>
+                                            <li onClick={onClose}><Link to="/">Dashboard</Link></li>
+                                            <li onClick={onClose}><Link to="/ordersdata">Orders</Link></li>
                                         </ul>
                                     </Drawer>
                                 </li>

@@ -44,7 +44,7 @@ const AdminOrdersList = () => {
                 <div className="orders-data">
                     <h1 className="title"><i><FaDolly /></i> Orders List</h1>
                     <Search placeholder="input search text" onSearch={onSearch} enterButton />
-                    <OrdersData orderList={orderList} />
+                    <OrdersData orderList={orderList} fetchData={fetchData} />
                     <Pagination defaultPageSize={5} onChange={(page, size) => fetchData(page, size)} total={totalOrderCount} showSizeChanger />
                 </div>
             </div>
