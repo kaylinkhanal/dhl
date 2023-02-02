@@ -3,8 +3,8 @@ import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import { message } from 'antd';
 
-const AddProductCategory = (props)=>{
-    const addCategory = async(FieldValues)=>{
+const AddProductCategory = (props) => {
+    const addCategory = async (FieldValues) => {
         const requestOptions = {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
@@ -14,12 +14,13 @@ const AddProductCategory = (props)=>{
         const response = await fetch(`${process.env.REACT_APP_BASE_URL}/category`, requestOptions);
         const data = await response.json()
         console.log(data)
-        if(data.msg === 'Added new category'){
+        if (data.msg === 'Added new category') {
             message.success(data.msg)
             props.submitForm()
-        }else{
+        } else {
             message.error(data.msg)
         }
+        props.fetchCategory()
     }
 
     const categorySchema = Yup.object().shape({
@@ -29,7 +30,7 @@ const AddProductCategory = (props)=>{
     });
 
 
-    return(
+    return (
         <section>
             <div className='container'>
                 <div className='form'>
@@ -41,9 +42,9 @@ const AddProductCategory = (props)=>{
                             unitPrice: '',
                         }}
                         validationSchema={categorySchema}
-                        onSubmit={(values, { resetForm })=>{
+                        onSubmit={(values, { resetForm }) => {
                             addCategory(values)
-                            // resetForm()
+                            resetForm()
                         }}
                     >
 
