@@ -1,22 +1,22 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux"
-import { message, DatePicker} from 'antd'
+import { message, DatePicker } from 'antd'
 import dayjs from 'dayjs'
 import { FileUploader } from "react-drag-drop-files";
 import Map from '../../components/Map/map';
 
 const fileTypes = ["JPG", "PNG", "GIF", "JPEG"];
 
-const Orders = (props)=>{
+const Orders = (props) => {
     const [file, setFile] = useState(null);
     const navigate = useNavigate()
-    const {name, _id} = useSelector(state=> state.user)
-    const {currentDistance, senderLocationDetails, recepientLocationDetails} = useSelector(state=> state.location)
+    const { name, _id } = useSelector(state => state.user)
+    const { currentDistance, senderLocationDetails, recepientLocationDetails, senderAddress, recepientAddress } = useSelector(state => state.location)
 
-    const orderItem = async(formFields)=>{
+    const orderItem = async (formFields) => {
         const formData = new FormData();
         formData.append("orders", file);
         formData.append("userID", _id);
@@ -24,7 +24,7 @@ const Orders = (props)=>{
         formData.append("currentDistance", currentDistance);
         formData.append("senderLocationDetail", senderLocationDetails);
         formData.append("recipientLocationDetail", recepientLocationDetails)
-        Object.keys(formFields).map((item, id)=>{
+        Object.keys(formFields).map((item, id) => {
             formData.append(item, Object.values(formFields)[id]);
         })
         const res = await fetch(`${process.env.REACT_APP_BASE_URL}/orders`, {
@@ -33,41 +33,41 @@ const Orders = (props)=>{
         })
         const data = await res.json()
 
-        if(data){
+        if (data) {
             message.success(data.msg)
-            props.isEdit?  props.onOk() : navigate('/userOrderslist')
+            props.isEdit ? props.onOk() : navigate('/userOrderslist')
         }
     }
-    
-   
+
+
     const saveFile = (file) => {
-      setFile(file);
-      console.log(file)
+        setFile(file);
+        console.log(file)
     };
-	const OrderSchema = Yup.object().shape({
-		productType: Yup.string().required('Required'),
-		productWeight: Yup.string().required('Required'),
+    const OrderSchema = Yup.object().shape({
+        productType: Yup.string().required('Required'),
+        productWeight: Yup.string().required('Required'),
         maxSize: Yup.number().required('Required'),
         senderLocation: Yup.string().required('Required'),
-		receipentLocation: Yup.string().required('Required'),
+        receipentLocation: Yup.string().required('Required'),
         receipentName: Yup.string().required('Required'),
         receipentNumber: Yup.number().required('Required'),
-		expectedDeliveryDate: Yup.date().required('Required'),
+        expectedDeliveryDate: Yup.date().required('Required'),
         expectedDeliveryTime: Yup.string().required('Required'),
-	});
+    });
 
-    return(
+    return (
         <section className='form_section'>
             <div className='container'>
-                <Map/>
+                <Map />
                 {currentDistance}
                 <div className='form'>
                     <h1>{!props.isEdit ? 'Make your' : 'Edit'} order</h1>
-                    
+
 
                     <Formik
-                        initialValues={props.item?{
-                            _id:props.item._id,
+                        initialValues={props.item ? {
+                            _id: props.item._id,
                             productType: props.item.productType,
                             productWeight: props.item.productWeight,
                             maxSize: props.item.maxSize,
@@ -81,8 +81,8 @@ const Orders = (props)=>{
                             productType: '',
                             productWeight: '',
                             maxSize: '',
-                            senderLocation: '',
-                            receipentLocation: '',
+                            senderLocation: senderAddress,
+                            receipentLocation: recepientAddress,
                             receipentName: '',
                             receipentNumber: '',
                             expectedDeliveryDate: '',
@@ -90,13 +90,13 @@ const Orders = (props)=>{
                         }}
                         validationSchema={OrderSchema}
                         enableReinitialize={true}
-                        onSubmit={values=>{
+                        onSubmit={values => {
                             orderItem(values)
                         }}
                     >
 
                         {({ errors, touched, values, setFieldValue, handleChange, handleBlur, handleSubmit }) => (
-                            <Form  onSubmit={handleSubmit}>
+                            <Form onSubmit={handleSubmit}>
                                 <select name="productType" value={values.productType} onChange={handleChange} onBlur={handleBlur}>
                                     <option value="" disabled="disabled" label="Product Type"></option>
                                     <option value="documents" label="Documents">Documents</option>
@@ -110,24 +110,24 @@ const Orders = (props)=>{
                                 {errors.productType && touched.productType ? (<div className="error">{errors.productType}</div>) : null}
 
                                 <Field name="productWeight" placeholder="Product Weight" value={values.productWeight} onChange={handleChange} onBlur={handleBlur} />
-								{errors.productWeight && touched.productWeight ? (<div className="error">{errors.productWeight}</div>) : null}
+                                {errors.productWeight && touched.productWeight ? (<div className="error">{errors.productWeight}</div>) : null}
 
                                 <Field name="maxSize" placeholder="Max Size (in meters)" value={values.maxSize} onChange={handleChange} onBlur={handleBlur} />
                                 {errors.maxSize && touched.maxSize ? (<div className="error">{errors.maxSize}</div>) : null}
 
-                                <Field name="senderLocation" placeholder="Sender Location" value={values.senderLocation} onChange={handleChange} onBlur={handleBlur} />
+                                <Field name="senderLocation" placeholder="Sender Location" value={senderAddress} onChange={handleChange} onBlur={handleBlur} />
                                 {errors.senderLocation && touched.senderLocation ? (<div className="error">{errors.senderLocation}</div>) : null}
 
-                                <Field name="receipentLocation" placeholder="Receipent Location" value={values.receipentLocation} onChange={handleChange} onBlur={handleBlur} />
+                                <Field name="receipentLocation" placeholder="Receipent Location" value={recepientAddress} onChange={handleChange} onBlur={handleBlur} />
                                 {errors.receipentLocation && touched.receipentLocation ? (<div className="error">{errors.receipentLocation}</div>) : null}
 
                                 <Field name="receipentName" placeholder="Receipent Name" value={values.receipentName} onChange={handleChange} onBlur={handleBlur} />
                                 {errors.receipentName && touched.receipentName ? (<div className="error">{errors.receipentName}</div>) : null}
 
-                                <Field name="receipentNumber" placeholder="Receipent Number" value={values.receipentNumber} onChange={handleChange} onBlur={handleBlur}/>
+                                <Field name="receipentNumber" placeholder="Receipent Number" value={values.receipentNumber} onChange={handleChange} onBlur={handleBlur} />
                                 {errors.receipentNumber && touched.receipentNumber ? (<div className="error">{errors.receipentNumber}</div>) : null}
 
-                                <DatePicker onChange={(date)=> setFieldValue('expectedDeliveryDate', date)}  name="expectedDeliveryDate" placeholder="Expected Delivery Date" value={values.expectedDeliveryDate} />
+                                <DatePicker onChange={(date) => setFieldValue('expectedDeliveryDate', date)} name="expectedDeliveryDate" placeholder="Expected Delivery Date" value={values.expectedDeliveryDate} />
                                 {errors.expectedDeliveryDate && touched.expectedDeliveryDate ? (<div className="error">{errors.expectedDeliveryDate}</div>) : null}
 
                                 <select name="expectedDeliveryTime" value={values.expectedDeliveryTime} onChange={handleChange} onBlur={handleBlur}>
@@ -141,12 +141,12 @@ const Orders = (props)=>{
                                     <option label="6am-9am">6am-9am</option>
                                     <option label="9am-12pm">9am-12pm</option>
                                 </select>
-                                <FileUploader handleChange={saveFile} type="file"  types={fileTypes} />
-                                
+                                <FileUploader handleChange={saveFile} type="file" types={fileTypes} />
+
                                 {errors.expectedDeliveryTime && touched.expectedDeliveryTime ? (<div className="error">{errors.expectedDeliveryTime}</div>) : null}
                                 <button type="submit">{!props.isEdit ? 'Send' : 'Edit'} order</button>
                             </Form>
-                        )} 
+                        )}
                     </Formik>
                 </div>
             </div>
