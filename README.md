@@ -12,7 +12,7 @@
 * Node JS
 * Password encryption using Bcrypt
 * JsonWebToken Authentication/Authorization
-* Moment for parsing,v alidating, manipulating and displaying date and time.
+* Moment for parsing, validating, manipulating and displaying date and time.
 * Multer for file upload feature
 * Middlewares
 
