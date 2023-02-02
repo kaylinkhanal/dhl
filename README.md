@@ -12,6 +12,7 @@
 * Node JS
 * Password encryption using Bcrypt
 * JsonWebToken Authentication/Authorization
+* Multer for parsing,v alidating, manipulating and displaying date and time.
 * Multer for file upload feature
 * Middlewares
 
