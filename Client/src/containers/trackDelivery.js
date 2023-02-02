@@ -72,8 +72,10 @@ const TrackDelivery = () => {
                     current={statusMapping[deliveryStatus]}
                     items={[
                         {
-                            title: deliveryStatus,
-                            description: (deliveryStatus == 'pending') ? 'Your item needs to be approved' : 'item has been approved'
+                            title: "pending",
+                        },
+                        {
+                            title: "approved",
                         },
                        { 
                            title: "riderOnHisWay"

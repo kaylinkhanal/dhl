@@ -1,4 +1,4 @@
-const Category = require('../models/productCategory')
+const Category = require('../models/Categories')
 
 const postCategory =  async(req,res)=>{
     try{

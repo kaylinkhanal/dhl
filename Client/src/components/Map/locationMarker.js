@@ -3,7 +3,7 @@ import { Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { useDispatch, useSelector } from "react-redux";
-import { setSenderLocationDetails, } from "../../reducers/locationSlice"
+import { setSenderAddress,setSenderLocationDetails} from "../../reducers/locationSlice"
 import icon from "./constant";
 import { senderMarker } from "./constant";
 
@@ -20,6 +20,8 @@ const LocationMarker = ()=>{
 
         if (senderLocationDetails.lat != e.latlng.lat || senderLocationDetails.lng != e.latlng.lng) {
           dispatch(setSenderLocationDetails(e.latlng))
+          fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${e.latlng.lat}&lon=${e.latlng.lng}&apiKey=a1dd45a7dfc54f55a44b69d125722fcb`)
+          .then((res)=>res.json()).then((data=> dispatch(setSenderAddress(data?.features[0].properties?.formatted))))
         }
 
         map.flyTo(e.latlng, map.getZoom());

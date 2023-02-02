@@ -16,9 +16,13 @@ const Orders = (props)=>{
 
     const navigate = useNavigate()
     const {name, _id} = useSelector(state=> state.user)
-    const {currentDistance} = useSelector(state=> state.location)
-    const {senderLocationDetails} = useSelector(state=> state.location)
-    const {recepientLocationDetails} = useSelector(state=> state.location)
+    const {currentDistance,
+        senderLocationDetails, 
+        recepientLocationDetails,
+        senderAddress,
+        receipentAddress,
+    } = useSelector(state=> state.location)
+  
     const orderItem = async(formFields)=>{
         const formData = new FormData();
         formData.append("orders", file);
@@ -50,7 +54,7 @@ const Orders = (props)=>{
 	const OrderSchema = Yup.object().shape({
 		productType: Yup.string().required('Required'),
 		productWeight: Yup.string().required('Required'),
-        maxSize: Yup.number().required('Required'),
+        // maxSize: Yup.number().required('Required'),
         senderLocation: Yup.string().required('Required'),
 		receipentLocation: Yup.string().required('Required'),
         receipentName: Yup.string().required('Required'),
@@ -72,7 +76,7 @@ const Orders = (props)=>{
                             _id:props.item._id,
                             productType: props.item.productType,
                             productWeight: props.item.productWeight,
-                            maxSize: props.item.maxSize,
+                            // maxSize: props.item.maxSize,
                             senderLocation: props.item.senderLocation,
                             receipentLocation: props.item.receipentLocation,
                             receipentName: props.item.receipentName,
@@ -82,9 +86,9 @@ const Orders = (props)=>{
                         } : {
                             productType: '',
                             productWeight: '',
-                            maxSize: '',
-                            senderLocation: '',
-                            receipentLocation: '',
+                            // maxSize: '',
+                            senderLocation: senderAddress,
+                            receipentLocation: receipentAddress,
                             receipentName: '',
                             receipentNumber: '',
                             expectedDeliveryDate: '',
@@ -115,13 +119,13 @@ const Orders = (props)=>{
                                 <Field name="productWeight" placeholder="Product Weight" value={values.productWeight} onChange={handleChange} onBlur={handleBlur} />
 								{errors.productWeight && touched.productWeight ? (<div className="error">{errors.productWeight}</div>) : null}
 
-                                <Field name="maxSize" placeholder="Max Size (in meters)" value={values.maxSize} onChange={handleChange} onBlur={handleBlur} />
-                                {errors.maxSize && touched.maxSize ? (<div className="error">{errors.maxSize}</div>) : null}
+                                {/* <Field name="maxSize" placeholder="Max Size (in meters)" value={values.maxSize} onChange={handleChange} onBlur={handleBlur} />
+                                {errors.maxSize && touched.maxSize ? (<div className="error">{errors.maxSize}</div>) : null} */}
 
-                                <Field name="senderLocation" placeholder="Sender Location" value={senderLocationDetails} onChange={handleChange} onBlur={handleBlur} />
+                                <Field name="senderLocation" placeholder="Sender Location"  onChange={handleChange} onBlur={handleBlur} />
                                 {errors.senderLocation && touched.senderLocation ? (<div className="error">{errors.senderLocation}</div>) : null}
 
-                                <Field name="receipentLocation" placeholder="Receipent Location" value={JSON.stringify(recepientLocationDetails)} onChange={handleChange} onBlur={handleBlur} />
+                                <Field name="receipentLocation" placeholder="Receipent Location" onChange={handleChange} onBlur={handleBlur} />
                                 {errors.receipentLocation && touched.receipentLocation ? (<div className="error">{errors.receipentLocation}</div>) : null}
                                     { currentDistance ? <h5>The distance is {currentDistance} KM</h5> : ''}
 

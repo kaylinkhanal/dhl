@@ -25,8 +25,7 @@ const AddProductCategory = (props)=>{
     const categorySchema = Yup.object().shape({
         categoryName: Yup.string().required('Required'),
         minWeight: Yup.number().required('Required'),
-        minSize: Yup.number().required('Required'),
-        minPrice: Yup.number().required('Required'),
+        unitPrice: Yup.number().required('Required'),
     });
 
 
@@ -39,8 +38,7 @@ const AddProductCategory = (props)=>{
                         initialValues={{
                             categoryName: '',
                             minWeight: '',
-                            minSize: '',
-                            minPrice: '',
+                            unitPrice: '',
                         }}
                         validationSchema={categorySchema}
                         onSubmit={(values, { resetForm })=>{
@@ -57,11 +55,9 @@ const AddProductCategory = (props)=>{
                                 <Field name="minWeight" type="number" placeholder="Min. Product Weight (kg)" value={values.minWeight} onChange={handleChange} onBlur={handleBlur} />
                                 {errors.minWeight && touched.minWeight ? <div className="error">{errors.minWeight}</div> : null}
 
-                                <Field name="minSize" type="number" placeholder="Min. Product Size (in meter)" value={values.minSize} onChange={handleChange} onBlur={handleBlur} />
-                                {errors.minSize && touched.minSize ? <div className="error">{errors.minSize}</div> : null}
 
-                                <Field name="minPrice" type="number" placeholder="Min. Product Price" value={values.minPrice} onChange={handleChange} onBlur={handleBlur} />
-                                {errors.minPrice && touched.minPrice ? <div className="error">{errors.minPrice}</div> : null}
+                                <Field name="unitPrice" type="number" placeholder="Unit Price" value={values.unitPrice} onChange={handleChange} onBlur={handleBlur} />
+                                {errors.unitPrice && touched.unitPrice ? <div className="error">{errors.unitPrice}</div> : null}
 
                                 <button type="submit">Add Category</button>
                             </Form>
