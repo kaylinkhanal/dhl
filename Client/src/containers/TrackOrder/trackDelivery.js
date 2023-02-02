@@ -3,7 +3,7 @@ import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import { message, Steps } from 'antd';
 import { Link } from 'react-router-dom';
-import  statusMapping from "../configs/statusMapping.json"
+import statusMapping from "../../configs/statusMapping.json"
 
 const TrackDelivery = () => {
     const inputRef = useRef();
@@ -65,7 +65,7 @@ const TrackDelivery = () => {
                     </div>
                 </div>
             </section>
-           
+
             <div className="container">
                 {deliveryStatus ? (<Steps
                     size="small"
@@ -77,18 +77,18 @@ const TrackDelivery = () => {
                         {
                             title: "approved",
                         },
-                       { 
-                           title: "riderOnHisWay"
+                        {
+                            title: "riderOnHisWay"
                         },
-                        { 
+                        {
                             title: "riderPickedUp"
-                         },
-                         { 
+                        },
+                        {
                             title: "productDispatched"
-                         },
-                         { 
+                        },
+                        {
                             title: "productDelivered"
-                         },
+                        },
                     ]}
                 />) : ''}
             </div>

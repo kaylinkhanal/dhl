@@ -2,7 +2,7 @@ import React from "react";
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 import { message } from "antd";
-import ShowhidePassword from "../../components/showhidePassword";
+import ShowhidePassword from "../../components/Forms/showhidePassword";
 import { useNavigate, Link } from "react-router-dom";
 import { countries } from "country-data-list";
 

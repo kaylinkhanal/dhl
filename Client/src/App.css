@@ -226,12 +226,16 @@ li.active .menu-dropdown {
   text-align: center;
   display: flex;
   flex-flow: column;
+  font-size: 14px;
   justify-content: center;
-  font-weight: 700;
-  font-size: 18px;
   text-decoration: none;
   margin: 10px;
   transition: all 0.3s ease;
+}
+
+.card p.title{
+  font-weight: 700;
+  font-size: 18px;
 }
 
 .card:hover {
@@ -541,4 +545,40 @@ button.ant-drawer-close {
 
 span.anticon.anticon-close {
   color: #fff;
+}
+
+.category_list{
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.category_list .card {
+  display: flex;
+  width: calc((100% - 40px) / 2);
+  height: auto;
+  flex-flow: column;
+  margin-right: 20px;
+  text-align: left;
+  padding: 20px;
+  justify-content: inherit;
+}
+
+.category_list .card:nth-child(2n) {
+  margin-right: 0;
+}
+
+.category_list .card:nth-child(1n) {
+  margin-left: 0;
+}
+
+.category_list .card p{
+  display: inline-block;
+  margin-left: 10px;
+}
+.half_section{
+  display: flex;
+}
+
+.half_section>div{
+  width: 50%;
 }
