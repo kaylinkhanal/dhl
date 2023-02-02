@@ -2,7 +2,7 @@ import React, { useState, useMemo, useRef, useCallback } from "react";
 import { Marker, Popup, } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentDistance, setRecepientLocationDetails } from "../../reducers/locationSlice"
+import { setCurrentDistance, setRecepientLocationDetails,setReceipentAddress } from "../../reducers/locationSlice"
 import icon from "./constant";
 import { receiverMarker } from "./constant";
 
@@ -53,7 +53,8 @@ const DraggableMarker = ()=>{
              lat: markerRef.current.getLatLng().lat ,
              lng: markerRef.current.getLatLng().lng ,
             }
-            console.log("anskjhd", recepientDetails)
+            fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${markerRef.current.getLatLng().lat}&lon=${markerRef.current.getLatLng().lng}&apiKey=a1dd45a7dfc54f55a44b69d125722fcb`)
+            .then((res)=>res.json()).then((data=> dispatch(setReceipentAddress(data?.features[0].properties?.formatted))))
             dispatch(setRecepientLocationDetails(recepientDetails))
             const distance = caculateDistance(senderLocationDetails)
             dispatch(setCurrentDistance(distance))
