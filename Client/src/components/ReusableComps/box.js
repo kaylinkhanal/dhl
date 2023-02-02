@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { SlTrash, SlPencil, SlCalender, SlLocationPin, SlClock, SlPhone, SlUser, SlClose, } from "react-icons/sl";
-import { Modal, Popconfirm } from "antd";
-import { FcShipped } from "react-icons/fc";
+import { BiRun } from "react-icons/bi";
+import { Modal, Popconfirm, Tooltip } from "antd";
+import { TbTruckDelivery } from "react-icons/tb";
 import { GiCardPickup } from "react-icons/gi";
+import { MdOutlineFactCheck } from "react-icons/md"
 import statusMapping from "../../configs/statusMapping.json"
 import Orders from "../../containers/User/orders";
 import io from 'socket.io-client';
@@ -34,18 +36,19 @@ const Box = ({ item, fetchData, isRider }) => {
 		setIsModalOpen(false);
 	};
 
-	const orderTrackDetails = (statusId) => {
+	const orderTrackDetails = (e, statusId, itemStatus) => {
 		const orderStatus = Object.keys(statusMapping).find(item => statusMapping[item] == statusId)
 		const orderDetails = {
 			status: orderStatus,
 			id: item._id
 		}
 		socket.emit('requestOrder', orderDetails)
+		fetchData()
+		e.currentTarget.classList.add('active');
 	}
 
 	return (
 		<>
-
 			<Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={null} >
 				<Orders isEdit={true} item={item} onOk={handleOk} />
 			</Modal>
@@ -62,12 +65,12 @@ const Box = ({ item, fetchData, isRider }) => {
 					</Popconfirm>
 				</div>
 
-			) : <div className="btns">
-				<i><button onClick={() => orderTrackDetails(2)}>rider is on his way</button>
-					<button onClick={() => orderTrackDetails(3)}>rider has picked up from {item.senderLocation}</button>
-					<button onClick={() => orderTrackDetails(4)}>Product has been dispatched for delivery</button>
-					<button onClick={() => orderTrackDetails(5)}>Item has been has been dispatched</button>
-					<GiCardPickup /><FcShipped /></i>
+			) : <div className="btns rider">
+				<button onClick={(e) => orderTrackDetails(e, 2)}> <Tooltip title="Rider is on his way" placement="topRight"><BiRun /></Tooltip></button>
+				<button onClick={(e) => orderTrackDetails(e, 3)}><Tooltip title={`Rider has picked up from ${item.senderLocation}`} placement="topRight"><GiCardPickup /></Tooltip></button>
+				<button onClick={(e) => orderTrackDetails(e, 4)}><Tooltip title="Product has been dispatched for delivery" placement="topRight"><TbTruckDelivery /></Tooltip></button>
+				<button onClick={(e) => orderTrackDetails(e, 5)}><Tooltip title={`Item has been has been delivered to ${item.receipentName}`} placement="topRight"> <MdOutlineFactCheck /></Tooltip></button>
+
 			</div>}
 
 			<div className="order_item" >

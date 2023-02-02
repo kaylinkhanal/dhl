@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Box from "../../components/ReusableComps/box";
 import { FaDolly } from "react-icons/fa";
-import CardSkeletion from "../../components/ReusableComps/box";
+import CardSkeletion from "../../components/ReusableComps/cardSkeletion";
 import { useSelector } from "react-redux";
 // import io from 'socket.io-client';
 // const socket = io(process.env.REACT_APP_BASE_URL);
