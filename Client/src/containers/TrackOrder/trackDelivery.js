@@ -1,9 +1,12 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Formik, Field, Form } from 'formik';
-import * as Yup from 'yup';
 import { message, Steps } from 'antd';
 import { Link } from 'react-router-dom';
 import statusMapping from "../../configs/statusMapping.json"
+import { BiRun } from "react-icons/bi";
+import { GiCardPickup } from "react-icons/gi";
+import { TbTruckDelivery, TbClipboardCheck } from "react-icons/tb";
+import { MdOutlineFactCheck } from "react-icons/md";
 
 const TrackDelivery = () => {
     const inputRef = useRef();
@@ -72,22 +75,29 @@ const TrackDelivery = () => {
                     current={statusMapping[deliveryStatus]}
                     items={[
                         {
-                            title: "pending",
+                            title: "Approved / pending",
+                            description: (deliveryStatus == 'pending') ? 'Your order is not yet approved' : 'item has been approved',
+                            icon: <TbClipboardCheck />
                         },
                         {
-                            title: "approved",
+                            title: "riderOnHisWay",
+                            description: (deliveryStatus == 'riderOnHisWay') ? 'Rider id oh his way' : '',
+                            icon: <BiRun />
                         },
                         {
-                            title: "riderOnHisWay"
+                            title: "riderPickedUp",
+                            description: (deliveryStatus == 'riderPickedUp') ? 'Rider has picked up your order' : '',
+                            icon: <GiCardPickup />
                         },
                         {
-                            title: "riderPickedUp"
+                            title: "productDispatched",
+                            description: (deliveryStatus == 'productDispatched') ? 'Order has been dispatched to deliver' : '',
+                            icon: <TbTruckDelivery />
                         },
                         {
-                            title: "productDispatched"
-                        },
-                        {
-                            title: "productDelivered"
+                            title: "productDelivered",
+                            description: (deliveryStatus == 'productDelivered') ? 'Order Delivered' : '',
+                            icon: <MdOutlineFactCheck />
                         },
                     ]}
                 />) : ''}

@@ -36,7 +36,7 @@ const Box = ({ item, fetchData, isRider }) => {
 		setIsModalOpen(false);
 	};
 
-	const orderTrackDetails = (e, statusId, itemStatus) => {
+	const orderTrackDetails = (e, statusId) => {
 		const orderStatus = Object.keys(statusMapping).find(item => statusMapping[item] == statusId)
 		const orderDetails = {
 			status: orderStatus,
