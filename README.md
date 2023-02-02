@@ -11,6 +11,7 @@
 * Mongo DB, Express
 * Node JS
 * Password encryption using Bcrypt
+* Socket.io for bi-directional communication.
 * JsonWebToken Authentication/Authorization
 * Moment for parsing, validating, manipulating and displaying date and time.
 * Multer for file upload feature
