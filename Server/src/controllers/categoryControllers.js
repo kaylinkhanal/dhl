@@ -9,7 +9,9 @@ const postCategory =  async(req,res)=>{
                 msg: 'Added new category'
             })
         }else{
-            msg: 'something went wrong'
+            res.json({
+                msg: 'something went wrong'
+            })
         }
         
     }catch(err){
@@ -29,6 +31,40 @@ const getCategory =  async(req,res)=>{
         console.log(err)
     }
 }
+const updateCategory = async(req,res)=>{
+    try {
+            const data = await Category.findByIdAndUpdate(req.body._id, req.body)
+            if (data) {
+                res.json({
+                    msg: "updated successfully"
+                })
+            } else {
+                res.json({
+                    msg: "something went wrong"
+                })
+            } 
+       } catch (error) {
+        console.error(error);
+    }
+}
 
+const deleteCategory = async(req,res)=>{
+    try{
+        const data = await Category.findByIdAndDelete(req.body.id)
+        if (data) {
+            res.json({
+                msg: "category deleted successfully"
+            })
+        } else {
+            res.json({
+                msg: "something went wrong"
+            })
+        } 
+    }catch(error){
+        console.error(error);
+    }
+}
 exports.postCategory = postCategory;
 exports.getCategory = getCategory;
+exports.updateCategory = updateCategory;
+exports.deleteCategory = deleteCategory;
