@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import ShowhidePassword from "./showhidePassword";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { responseHandler } from "../utils/responseHandler"
+import { responseHandler } from "../../utils/responseHandler"
 const ChangePassword = () => {
 	const [isPasswordMatched, setIsPasswordMatched] = useState("");
 	const email = useSelector((state) => state.user.email);

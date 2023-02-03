@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
-import Box from "../../components/box";
+import Box from "../../components/ReusableComps/box";
 import { FaDolly } from "react-icons/fa";
-import CardSkeletion from "../../components/cardSkeletion";
+import CardSkeletion from "../../components/ReusableComps/cardSkeletion";
 import { useSelector } from "react-redux";
 // import io from 'socket.io-client';
 // const socket = io(process.env.REACT_APP_BASE_URL);
 
 const Dashboard = () => {
-  const [orderList, setOrderList] = useState([]);
-  const [loading, setLoading] = useState(false)
-  const {_id} = useSelector(state => state.user)
+	const [orderList, setOrderList] = useState([]);
+	const [loading, setLoading] = useState(false)
+	const { _id } = useSelector(state => state.user)
 
-  const fetchData = async () => {
-    const response = await fetch(`${process.env.REACT_APP_BASE_URL}/orders?orderStatus=approved&flag=unresolved`)
-    const data = await response.json();
+	const fetchData = async () => {
+		const response = await fetch(`${process.env.REACT_APP_BASE_URL}/orders?orderStatus=approved&flag=unresolved`)
+		const data = await response.json();
 
 		if (data) {
 			setOrderList(data.ordersList);
@@ -24,7 +24,7 @@ const Dashboard = () => {
 	useEffect(() => {
 		fetchData();
 	}, []);
-		
+
 	// useEffect(()=> {
 	// 	if(orderList.length>0){
 	// 		socket.on('orderDetails',(orderDetails)=>{
@@ -51,7 +51,7 @@ const Dashboard = () => {
 
 					{orderList.length > 0 ? orderList.map((item, id) => {
 						return <Box key={id} item={item} fetchData={fetchData} isRider={true} />
-					}) : !loading ? <CardSkeletion boxNumber={4}/> : <h3>Orders not Found</h3>}
+					}) : !loading ? <CardSkeletion boxNumber={4} /> : <h3>Orders not Found</h3>}
 				</div>
 			</div>
 		</section>

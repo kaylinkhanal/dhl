@@ -226,12 +226,16 @@ li.active .menu-dropdown {
   text-align: center;
   display: flex;
   flex-flow: column;
+  font-size: 14px;
   justify-content: center;
-  font-weight: 700;
-  font-size: 18px;
   text-decoration: none;
   margin: 10px;
   transition: all 0.3s ease;
+}
+
+.card p.title{
+  font-weight: 700;
+  font-size: 18px;
 }
 
 .card:hover {
@@ -302,6 +306,43 @@ h4 {
   padding: 5px;
   background: none;
   color: #333;
+}
+
+.btns.rider button {
+  background: rgb(0 0 0 / 18%);
+  border-radius: 50%;
+  padding: 0;
+  height: 25px;
+  width: 25px;
+  text-align: center;
+  line-height: 30px;
+  margin-left: 20px;
+  position: relative;
+  font-size: 16px;
+  position: relative;
+}
+
+.btns.rider button::before {
+  position: absolute;
+  right: -14px;
+  content: '';
+  height: 1px;
+  width: 9px;
+  background: rgb(0 0 0 / 18%);
+  top: 50%;
+}
+
+.btns.rider  button:last-child::before {
+  content: none;
+}
+
+.btns.rider  button.active {
+  background: green ;
+  color: #fff ;
+}
+
+.btns.rider  button.active::before{
+  background: green;
 }
 
 .top {
@@ -541,4 +582,71 @@ button.ant-drawer-close {
 
 span.anticon.anticon-close {
   color: #fff;
+}
+
+.category_list{
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.category_list .card {
+  display: flex;
+  width: calc((100% - 40px) / 2);
+  height: auto;
+  flex-flow: column;
+  margin-right: 20px;
+  text-align: left;
+  padding: 20px;
+  justify-content: inherit;
+}
+
+.category_list .card:nth-child(2n) {
+  margin-right: 0;
+}
+
+.category_list .card:nth-child(1n) {
+  margin-left: 0;
+}
+
+.category_list .card p{
+  display: inline-block;
+  margin-left: 10px;
+}
+.half_section{
+  display: flex;
+}
+
+.half_section>div{
+  width: 50%;
+}
+
+.ant-steps-item-icon {
+  height: 40px !important;
+  width: 40px !important;
+  border-radius: 50% !important;
+  background: #d5d3d3 !important;
+  display: inline-block;
+  line-height: 48px !important;
+  padding: 0;
+}
+
+.ant-steps-item-finish span.ant-steps-icon,
+.ant-steps-item-finish .ant-steps-item-title{
+  color: green !important;
+}
+
+.ant-steps-item-finish .ant-steps-item-icon {
+  background: rgb(0 128 0 / 26%) !important;
+}
+
+.ant-steps-item-finish ::after {
+  background-color: green !important;
+}
+
+.ant-steps-item-title {
+  font-size: 16px !important
+}
+
+.ant-steps-item-title::after {
+  height: 2px !important
 }

@@ -1,23 +1,24 @@
-import React, {useEffect} from "react"
+import React, { useEffect } from "react"
 import io from 'socket.io-client';
 const socket = io(process.env.REACT_APP_BASE_URL);
 
 //to send data to sockets, we just emit the data
-const OrdersData = ({orderList})=>{
+const OrdersData = ({ orderList, fetchData }) => {
     useEffect(() => {
         socket.on('connect');
-      }, []);
+    }, []);
 
-    const changeStatus = async(status , id, val) => {
+    const changeStatus = async (status, id, val) => {
         const orderDetails = {
             status,
             id,
             val
         }
-       socket.emit('requestOrder',orderDetails)
+        socket.emit('requestOrder', orderDetails)
+        fetchData()
     }
-    return(
-        <div style={{'overflowX':'auto'}}>
+    return (
+        <div style={{ 'overflowX': 'auto' }}>
             <table>
                 <thead>
                     <tr>
@@ -38,13 +39,13 @@ const OrdersData = ({orderList})=>{
 
                 <tbody>
                     {orderList.length > 0 ? orderList.map((item, id) => {
-                        return( 
-                            <tr style={item.orderStatus==="accepted"
-                                ?{background: '#b6f2c7'}
-                                :item.orderStatus==="rejected"
-                                ?{background:"#f2b6b6"}:null} 
-                             key={id}>
-                                <td>{id+1}.</td>
+                        return (
+                            <tr style={item.orderStatus === "accepted"
+                                ? { background: '#b6f2c7' }
+                                : item.orderStatus === "rejected"
+                                    ? { background: "#f2b6b6" } : null}
+                                key={id}>
+                                <td>{id + 1}.</td>
                                 <td>{item.productType}</td>
                                 <td>{item.productWeight}kg</td>
                                 <td>{item.maxSize}m</td>
@@ -56,8 +57,8 @@ const OrdersData = ({orderList})=>{
                                 <td>{item.expectedDeliveryDate}</td>
                                 <td>{item.orderStatus}</td>
                                 <td>
-                                    <button className="success" onClick={()=> changeStatus('accepted', item._id, 1)}>Accept</button>
-                                    <button className="cancel" onClick={()=> changeStatus('rejected', item._id)}>Reject</button>
+                                    <button className="success" onClick={() => changeStatus('accepted', item._id, 1)}>Accept</button>
+                                    <button className="cancel" onClick={() => changeStatus('rejected', item._id)}>Reject</button>
                                 </td>
                             </tr>
                         )
@@ -66,5 +67,5 @@ const OrdersData = ({orderList})=>{
             </table>
         </div>
     )
-} 
+}
 export default OrdersData
