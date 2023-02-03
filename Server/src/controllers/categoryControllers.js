@@ -30,5 +30,20 @@ const getCategory =  async(req,res)=>{
     }
 }
 
+const deleteCategory =  async(req,res)=>{
+    try{
+        const categoryData = await Category.findByIdAndRemove(req.body.id)
+        if (categoryData) {
+            res.json({
+                msg: "deleted successfully"
+            })
+        }
+        
+    }catch(err){
+        console.log(err)
+    }
+}
+
 exports.postCategory = postCategory;
 exports.getCategory = getCategory;
+exports.deleteCategory = deleteCategory;
