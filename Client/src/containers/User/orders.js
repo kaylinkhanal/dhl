@@ -12,8 +12,9 @@ const fileTypes = ["JPG", "PNG", "GIF", "JPEG"];
 
 const Orders = (props) => {
     const [file, setFile] = useState(null);
+    const [selectedCat, setSelectedCat] = useState({})
     const [categories, setCategories] = useState([])
-
+    
     const fetchCategories = async () => {
         const response = await fetch(`${process.env.REACT_APP_BASE_URL}/category`);
         const data = await response.json()
@@ -23,7 +24,7 @@ const Orders = (props) => {
     }
 
     useEffect(() => {
-        fetchCategories()
+       fetchCategories()
     }, [])
 
     const navigate = useNavigate()
@@ -65,7 +66,16 @@ const Orders = (props) => {
     };
     const OrderSchema = Yup.object().shape({
         productType: Yup.string().required('Required'),
-        productWeight: Yup.string().required('Required'),
+        productWeight: Yup.number()
+        .typeError("Must be a number")
+        .required("Required")
+        .test("maxLength", "mininum weight should be " + selectedCat.minWeight, (val,allFormFields) => {
+            const selectedFieldMinWeight = categories.find((item)=> item.categoryName===allFormFields.parent.productType ).minWeight 
+            if(selectedFieldMinWeight<=val){
+                return true
+            }
+            return false
+        }),
         // maxSize: Yup.number().required('Required'),
         senderLocation: Yup.string().required('Required'),
         receipentLocation: Yup.string().required('Required'),
@@ -117,7 +127,7 @@ const Orders = (props) => {
                                 <select name="productType" value={values.productType} onChange={handleChange} onBlur={handleBlur}>
                                     <option value="" disabled="disabled" label="Product Type"></option>
                                     {categories.length > 0 ? categories.map((category) => {
-                                        return <option value={category.categoryName} label={category.categoryName}>{category.categoryName}</option>
+                                        return <option  onClick={()=> setSelectedCat(category)}value={category.categoryName} label={category.categoryName}>{category.categoryName}</option>
                                     }) : null}
                                 </select>
                                 {errors.productType && touched.productType ? (<div className="error">{errors.productType}</div>) : null}
