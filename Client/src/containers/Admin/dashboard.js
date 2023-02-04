@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import AddProductCategory from "./addProductCategory";
-import { Modal } from 'antd';
+import { Modal, Popconfirm } from 'antd';
 import Card from "../../components/ReusableComps/card";
-import { FaDolly, FaTelegramPlane } from "react-icons/fa";
+import { FaTelegramPlane } from "react-icons/fa";
+
+import { SlTrash, SlPencil } from "react-icons/sl";
+
+
 
 const Dashboard = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -32,6 +36,13 @@ const Dashboard = () => {
             setIsModalOpen(false);
         }
     };
+    <div className="btns">
+    <button onClick={showModal}><i><SlPencil /></i></button>
+
+    
+
+   
+</div>
     return (
         <section id="admin_dashboard">
             <div className="container">
@@ -48,10 +59,11 @@ const Dashboard = () => {
                             <div className="category_list">
                                 {category.length > 0 ? category.map((item) => {
                                     return (
-                                        <Card title={item.categoryName} icon={<FaTelegramPlane />} isCategory={true} Item={item} />
+                                        <Card title={item.categoryName} icon={<FaTelegramPlane />} isCategory={true} Item={item}  fetch={fetchCategory}/>
                                     )
                                 }) : 'loading'}
                             </div>
+                            
                         </div>
                     </div>
 

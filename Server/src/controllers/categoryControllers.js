@@ -30,5 +30,40 @@ const getCategory =  async(req,res)=>{
     }
 }
 
+const deleteCategory =  async(req,res)=>{
+    try{
+        const categoryData = await Category.findByIdAndRemove(req.body.id)
+        if (categoryData) {
+            res.json({
+                msg: "deleted successfully"
+            })
+        }
+        
+    }catch(err){
+        console.log(err)
+    }
+}
+
+const productCategory= async(req, res)=>{
+    try{
+    const data = await Category.findByIdAndUpdate(req.body._id, req.body)
+
+    if(data){
+        res.json({
+            msg: "updated successfully"
+        })
+    }else{
+        res.json({
+            msg: "something went wrong"
+        })
+    }
+    }catch(err){
+        console.log(err)
+    }
+}
+
 exports.postCategory = postCategory;
 exports.getCategory = getCategory;
+exports.deleteCategory = deleteCategory;
+exports.productCategory = productCategory;
+
