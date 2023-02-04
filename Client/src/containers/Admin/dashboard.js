@@ -3,7 +3,7 @@ import AddProductCategory from "./addProductCategory";
 import { Modal, Popconfirm } from 'antd';
 import Card from "../../components/ReusableComps/card";
 import { FaTelegramPlane } from "react-icons/fa";
-import axios from "axios";
+
 import { SlTrash, SlPencil } from "react-icons/sl";
 
 
@@ -39,6 +39,8 @@ const Dashboard = () => {
     <div className="btns">
     <button onClick={showModal}><i><SlPencil /></i></button>
 
+    
+
    
 </div>
     return (
@@ -61,6 +63,7 @@ const Dashboard = () => {
                                     )
                                 }) : 'loading'}
                             </div>
+                            
                         </div>
                     </div>
 

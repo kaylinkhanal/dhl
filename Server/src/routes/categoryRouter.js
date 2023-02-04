@@ -8,5 +8,8 @@ app.get('/category',categoryController.getCategory)
 
 app.delete('/category',categoryController.deleteCategory)
 
+app.put('/category',categoryController.productCategory)
+
+
 
 module.exports = app;

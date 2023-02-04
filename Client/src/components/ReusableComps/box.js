@@ -15,6 +15,7 @@ const socket = io("http://localhost:5000");
 const Box = ({ item, fetchData, isRider }) => {
 	const { userRole } = useSelector((state) => state.user);
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	
 	const triggerDelete = () => {
 		axios
 			.delete(`${process.env.REACT_APP_BASE_URL}/orders`, {

@@ -2,13 +2,18 @@ import React from 'react'
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import { message } from 'antd';
+import {  useNavigate } from 'react-router-dom';
+
 
 const AddProductCategory = (props) => {
-    const addCategory = async (FieldValues) => {
+debugger
+    const navigate = useNavigate()
+
+    const addCategory = async (values) => {
         const requestOptions = {
-            method: "POST",
+            method:props.isEdit?"PUT": "POST",
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(FieldValues)
+            body: JSON.stringify(values)
         };
 
         const response = await fetch(`${process.env.REACT_APP_BASE_URL}/category`, requestOptions);
@@ -17,10 +22,14 @@ const AddProductCategory = (props) => {
         if (data.msg === 'Added new category') {
             message.success(data.msg)
             props.submitForm()
-        } else {
+        } else if (data){
+            message.success(data.msg)
+            props.isEdit ? props.onOk() : navigate('/category')
+        } else{
             message.error(data.msg)
         }
         props.fetchCategory()
+        
     }
 
     const categorySchema = Yup.object().shape({
@@ -34,17 +43,19 @@ const AddProductCategory = (props) => {
         <section>
             <div className='container'>
                 <div className='form'>
-                    <h3>Add Product Categories</h3>
+                    {/* <h3>Add Product Categories</h3> */}
+                    <h1>{!props.isEdit ? 'Add Product Categories' : 'Edit'} Categories</h1>
+
                     <Formik
-                        initialValues={{
+                        initialValues={props.item ||{
                             categoryName: '',
                             minWeight: '',
-                            unitPrice: '',
+                            unitPrice: '', 
                         }}
                         validationSchema={categorySchema}
-                        onSubmit={(values, { resetForm }) => {
+                        onSubmit={(values) => {
                             addCategory(values)
-                            resetForm()
+                        
                         }}
                     >
 
@@ -60,7 +71,8 @@ const AddProductCategory = (props) => {
                                 <Field name="unitPrice" type="number" placeholder="Unit Price" value={values.unitPrice} onChange={handleChange} onBlur={handleBlur} />
                                 {errors.unitPrice && touched.unitPrice ? <div className="error">{errors.unitPrice}</div> : null}
 
-                                <button type="submit">Add Category</button>
+                                <button type="submit">{!props.isEdit ? 'Add' : 'Edit'} Category</button>
+
                             </Form>
                         )}
                     </Formik>
