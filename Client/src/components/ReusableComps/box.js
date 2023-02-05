@@ -40,7 +40,7 @@ const Box = ({ item, fetchData, isRider }) => {
 		axios
 			.post(`${process.env.REACT_APP_BASE_URL}/pdf`, 
 				{ item },
-			).then((response) => (response ? message.success(response.data.msg) : null))
+			).then((response) => (response ? message.success(response.data.msg) : message.error("error on downloading")))
 			.catch((error) => {
 				console.error("There was an error!", error);
 			});
