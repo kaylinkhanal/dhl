@@ -6,18 +6,20 @@ import { message } from 'antd';
 const AddProductCategory = (props) => {
     const addCategory = async (FieldValues) => {
         const requestOptions = {
-            method: "POST",
+            method: props.isEdit?"PUT":"POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(FieldValues)
         };
 
         const response = await fetch(`${process.env.REACT_APP_BASE_URL}/category`, requestOptions);
         const data = await response.json()
-        console.log(data)
         if (data.msg === 'Added new category') {
             message.success(data.msg)
             props.submitForm()
-        } else {
+        }else if(data.msg==="updated successfully"){
+            message.success(data.msg)
+        }
+         else {
             message.error(data.msg)
         }
         props.fetchCategory()
@@ -34,9 +36,9 @@ const AddProductCategory = (props) => {
         <section>
             <div className='container'>
                 <div className='form'>
-                    <h3>Add Product Categories</h3>
+                    <h3>{props.isEdit?"Update Product Categories":"Add Product Categories"}</h3>
                     <Formik
-                        initialValues={{
+                        initialValues={props.item?props.item:{
                             categoryName: '',
                             minWeight: '',
                             unitPrice: '',
@@ -60,7 +62,7 @@ const AddProductCategory = (props) => {
                                 <Field name="unitPrice" type="number" placeholder="Unit Price" value={values.unitPrice} onChange={handleChange} onBlur={handleBlur} />
                                 {errors.unitPrice && touched.unitPrice ? <div className="error">{errors.unitPrice}</div> : null}
 
-                                <button type="submit">Add Category</button>
+                                <button type="submit">{props.isEdit?"Update Category":"Add Category"}</button>
                             </Form>
                         )}
                     </Formik>

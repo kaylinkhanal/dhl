@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import AddProductCategory from "./addProductCategory";
 import { Modal } from 'antd';
 import Card from "../../components/ReusableComps/card";
-import { FaDolly, FaTelegramPlane } from "react-icons/fa";
+import {FaDhl} from "react-icons/fa";
 
 const Dashboard = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -48,7 +48,7 @@ const Dashboard = () => {
                             <div className="category_list">
                                 {category.length > 0 ? category.map((item) => {
                                     return (
-                                        <Card title={item.categoryName} icon={<FaTelegramPlane />} isCategory={true} Item={item} />
+                                        <Card title={item.categoryName} icon={<FaDhl />} isCategory={true} Item={item} fetchCategory={fetchCategory} />
                                     )
                                 }) : 'loading'}
                             </div>
