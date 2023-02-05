@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { SlTrash, SlPencil, SlCalender, SlLocationPin, SlClock, SlPhone, SlUser, SlClose, } from "react-icons/sl";
-import { BiRun } from "react-icons/bi";
-import { Modal, Popconfirm, Tooltip } from "antd";
+import { BiRun, BiDownload } from "react-icons/bi";
+import { message, Modal, Popconfirm, Tooltip } from "antd";
 import { TbTruckDelivery } from "react-icons/tb";
 import { GiCardPickup } from "react-icons/gi";
 import { MdOutlineFactCheck } from "react-icons/md"
@@ -35,6 +35,16 @@ const Box = ({ item, fetchData, isRider }) => {
 	const handleCancel = () => {
 		setIsModalOpen(false);
 	};
+
+	const savepdf =()=>{
+		axios
+			.post(`${process.env.REACT_APP_BASE_URL}/pdf`, 
+				{ item },
+			).then((response) => (response ? message.success(response.data.msg) : message.error("error on downloading")))
+			.catch((error) => {
+				console.error("There was an error!", error);
+			});
+	}
 
 	const orderTrackDetails = (e, statusId) => {
 		const orderStatus = Object.keys(statusMapping).find(item => statusMapping[item] == statusId)
@@ -70,7 +80,7 @@ const Box = ({ item, fetchData, isRider }) => {
 				<button onClick={(e) => orderTrackDetails(e, 3)}><Tooltip title={`Rider has picked up from ${item.senderLocation}`} placement="topRight"><GiCardPickup /></Tooltip></button>
 				<button onClick={(e) => orderTrackDetails(e, 4)}><Tooltip title="Product has been dispatched for delivery" placement="topRight"><TbTruckDelivery /></Tooltip></button>
 				<button onClick={(e) => orderTrackDetails(e, 5)}><Tooltip title={`Item has been has been delivered to ${item.receipentName}`} placement="topRight"> <MdOutlineFactCheck /></Tooltip></button>
-
+				<button onClick={()=> savepdf()}><Tooltip title= "Generate Pdf" placement="topRight"><BiDownload/></Tooltip></button>
 			</div>}
 
 			<div className="order_item" >
