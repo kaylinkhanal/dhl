@@ -291,7 +291,7 @@ h4 {
 }
 
 .success {
-  color: green;
+  color: green !important;
 }
 
 .cancel {

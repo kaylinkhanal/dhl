@@ -69,7 +69,6 @@ const updateOrder = async (req, res) => {
         const formattedDate = moment(req.body.expectedDeliveryDate).format('YYYY-MM-DD')
         req.body.expectedDeliveryDate = formattedDate
         const data = await Orders.findByIdAndUpdate(req.body._id, req.body)
-        console.log(data);
         if (data) {
             res.json({
                 msg: "updated successfully"

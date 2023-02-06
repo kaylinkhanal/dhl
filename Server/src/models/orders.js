@@ -6,7 +6,6 @@ const { Schema } = mongoose;
 const ordersSchema = new Schema({
     productType: { type: String, required: true },
     productWeight: { type: String, required: true },
-    maxSize: { type: String, required: true },
     senderLocation: { type: String, required: true },
     receipentLocation: { type: String, required: true },
     currentDistance: { type: Number, required: true },

@@ -37,26 +37,39 @@ const Orders = (props) => {
     } = useSelector(state => state.location)
 
     const orderItem = async (formFields) => {
-        const formData = new FormData();
-        formData.append("orders", file);
-        formData.append("userID", _id);
-        formData.append("senderName", name);
-        formData.append("currentDistance", currentDistance);
-        formData.append("senderLocationDetails", JSON.stringify(senderLocationDetails));
-        formData.append("recepientLocationDetails", JSON.stringify(recepientLocationDetails));
-        Object.keys(formFields).map((item, id) => {
-            formData.append(item, Object.values(formFields)[id]);
-        })
-        const res = await fetch(`${process.env.REACT_APP_BASE_URL}/orders`, {
-            method: "POST",
-            body: formData,
-        })
-        const data = await res.json()
-
-        if (data) {
-            message.success(data.msg)
-            props.isEdit ? props.onOk() : navigate('/userOrderslist')
+        if(props.isEdit){
+            const res = await fetch(`${process.env.REACT_APP_BASE_URL}/orders`, {
+                method: "PUT",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formFields),
+            })
+            const data = await res.json()
+            if (data) {
+                message.success("success")
+            }
+        }else{
+            const formData = new FormData();
+            formData.append("orders", file);
+            formData.append("userID", _id);
+            formData.append("senderName", name);
+            formData.append("currentDistance", currentDistance);
+            formData.append("senderLocationDetails", JSON.stringify(senderLocationDetails));
+            formData.append("recepientLocationDetails", JSON.stringify(recepientLocationDetails));
+            Object.keys(formFields).map((item, id) => {
+                formData.append(item, Object.values(formFields)[id]);
+            })
+            const res = await fetch(`${process.env.REACT_APP_BASE_URL}/orders`, {
+                method: "POST",
+                body: formData,
+            })
+            const data = await res.json()
+    
+            if (data) {
+                message.success(data.msg)
+                props.isEdit ? props.onOk() : navigate('/userOrderslist')
+            }
         }
+
     }
 
 
@@ -88,7 +101,7 @@ const Orders = (props) => {
     return (
         <section className='form_section'>
             <div className='container'>
-                <Map />
+                {!props.isEdit  && <Map />}
                 <div className='form'>
                     <h1>{!props.isEdit ? 'Make your' : 'Edit'} order</h1>
 
@@ -144,7 +157,7 @@ const Orders = (props) => {
                                 <Field name="receipentLocation" placeholder="Receipent Location" onChange={handleChange} onBlur={handleBlur} />
                                 {errors.receipentLocation && touched.receipentLocation ? (<div className="error">{errors.receipentLocation}</div>) : null}
                                 {currentDistance ? <h5>The distance is {currentDistance} KM</h5> : ''}
-
+                                {currentDistance ? <h5>The estimated price is Rs. {selectedCat.unitPrice * values?.productWeight * currentDistance} </h5> : ''}
                                 <Field name="receipentName" placeholder="Receipent Name" value={values.receipentName} onChange={handleChange} onBlur={handleBlur} />
                                 {errors.receipentName && touched.receipentName ? (<div className="error">{errors.receipentName}</div>) : null}
 
@@ -165,9 +178,7 @@ const Orders = (props) => {
                                     <option label="6am-9am">6am-9am</option>
                                     <option label="9am-12pm">9am-12pm</option>
                                 </select>
-
-                                <FileUploader handleChange={saveFile} type="file" types={fileTypes} />
-
+                                {!props.isEdit &&  <FileUploader handleChange={saveFile} type="file" types={fileTypes} />}
                                 {errors.expectedDeliveryTime && touched.expectedDeliveryTime ? (<div className="error">{errors.expectedDeliveryTime}</div>) : null}
                                 <button type="submit">{!props.isEdit ? 'Send' : 'Edit'} order</button>
                             </Form>
