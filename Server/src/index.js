@@ -27,11 +27,12 @@ const Orders = require('./models/orders')
 
 io.on('connection', (socket) => {
   socket.on('requestOrder', async (orderDetails) => {
+    // console.log(orderDetails)
     //send to other connected clients
     io.emit('orderDetails', orderDetails)
     // console.log(orderDetails.id)
     const updatedResult = await Orders.findByIdAndUpdate({ _id: orderDetails.id }, { orderStatus: orderDetails.status })
-    console.log('updated status', updatedResult)
+    // console.log('updated status', updatedResult)
   });
 });
 

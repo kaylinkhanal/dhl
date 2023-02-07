@@ -4,8 +4,9 @@ import { useSelector } from "react-redux";
 import { SlTrash, SlPencil, SlCalender, SlLocationPin, SlClock, SlPhone, SlUser, SlClose, } from "react-icons/sl";
 import { BiRun } from "react-icons/bi";
 import { GiCardPickup } from "react-icons/gi";
-import { TbTruckDelivery } from "react-icons/tb";
+import { TbFile, TbTruckDelivery } from "react-icons/tb";
 import { Modal, Popconfirm } from "antd";
+import StatusMapping from "../configs/statusMapping.json"
 import Orders from "../containers/User/orders";
 import io from 'socket.io-client';
 const socket = io("http://localhost:5000");
@@ -34,6 +35,18 @@ const Box = ({ item, fetchData, isRider }) => {
 		setIsModalOpen(false);
 	};
 
+	const orderTrackDetail = (statusId) => {
+		const orderStatus = Object.keys(StatusMapping).find(item => StatusMapping[item] === statusId)
+		console.log(orderStatus)
+
+		const orderDetails = {
+			status: orderStatus,
+			id: item._id
+		}
+		socket.emit('requestOrder', orderDetails)
+		fetchData()
+	}
+
 	return (
 		<>
 
@@ -53,9 +66,10 @@ const Box = ({ item, fetchData, isRider }) => {
 					</Popconfirm>
 				</div> :
 				<div className="btns rider">
-					<button ><i><BiRun /></i></button>
-					<button><i><GiCardPickup /></i></button>
-					<button><i><TbTruckDelivery /></i></button>
+					<button onClick={() => orderTrackDetail(2)}><i><BiRun /></i></button>
+					<button onClick={() => orderTrackDetail(3)}><i><GiCardPickup /></i></button>
+					<button onClick={() => orderTrackDetail(4)}><i><TbTruckDelivery /></i></button>
+					<button onClick={() => orderTrackDetail(5)}><i><TbFile /></i></button>
 				</div>
 			}
 

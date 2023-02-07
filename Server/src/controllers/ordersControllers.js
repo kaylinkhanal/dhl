@@ -32,11 +32,12 @@ const getOrder = async (req, res) => {
         if (page) {
             orderData = await Orders.find().skip(skipCount).limit(size)
             totalOrderCount = await Orders.find().count()
+        } else if (req.query.orderStatus && req.query.flag == "unresolved") {
+            // const filterOrders = await Orders.find({ orderStatus: {$ne: 'pending'} }) // for one object
+            orderData = await Orders.find({ 'orderStatus': { $nin: ['pending', 'rejected'] } })
+
         } else if (req.query.orderStatus) {
-            const filterOrders = await Orders.find({ orderStatus: req.query.orderStatus })
-            res.json({
-                orderList: filterOrders
-            })
+            orderData = await Orders.find({ orderStatus: req.query.orderStatus })
         } else {
             orderData = await Orders.find()
         }
@@ -111,25 +112,27 @@ const deleteOrder = async (req, res) => {
 
 const trackOrders = async (req, res) => {
     try {
-        const trackOrderData = await Orders.findOne({ _id: req.body.orderId })
-        console.log(trackOrderData)
-        if (trackOrderData) {
-            if (trackOrderData.receipentNumber === req.body.receipentNumber) {
+        const data = await Orders.findOne({ _id: req.body.orderId })
+        // console.log(data.receipentNumber == req.body.phoneNumber)
+
+        if (data) {
+            if (data.receipentNumber == req.body.phoneNumber) {
                 res.json({
-                    msg: 'searching',
+                    msg: 'Searching',
                     deliveryDetails: data.orderStatus
                 })
+            } else {
+                res.json({
+                    msg: 'something went wrong'
+                })
             }
-            res.json({
-                orderDetails: trackOrderData,
-                msg: 'check your delivery statu'
-            })
         } else {
             res.json({
-                orderDetails: trackOrderData,
-                msg: 'nvalid orderId or number'
+                msg: 'invalid credentials'
             })
         }
+
+
     } catch (err) {
         console.log(err)
     }

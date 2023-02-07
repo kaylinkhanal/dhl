@@ -1,0 +1,7 @@
+{
+    "approved": 1,
+    "riderOnHisWay": 2,
+    "riderPickedUp":3,
+    "productDispatched": 4,
+    "productDelivered": 5
+}

@@ -1,12 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
+import { Steps } from 'antd';
 import { useNavigate, Link } from 'react-router-dom';
 import { message } from "antd";
-import TrackOrderStatus from "./trackOrderStatus";
+import statusMapping from "../configs/statusMapping.json"
+import { BiRun } from "react-icons/bi";
+import { GiCardPickup } from "react-icons/gi";
+import { TbTruckDelivery, TbClipboardCheck } from "react-icons/tb";
+import { MdOutlineFactCheck } from "react-icons/md";
 
 const TrackOrder = () => {
+
     const navigate = useNavigate();
+    const [deliveryStatus, setDeliveryStatus] = useState('')
+    console.log(statusMapping[deliveryStatus])
     const trackOrder = async (fieldValues) => {
         const requestOptions = {
             method: "POST",
@@ -19,12 +27,13 @@ const TrackOrder = () => {
         console.log(data);
         if (data) {
             message.success(data.msg)
-            navigate('/trackOrderStatus')
+            setDeliveryStatus(data.deliveryDetails)
+            // navigate('/trackOrderStatus')
         }
     }
     const SignupSchema = Yup.object().shape({
         orderId: Yup.string().required('Required'),
-        receipentNumber: Yup.number().required('Required'),
+        phoneNumber: Yup.number().required('Required'),
     });
 
     return (
@@ -35,7 +44,7 @@ const TrackOrder = () => {
                     <Formik
                         initialValues={{
                             orderId: '',
-                            receipentNumber: ''
+                            phoneNumber: ''
                         }}
                         validationSchema={SignupSchema}
                         onSubmit={(values, { resetForm }) => {
@@ -50,14 +59,14 @@ const TrackOrder = () => {
                                 {errors.orderId && touched.orderId ? (<div className="error">{errors.orderId}</div>) : null}
 
                                 <Field
-                                    name="receipentNumber"
+                                    name="phoneNumber"
                                     placeholder="Enter Your Number"
-                                    value={values.receipentNumber}
+                                    value={values.phoneNumber}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                 />
-                                {errors.receipentNumber && touched.receipentNumber ? (
-                                    <div className="error">{errors.receipentNumber}</div>
+                                {errors.phoneNumber && touched.phoneNumber ? (
+                                    <div className="error">{errors.phoneNumber}</div>
                                 ) : null}
 
                                 <button type="submit">Submit</button>
@@ -65,6 +74,38 @@ const TrackOrder = () => {
                         )}
                     </Formik>
                 </div>
+
+                {deliveryStatus ? (<Steps
+                    size="small"
+                    current={statusMapping[deliveryStatus]}
+                    items={[
+                        {
+                            title: "Approved / pending",
+                            description: (deliveryStatus == 'pending') ? 'Your order is not yet approved' : 'item has been approved',
+                            icon: <TbClipboardCheck />
+                        },
+                        {
+                            title: "riderOnHisWay",
+                            description: (deliveryStatus == 'riderOnHisWay') ? 'Rider id oh his way' : '',
+                            icon: <BiRun />
+                        },
+                        {
+                            title: "riderPickedUp",
+                            description: (deliveryStatus == 'riderPickedUp') ? 'Rider has picked up your order' : '',
+                            icon: <GiCardPickup />
+                        },
+                        {
+                            title: "productDispatched",
+                            description: (deliveryStatus == 'productDispatched') ? 'Order has been dispatched to deliver' : '',
+                            icon: <TbTruckDelivery />
+                        },
+                        {
+                            title: "productDelivered",
+                            description: (deliveryStatus == 'productDelivered') ? 'Order Delivered' : '',
+                            icon: <MdOutlineFactCheck />
+                        },
+                    ]}
+                />) : ''}
             </div>
         </section>
     );

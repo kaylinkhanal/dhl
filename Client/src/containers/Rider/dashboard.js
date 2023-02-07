@@ -10,11 +10,11 @@ const OrdersList = () => {
 	const [loading, setLoading] = useState(false)
 
 	const fetchData = async () => {
-		const response = await fetch(`${process.env.REACT_APP_BASE_URL}/orders?orderStatus=approved`)
+		const response = await fetch(`${process.env.REACT_APP_BASE_URL}/orders?orderStatus=approved&flag=unresolved`)
 		const data = await response.json();
 
 		if (data) {
-			setOrderList(data.orderList);
+			setOrderList(data.ordersList);
 			setLoading(true)
 		}
 	};
