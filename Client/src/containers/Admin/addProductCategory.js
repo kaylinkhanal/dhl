@@ -13,6 +13,7 @@ const AddProductCategory = (props) => {
 
         const response = await fetch(`${process.env.REACT_APP_BASE_URL}/category`, requestOptions);
         const data = await response.json()
+        console.log(data)
         if (data.msg === 'Added new category') {
             message.success(data.msg)
             props.submitForm()

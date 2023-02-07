@@ -1,7 +1,7 @@
 const Orders = require('../models/orders')
 const moment = require('moment')
 
-const postOrder = async (req, res) => {
+const postOrder = async (req, res) => { 
     try {
         console.log(req.body)
         const formattedDate = moment(req.body.expectedDeliveryDate).format('YYYY/MM/DD')

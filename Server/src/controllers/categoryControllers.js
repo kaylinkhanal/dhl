@@ -1,8 +1,9 @@
-const Category = require('../models/Categories')
+const Category = require('../models/categories')
 
 const postCategory =  async(req,res)=>{
-    try{
+        try{
         const categoryData = await Category.create(req.body)
+        
         if(categoryData){
             res.json({
                 categoryList: categoryData,

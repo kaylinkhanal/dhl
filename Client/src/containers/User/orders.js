@@ -97,7 +97,7 @@ const Orders = (props) => {
                             _id: props.item._id,
                             productType: props.item.productType,
                             productWeight: props.item.productWeight,
-                            // maxSize: props.item.maxSize,
+                            maxSize: props.item.maxSize,
                             senderLocation: props.item.senderLocation,
                             receipentLocation: props.item.receipentLocation,
                             receipentName: props.item.receipentName,
@@ -135,8 +135,8 @@ const Orders = (props) => {
                                 <Field name="productWeight" placeholder="Product Weight" value={values.productWeight} onChange={handleChange} onBlur={handleBlur} />
                                 {errors.productWeight && touched.productWeight ? (<div className="error">{errors.productWeight}</div>) : null}
 
-                                {/* <Field name="maxSize" placeholder="Max Size (in meters)" value={values.maxSize} onChange={handleChange} onBlur={handleBlur} />
-                                {errors.maxSize && touched.maxSize ? (<div className="error">{errors.maxSize}</div>) : null} */}
+                                <Field name="maxSize" placeholder="Max Size (in meters)" value={values.maxSize} onChange={handleChange} onBlur={handleBlur} />
+                                {errors.maxSize && touched.maxSize ? (<div className="error">{errors.maxSize}</div>) : null}
 
                                 <Field name="senderLocation" placeholder="Sender Location" onChange={handleChange} onBlur={handleBlur} />
                                 {errors.senderLocation && touched.senderLocation ? (<div className="error">{errors.senderLocation}</div>) : null}
