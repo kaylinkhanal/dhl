@@ -26,13 +26,13 @@
   - [x] Add, Update, Delete Orders
   - [x] Change Password Feature
   - [x] User Profile
-  - [x} Non User Login for Order Status Tracking
+  - [x] Non User Login for Order Status Tracking
 - [ ] Admin
   - [x] Display Orders Data
   - [x] Pagination
   - [x] Accept/ Reject Orders
   - [ ] Search orders feature
- - [ ] Rider
+ - [x] Rider
   - [x] Display approved orders in rider panel
   - [x] Change Delivery status
   - [x] Download invoice pdf
