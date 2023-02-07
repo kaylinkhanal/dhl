@@ -20,7 +20,8 @@ const AdminOrdersList = () => {
     const [totalOrderCount, setTotalOrderCount] = useState(0);
     const { token } = useSelector(state => state.user)
     const [searchData,setSearchData]=useState('');
-    console.log(searchData)
+    const [data,setData]=useState([])
+    // console.log(searchData)
 
     const fetchData = async (page, size) => {
         const response = await fetch(`${process.env.REACT_APP_BASE_URL}/orders?page=${page || 1}&size=${size || 5}`, {
@@ -53,7 +54,12 @@ const AdminOrdersList = () => {
         fetchData();
     }, []);
     console.log(orderList)
+const filterData=(searchVal)=>{
+    let newSearchVal=searchVal.toLowerCase()
+      setData(orderList.filter((each)=>each.receipentName.toLowerCase().includes(newSearchVal))) 
+    
 
+}
 
 
     return (
@@ -62,12 +68,13 @@ const AdminOrdersList = () => {
                 <div className="orders-data">
                     <h1 className="title"><i><FaDolly /></i> Orders List</h1>
                     {/* <Search placeholder="input search text" onSearch={onSearch} enterButton /> */}
-                    <input type="text" onChange={(e)=>{setSearchData(e.target.value) }}/>
+                    <input type="text" onChange={(e)=>{setSearchData(e.target.value); filterData(e.target.value) }}/>
                 
                     {
                         searchData?
                        <>
-                       <OrdersData orderList={orderList.filter(each=>each.receipentName === searchData)} fetchData={fetchData} />
+                        <OrdersData orderList={data} fetchData={fetchData} />
+                       {/* <OrdersData orderList={orderList.filter(each=>each.receipentName.toLowerCase().include(searchData.toLowerCase()))} fetchData={fetchData} /> */}
                        
                         </>:
 
