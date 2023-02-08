@@ -1,4 +1,5 @@
 const puppeteer = require("puppeteer");
+const path = require('path')
 const generatePdf = async (req, res) => {
   try {
     const reqData = req.body.item;
@@ -36,10 +37,14 @@ const generatePdf = async (req, res) => {
       printBackground: true,
     });
     await browser.close();
+   
+    return res.sendFile(path.resolve(`${data.senderName} ${data.productType} .pdf` ));
+  //   res.download( ), (err) => { 
+  //     if (err) { 
+  //         console.log(err); 
+  //     } 
+  // });
 
-    res.json({
-      msg: "pdf downloaded sucesfully",
-    });
   } catch (err) {
     console.log(err);
   }
