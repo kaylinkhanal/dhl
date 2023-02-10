@@ -47,6 +47,14 @@ const Box = ({ item, fetchData, isRider }) => {
 		fetchData()
 	}
 
+	const isDisabled = (currentId) => {
+		const currentStatus = item.orderStatus
+		// console.log(currentStatus)
+		const statusId = StatusMapping[currentStatus]
+		// console.log(statusId)
+		if (currentId <= statusId) return true
+
+	}
 	return (
 		<>
 
@@ -66,10 +74,10 @@ const Box = ({ item, fetchData, isRider }) => {
 					</Popconfirm>
 				</div> :
 				<div className="btns rider">
-					<button onClick={() => orderTrackDetail(2)}><i><BiRun /></i></button>
-					<button onClick={() => orderTrackDetail(3)}><i><GiCardPickup /></i></button>
-					<button onClick={() => orderTrackDetail(4)}><i><TbTruckDelivery /></i></button>
-					<button onClick={() => orderTrackDetail(5)}><i><TbFile /></i></button>
+					<button disabled={isDisabled(2)} className={isDisabled(2) ? 'success' : null} onClick={() => orderTrackDetail(2)}><i><BiRun /></i></button>
+					<button disabled={isDisabled(3)} className={isDisabled(3) ? 'success' : null} onClick={() => orderTrackDetail(3)}><i><GiCardPickup /></i></button>
+					<button disabled={isDisabled(4)} className={isDisabled(4) ? 'success' : null} onClick={() => orderTrackDetail(4)}><i><TbTruckDelivery /></i></button>
+					<button disabled={isDisabled(5)} className={isDisabled(5) ? 'success' : null} onClick={() => orderTrackDetail(5)}><i><TbFile /></i></button>
 				</div>
 			}
 

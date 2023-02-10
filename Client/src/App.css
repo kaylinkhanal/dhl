@@ -453,7 +453,7 @@ button.cancel {
 }
 
 button.success {
-  background: #00800047;
+  background: #00800047 !important;
 }
 
 /* profile 
