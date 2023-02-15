@@ -35,6 +35,6 @@ export const {
   setRecepientLocationDetails,
   setCurrentDistance,
   setSenderAddress,
-  setReceipentAddress
+  setReceipentAddress,
 } = locationSlice.actions;
 export default locationSlice.reducer;
