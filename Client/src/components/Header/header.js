@@ -1,18 +1,20 @@
 import React from "react";
 import Navigation from "./navigation";
-import Logo from '../../images/dhl.png'
+import Logo from "../../images/dhl.png";
 
-const Header = ()=>{
-    return(
-        <div className="header">
-            <div className="container">
-                <div className="header_content">
-                    <div className="logo"><img src={Logo} alt=""/></div>
+const Header = () => {
+  return (
+    <div className="header">
+      <div className="container">
+        <div className="header_content">
+          <div className="logo">
+            <img src={Logo} alt="" />
+          </div>
 
-                    <Navigation/>
-                </div>
-            </div>
+          <Navigation />
         </div>
-    )
-}
-export default Header
+      </div>
+    </div>
+  );
+};
+export default Header;

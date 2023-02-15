@@ -10,16 +10,15 @@ const avatarStorage = multer.diskStorage({
 });
 const avatarUpload = multer({ storage: avatarStorage }).single("avatar");
 
-
 const orderStorage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, '../Client/src/uploads/orders')
-    },
-    filename: function (req, file, cb) {
-      cb(null, file.originalname)
-    }
-  })
-const orderUpload = multer({ storage: orderStorage }).single('orders')
+  destination: function (req, file, cb) {
+    cb(null, "../Client/src/uploads/orders");
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
+const orderUpload = multer({ storage: orderStorage }).single("orders");
 
 exports.avatarUpload = avatarUpload;
 exports.orderUpload = orderUpload;
