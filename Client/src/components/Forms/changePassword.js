@@ -78,7 +78,7 @@ const ChangePassword = () => {
               handleBlur,
               handleSubmit,
             }) => (
-              <Form onSubmit={handleSubmit}>
+              <Form onSubmit={handleSubmit} className="form">
                 <Field
                   name="currentPassword"
                   placeholder="Current Password"
