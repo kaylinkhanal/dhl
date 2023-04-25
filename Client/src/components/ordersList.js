@@ -35,7 +35,9 @@ const OrdersList = () => {
 							<Pagination
 								defaultPageSize={5}
 								onChange={(page, size) => fetchData(page, size)} total={totalOrderCount} />
-						</>: <Skeleton active paragraph={{ rows: 3 }} />}
+						</>:orderList.length > 0 ? orderList.map((item, id) => {
+	                           return <Box key={id} item={item} fetchData={fetchData} />
+                                        }) : !loading ? <Skeleton active paragraph={{ rows: 3 }}/> : <h3>There is no Order List</h3>}
 				</div>
 			</div>
 		</section>
@@ -43,3 +45,5 @@ const OrdersList = () => {
 };
 
 export default OrdersList;
+
+

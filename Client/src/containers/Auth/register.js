@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import { message } from "antd";
 import ShowhidePassword from "../../components/showhidePassword";
 import { useNavigate, Link } from "react-router-dom";
-import { countries } from "country-data-list";
+// import { countries } from "country-data-list";
 
 const Register = () => {
 	const navigate = useNavigate();
@@ -187,7 +187,7 @@ const Register = () => {
 									<div className="error">{errors.confirmPassword}</div>
 								) : null}
 
-								<select
+								{/* <select
 									name="country"
 									value={values.country}
 									onChange={handleChange}
@@ -210,7 +210,7 @@ const Register = () => {
 
 								{errors.country && touched.country ? (
 									<div className="error">{errors.country}</div>
-								) : null}
+								) : null} */}
 
 								<Field
 									name="zipCode"
